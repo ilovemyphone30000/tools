@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI tools I've built</title>
+<meta name="description" content="Five AI agents built for A&amp;R, show listings, tour routing, resale pricing and label ownership.">
+<style>
+  /* One reading column. Each tool is a name, then a line about what it does. Space between, no boxes. */
+  :root {
+    --bg: #fbfbfa;
+    --fg: #1a1a1a;
+    --muted: #6b6b6b;
+    --line: #e6e6e3;
+    --accent: #2a5db0;
+    --sans: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #161615;
+      --fg: #ededeb;
+      --muted: #9b9b96;
+      --line: #2e2e2b;
+      --accent: #8fb4ef;
+      color-scheme: dark;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    margin: 0;
+    -webkit-text-size-adjust: 100%;
+  }
+  .page {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 48px 64px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+  }
+  .lede {
+    color: var(--muted);
+    margin: 0;
+    max-width: 60ch;
+  }
+
+  ul {
+    list-style: none;
+    margin: 48px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  li {
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+  }
+  .name {
+    font-weight: 600;
+    margin: 0;
+  }
+  .what {
+    color: var(--muted);
+    margin: 4px 0 0;
+    max-width: 68ch;
+  }
+
+  a { color: var(--accent); }
+  a:hover { color: var(--fg); }
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  footer {
+    border-top: 1px solid var(--line);
+    margin-top: 48px;
+    padding-top: 24px;
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+  footer p {
+    margin: 0;
+    max-width: 60ch;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>AI tools I've built</h1>
+    <p class="lede">Five agents I run for music work. Each one gathers its own numbers on a schedule and reports
+      into a spreadsheet or a page.</p>
+  </header>
+
+  <ul>
+    <li>
+      <p class="name"><a href="https://ilovemyphone30000.github.io/instinct/">A&amp;R Superplaylist</a></p>
+      <p class="what">Scans 44 Spotify discovery playlists every day for songs that two or more lists picked up in
+        the same week, keeps the small artists, logs them in a shared sheet with their streaming and follower
+        numbers, and publishes a password-protected dashboard that tracks how each artist grows. Builds a private
+        playlist of the week's finds three times a week.</p>
+    </li>
+    <li>
+      <p class="name">Show list and announcements</p>
+      <p class="what">Gathers the next two weeks of concerts in New York, Chicago and Los Angeles, plus everything
+        newly announced, from public listings, 19 venue calendars and the Ticketmaster Discovery API. Clears the
+        duplicates, marks the team's own artists, and publishes one password-protected page.</p>
+    </li>
+    <li>
+      <p class="name">Itinerary builder</p>
+      <p class="what">Turns five answers (artist, length, start and end room size, fixed dates) into a multi-year
+        touring routing in the label's sheet format. A fuller version audits an itinerary that already exists: fills
+        the gaps, fixes the room ladder, and researches comparable artists' venues city by city.</p>
+    </li>
+    <li>
+      <p class="name">AXS resale scan</p>
+      <p class="what">Every three days it re-checks the standard, official resale and SeatGeek price for every
+        upcoming show in the tracker sheet, and flags the ones where a fan gets in cheaper on resale than at face
+        value. It reads prices only, never buys or holds a ticket.</p>
+    </li>
+    <li>
+      <p class="name"><a href="https://ilovemyphone30000.github.io/labelmap/">Label map</a></p>
+      <p class="what">A single-page reference to who owns whom across the major labels, built from a company
+        directory plus manual research. One self-contained HTML file with the logos inlined, and a matching one-page
+        PDF poster generated from that same file, so the two can't drift apart.</p>
+    </li>
+  </ul>
+
+  <footer>
+    <p>As of Nov 22, 2026. The Superplaylist and show pages are password-protected; the label map is open.</p>
+  </footer>
+</div>
+</body>
+</html>
