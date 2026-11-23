@@ -140,21 +140,15 @@
   .screen-foot { display: flex; flex-wrap: wrap; gap: 4px 20px; padding: 8px 12px; border-top: 1px solid var(--grey1); font-size: 12px; color: var(--muted); }
   .screen-foot b { font-weight: 400; color: var(--green); }
 
-  .subtabs { display: flex; gap: 20px; padding: 10px 12px 0; }
-  .subtabs button {
-    border: 0 !important; background: none !important; padding: 0 0 7px !important;
-    font-size: 12px !important; letter-spacing: 0.1em; color: var(--muted) !important;
-    border-bottom: 2px solid transparent !important;
-  }
-  .subtabs button[aria-pressed="true"] { color: var(--ink) !important; border-bottom-color: var(--ink) !important; }
-  .cities { display: flex; flex-wrap: wrap; gap: 20px; padding: 14px 12px 12px; align-items: baseline; }
-  .cities button {
-    border: 0 !important; background: none !important; padding: 0 0 4px !important;
-    font-family: var(--serif) !important; font-size: 17px !important; text-transform: none !important;
-    border-bottom: 1px solid transparent !important;
-  }
-  .cities button[aria-pressed="true"] { color: var(--ink) !important; border-bottom-color: var(--ink) !important; }
-  .cities button .n { font-size: 12px; }
+  .sh-controls { display: flex; flex-wrap: wrap; gap: 10px 16px; padding: 12px; border-bottom: 1px solid var(--grey1); }
+  .seg { display: inline-flex; border: 1px solid var(--grey4); }
+  .seg button { border: 0 !important; border-radius: 0 !important; background: #fff !important; color: var(--ink) !important;
+    font-size: 13px !important; letter-spacing: 0 !important; text-transform: none !important; padding: 8px 14px !important; min-height: 36px; cursor: pointer; }
+  .seg button + button { border-left: 1px solid var(--grey4) !important; }
+  .seg button:hover { background: #f1f0ec !important; }
+  .seg button[aria-pressed="true"] { background: var(--ink) !important; color: #fff !important; }
+  .sh-hint { margin: -6px 0 10px; font-size: 13px; color: var(--green); }
+  .screen #sh-nosup { text-transform: none; letter-spacing: 0; font-size: 13px; padding: 7px 12px; min-height: 34px; }
   .viewline { font-family: var(--sans); font-weight: 600; font-size: 20px; color: var(--green); padding: 8px 12px 10px; margin: 0; }
   .sh-date { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
   .sh-day { background: #fff; padding: 14px 16px 6px; font-size: 13px; font-weight: 600; color: var(--muted); border-bottom: 1px solid var(--grey1); }
@@ -242,10 +236,6 @@
     .stg + .stg::before, .stg:nth-child(4)::before { display: block; left: calc(50% - 6px); top: -14px; transform: rotate(90deg); }
   }
 
-  .resale h2 { margin: 0 0 6px; font-family: var(--display); font-weight: 400; font-size: 30px; letter-spacing: 0.01em; }
-  .resale p { margin: 0; font-size: 15px; color: var(--muted); }
-  .resale { border-top: 1px solid var(--grey1); margin-top: 48px; padding-block: 28px 8px; }
-  .resale p { margin-bottom: 0; }
 
   /* the ask */
   .ask { border-top: 1px solid var(--grey1); margin-top: 40px; padding-block: 24px 8px; }
@@ -345,9 +335,12 @@
       <div class="panel-head">
         <h3>Show calendar</h3>
       </div>
+      <p class="sh-hint">Try it: pick a city, switch to Just announced, or show only shows with no support.</p>
       <div class="screen">
-        <div class="subtabs" id="sh-tabs"></div>
-        <div class="cities" id="sh-cities"></div>
+        <div class="sh-controls">
+          <div class="seg" id="sh-tabs" role="group" aria-label="When"></div>
+          <div class="seg" id="sh-cities" role="group" aria-label="City"></div>
+        </div>
         <div class="bar tight">
           <button id="sh-nosup" class="ghost" type="button" aria-pressed="false">No support only</button>
           <label class="srch-l" for="sh-q">Search</label><input type="search" id="sh-q" placeholder="Artist or venue">
@@ -405,20 +398,6 @@
       </div>
     </div>
 
-    <div id="p-rs" class="tool">
-      <div class="screen">
-        <div class="bar tight"><span class="bar-note">Illustrative example</span></div>
-        <div class="scroll">
-          <table class="rs">
-            <thead><tr><th scope="col">Show</th><th scope="col">Face value</th><th scope="col">Official resale</th><th scope="col"></th></tr></thead>
-            <tbody>
-              <tr><td>Example show, Chicago, Mar 14</td><td class="num">$45</td><td class="num low">$38</td><td><span class="nosup">Resale lower</span></td></tr>
-              <tr><td>Example show, Los Angeles, Mar 20</td><td class="num">$40</td><td class="num">$52</td><td></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
     </div>
   </section>
 
@@ -457,7 +436,7 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
     return "<span class='flat'>0%</span>";
   }
 
-  var TABS = [["ar","A&R Instinct","Finds unsigned artists from editorial playlists, user playlists, press and listener jumps."],["sh","Show calendar","Every show in NYC, LA and Chicago, and which new announcements don't have support."],["it","Routing engine","Turns a short intake form into a multi-year tour plan for visa submissions."],["rs","Resale tracker","Checks for shows where official resale is lower than face value."]];
+  var TABS = [["ar","A&R Instinct","Finds unsigned artists from editorial playlists, user playlists, press and listener jumps."],["sh","Show calendar","Every show in NYC, LA and Chicago, and which new announcements don't have support."],["it","Routing engine","Turns a short intake form into a multi-year tour plan for visa submissions."]];
   TABS.forEach(function (t) {
     var panel = document.getElementById("p-"+t[0]);
     panel.hidden = false;
