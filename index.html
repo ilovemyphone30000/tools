@@ -55,13 +55,14 @@
   .mast nav a { font-family: var(--sans); font-size: 13px; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--grey4); }
   .mast nav a:hover { color: var(--green); border-bottom-color: var(--green); }
 
-  .tools { padding-block: 28px 10px; }
-  .tools h2 { margin: 0 0 14px; font-family: var(--display); font-weight: 400; font-size: 24px; letter-spacing: 0.01em; color: var(--ink); }
+  .tools { border-top: 1px solid var(--grey1); margin-top: 48px; padding-block: 28px 10px; }
+  .tools h2 { margin-bottom: 20px !important; }
+  .tools h2 { margin: 0 0 14px; font-family: var(--display); font-weight: 400; font-size: 30px; letter-spacing: 0.01em; color: var(--ink); }
 
   .tool + .tool { margin-top: 40px; }
   .tool-head { margin-bottom: 12px; }
-  .tool-head h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 22px; letter-spacing: 0.01em; line-height: 1.15; }
-  .tool-head p { margin: 4px 0 0; font-size: 14px; color: var(--muted); max-width: 62ch; }
+  .tool-head h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 21px; letter-spacing: 0.01em; line-height: 1.15; }
+  .tool-head p { margin: 4px 0 0; font-size: 14px; color: var(--muted); }
   .panel-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 20px; margin-bottom: 12px; }
   .panel-head h3 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .panel-head p { margin: 0; font-size: 14px; color: var(--muted); max-width: 56ch; }
@@ -72,13 +73,13 @@
   .screen { border: 1px solid var(--grey4); background: #fff; font-family: var(--sans); color: var(--ink); }
   .bar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; padding: 8px 12px; border-bottom: 1px solid var(--grey1); }
   .bar.tight { padding: 6px 12px; }
-  .brand { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; }
-  .scaleline { font-family: var(--sans); font-size: 11px; color: var(--ink); }
+  .brand { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; }
+  .scaleline { font-family: var(--sans); font-size: 12px; color: var(--ink); }
   .scaleline b { font-weight: 400; color: var(--green); }
   .spacer { flex: 1 1 auto; }
-  .tiny { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .tiny { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
   .screen button {
-    font-family: var(--sans); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+    font-family: var(--sans); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
     color: var(--ink); background: #fff; border: 1px solid var(--grey4);
     border-radius: 0; padding: 5px 9px; cursor: pointer; line-height: 1.2;
   }
@@ -87,18 +88,19 @@
   .screen button.ghost[aria-pressed="true"] { background: #fff; color: var(--green); border-color: var(--green); }
   .screen button .n { color: var(--muted); margin-left: 5px; }
   .screen button[aria-pressed="true"] .n { color: #fff; opacity: .7; }
-  .screen input[type="search"] { font-family: var(--sans); font-size: 11px; color: var(--ink); border: 1px solid var(--grey4); border-radius: 0; padding: 5px 8px; min-width: 0; flex: 1 1 12rem; }
+  .screen input[type="search"] { font-family: var(--sans); font-size: 12px; color: var(--ink); border: 1px solid var(--grey4); border-radius: 0; padding: 5px 8px; min-width: 0; flex: 1 1 12rem; }
   :focus-visible { outline: 2px solid var(--green); outline-offset: 1px; }
 
   .scroll { overflow-x: auto; }
-  .screen table { border-collapse: collapse; width: 100%; font-size: 11.5px; }
+  .screen table { border-collapse: collapse; width: 100%; font-size: 12px; }
   .screen th {
-    text-align: left; font-weight: 400; font-size: 11px; letter-spacing: 0.08em;
+    text-align: left; font-weight: 400; font-size: 12px; letter-spacing: 0.08em;
     text-transform: uppercase; color: var(--muted);
     padding: 7px 14px 6px 0; border-bottom: 1px solid var(--grey1); white-space: nowrap;
   }
   .screen td { padding: 8px 14px 8px 0; border-bottom: 1px solid #f1f0ec; vertical-align: top; }
-  .screen td:last-child, .screen th:last-child { padding-right: 0; }
+  .screen td:last-child, .screen th:last-child { padding-right: 12px; }
+  .screen td:first-child, .screen th:first-child { padding-left: 12px; }
   .screen a { color: inherit; text-decoration: none; }
   .screen a:hover { text-decoration: underline; }
 
@@ -106,9 +108,9 @@
   .star[aria-pressed="true"] { color: var(--ink) !important; }
   .who { white-space: nowrap; }
   .who .nm { font-size: 12.5px; letter-spacing: 0.03em; text-transform: uppercase; }
-  .jump { font-size: 11px; background: var(--ink); color: #fff; padding: 1px 4px; margin-left: 6px; white-space: nowrap; }
-  .lab.unsigned { color: var(--green); letter-spacing: 0.06em; text-transform: uppercase; font-size: 11px; }
-  .lab { font-size: 11px; color: var(--muted); margin-top: 3px; display: flex; align-items: center; gap: 4px; }
+  .jump { font-size: 12px; background: var(--ink); color: #fff; padding: 1px 4px; margin-left: 6px; white-space: nowrap; }
+  .lab.unsigned { color: var(--green); letter-spacing: 0.06em; text-transform: uppercase; font-size: 12px; }
+  .lab { font-size: 12px; color: var(--muted); margin-top: 3px; display: flex; align-items: center; gap: 4px; }
   .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--grey4); display: inline-block; }
   .num { white-space: nowrap; font-variant-numeric: tabular-nums; }
   .num .v { display: inline-block; min-width: 2.6rem; }
@@ -116,18 +118,18 @@
   .to-now { color: var(--grey7); margin: 0 4px 0 -6px; }
   .spark { vertical-align: middle; margin: 0 5px; }
   .up { color: var(--green); } .down { color: var(--red); } .flat { color: var(--muted); }
-  .chip { display: inline-block; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 5px; margin: 0 3px 3px 0; white-space: nowrap; }
+  .chip { display: inline-block; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 5px; margin: 0 3px 3px 0; white-space: nowrap; }
   .chip.pl { background: var(--yellow); }
   .chip.pr { background: var(--pink); }
   .chip .dt { opacity: .8; margin-left: 4px; }
   .dash { color: var(--muted); }
-  .screen-foot { display: flex; flex-wrap: wrap; gap: 4px 20px; padding: 8px 12px; border-top: 1px solid var(--grey1); font-size: 11px; color: var(--muted); }
+  .screen-foot { display: flex; flex-wrap: wrap; gap: 4px 20px; padding: 8px 12px; border-top: 1px solid var(--grey1); font-size: 12px; color: var(--muted); }
   .screen-foot b { font-weight: 400; color: var(--green); }
 
   .subtabs { display: flex; gap: 20px; padding: 10px 12px 0; }
   .subtabs button {
     border: 0 !important; background: none !important; padding: 0 0 7px !important;
-    font-size: 11px !important; letter-spacing: 0.1em; color: var(--muted) !important;
+    font-size: 12px !important; letter-spacing: 0.1em; color: var(--muted) !important;
     border-bottom: 2px solid transparent !important;
   }
   .subtabs button[aria-pressed="true"] { color: var(--ink) !important; border-bottom-color: var(--ink) !important; }
@@ -138,9 +140,9 @@
     border-bottom: 1px solid transparent !important;
   }
   .cities button[aria-pressed="true"] { color: var(--ink) !important; border-bottom-color: var(--ink) !important; }
-  .cities button .n { font-size: 11px; }
+  .cities button .n { font-size: 12px; }
   .viewline { font-family: var(--sans); font-weight: 600; font-size: 20px; color: var(--green); padding: 8px 12px 10px; margin: 0; }
-  .sh-date { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+  .sh-date { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
   .sh-day { position: sticky; top: 0; z-index: 1; background: #fff; padding: 14px 16px 6px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--grey1); }
   .sh-rows { list-style: none; margin: 0; padding: 0; }
   .sh-rows li { display: grid; grid-template-columns: 4rem minmax(0, 1.4fr) minmax(0, 1fr) 7.5rem; gap: 4px 16px; align-items: baseline; padding: 12px 16px; border-bottom: 1px solid #f1f0ec; }
@@ -152,11 +154,13 @@
   .sh-rows .venue:hover { color: var(--green) !important; }
   .sh-rows .age { margin-left: 8px; font-size: 12px; color: var(--muted); }
   .sh-st { text-align: right; }
-  .nosup { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--green); border: 1px solid var(--green); padding: 2px 6px; white-space: nowrap; }
+  .nosup { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--green); border: 1px solid var(--green); padding: 2px 6px; white-space: nowrap; }
   @media (max-width: 640px) {
     .sh-rows li { grid-template-columns: 3.4rem minmax(0, 1fr); }
     .sh-rows .venue, .sh-st { grid-column: 2; text-align: left; }
   }
+  .ar-scroll { max-height: 420px; overflow: auto; overscroll-behavior: contain; }
+  .ar-scroll thead th { position: sticky; top: 0; background: #fff; z-index: 1; }
   .sh-scroll { max-height: 380px; overflow-y: auto; overscroll-behavior: contain; }
 
   /* artist pitches */
@@ -172,7 +176,7 @@
   .pitch-list img { display: block; width: calc(100% + 36px); max-width: none; margin: -16px -18px 14px; aspect-ratio: 1 / 1; height: auto; object-fit: cover; background: var(--grey1); }
   @media (max-width: 760px) { .pitch-list img { aspect-ratio: 4 / 3; } }
   .pitch-list .who { display: block; font-family: var(--display); font-size: 24px; line-height: 1.1; white-space: normal; }
-  .pitch-list .st { display: inline-block; margin-top: 10px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border: 1px solid var(--green); color: var(--green); background: var(--tint); }
+  .pitch-list .st { display: inline-block; margin-top: 10px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border: 1px solid var(--green); color: var(--green); background: var(--tint); }
   .pitch-list li.done { background: #efede6; border-color: var(--grey4); }
   .pitch-list .st.prog { border-color: var(--grey4); color: var(--muted); background: none; }
   .pitch-list .to { display: block; margin-top: 10px; font-size: 15px; }
@@ -181,32 +185,36 @@
   .pitch-list .how { display: block; margin-top: 4px; font-size: 14px; color: var(--muted); }
 
   /* label map */
-  .lmap { border-top: 1px solid var(--grey1); margin-top: 40px; padding-block: 28px 0; }
-  .lmap h2, .resale h2 { margin: 0 0 6px; font-family: var(--display); font-weight: 400; font-size: 26px; letter-spacing: 0.01em; }
-  .lmap > p, .resale p { margin: 0 0 16px; font-size: 15px; color: var(--muted); max-width: 62ch; }
+  .lmap { border-top: 1px solid var(--grey1); margin-top: 48px; padding-block: 28px 0; }
+  .lmap h2, .resale h2 { margin: 0 0 6px; font-family: var(--display); font-weight: 400; font-size: 30px; letter-spacing: 0.01em; }
+  .lmap > p, .resale p { margin: 0 0 16px; font-size: 15px; color: var(--muted); }
   .lmap > p a { color: var(--green); }
-  .lm-ask { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px; }
-  .lm-ask input { font: inherit; font-size: 15px; padding: 9px 12px; border: 1px solid var(--grey4); border-radius: 0; background: #fff; color: var(--ink); flex: 1 1 16rem; min-width: 0; max-width: 26rem; }
-  .lm-ask button { font: inherit; font-size: 12px; background: none; border: 1px solid var(--grey4); padding: 6px 10px; cursor: pointer; color: var(--ink); }
-  .lm-ask button:hover { border-color: var(--ink); }
-  .lm-path { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-height: 44px; margin-bottom: 18px; font-size: 15px; }
-  .lm-path .node { border: 1px solid var(--grey4); background: #fff; padding: 7px 11px; }
+  .lm-box { display: grid; grid-template-columns: minmax(0, 20rem) minmax(0, 1fr); }
+  @media (max-width: 860px) { .lm-box { grid-template-columns: 1fr; } }
+  .lm-left { padding: 16px; border-right: 1px solid var(--grey1); display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  @media (max-width: 860px) { .lm-left { border-right: 0; border-bottom: 1px solid var(--grey1); } }
+  .lm-left input { font: inherit; font-size: 15px; padding: 9px 12px; border: 1px solid var(--grey4); border-radius: 0; background: #fff; color: var(--ink); width: 100%; min-width: 0; }
+  .screen .lm-left input[type="search"] { flex: none; font-size: 15px; padding: 9px 12px; }
+  .screen .lm-col li button { font-size: 13px; letter-spacing: 0; text-transform: none; border: 0; background: none; padding: 3px 0; color: var(--ink); }
+  .screen .lm-col li button:hover, .screen .lm-col li button[aria-pressed="true"] { color: var(--green); background: none; }
+  .lm-own { margin-top: 10px; }
+  .lm-path { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: flex-start; }
+  .lm-path li { display: flex; flex-direction: column; align-items: flex-start; }
+  .lm-path .node { border: 1px solid var(--grey4); background: #fff; padding: 7px 11px; font-size: 15px; }
   .lm-path .node.top { background: var(--ink); color: var(--bg); border-color: var(--ink); }
   .lm-path .node.hit { border-color: var(--green); color: var(--green); font-weight: 600; }
-  .lm-path .rel { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-left: 6px; }
-  .lm-path .node.top .rel { color: var(--bg); opacity: .7; }
-  .lm-path .arr { color: var(--grey7); }
-  .lm-path .none { color: var(--muted); }
-  .lm-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2px; }
-  @media (max-width: 900px) { .lm-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .lm-path .by { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding: 6px 0 6px 12px; border-left: 1px solid var(--grey4); margin-left: 14px; }
+  .lm-path .none { color: var(--muted); font-size: 14px; }
+  .lm-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 4px 0; }
+  @media (max-width: 1100px) { .lm-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 500px) { .lm-grid { grid-template-columns: 1fr; } }
-  .lm-col { border: 1px solid var(--grey1); padding: 12px 14px; background: #fff; min-width: 0; }
+  .lm-col { padding: 12px 16px; min-width: 0; }
   .lm-col h3 { margin: 0 0 8px; font-size: 13px; font-weight: 700; }
   .lm-col h3 span { font-weight: 400; color: var(--muted); }
   .lm-col ul { margin: 0; padding: 0; list-style: none; }
   .lm-col li button { font: inherit; font-size: 13px; background: none; border: 0; padding: 3px 0; cursor: pointer; color: var(--ink); text-align: left; }
   .lm-col li button:hover, .lm-col li button[aria-pressed="true"] { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
-  .resale { border-top: 1px solid var(--grey1); margin-top: 40px; padding-block: 28px 8px; }
+  .resale { border-top: 1px solid var(--grey1); margin-top: 48px; padding-block: 28px 8px; }
   .resale p { margin-bottom: 0; }
 
   /* the ask */
@@ -222,12 +230,12 @@
   @media (max-width: 700px) { .mast nav a { display: inline-block; padding-block: 12px 4px; } }
   @media (max-width: 700px) { #ar-filters { gap: 8px; } #ar-filters button, #ar-filters input { min-height: 44px; } }
   @media (max-width: 700px) {
-    #p-ar .scroll { overflow: visible; }
+    #p-ar .scroll { overflow-x: visible; overflow-y: auto; max-height: 560px; }
     #p-ar table, #p-ar tbody, #p-ar tr, #p-ar td { display: block; width: 100%; }
     #p-ar thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
     #p-ar tr { padding: 12px; border-bottom: 1px solid var(--grey1); }
     #p-ar td { border: 0; padding: 3px 0; white-space: normal; }
-    #p-ar td[data-label]::before { content: attr(data-label); display: inline-block; min-width: 6.5rem; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+    #p-ar td[data-label]::before { content: attr(data-label); display: inline-block; min-width: 6.5rem; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
     #p-ar td.who { padding-bottom: 6px; }
     #p-ar td.who .nm { font-size: 15px; font-weight: 600; }
   }
@@ -289,13 +297,12 @@
       </div>
       <div class="screen">
         <div class="bar tight">
-          <span class="brand">A&amp;R INSTINCT</span>
           <span class="scaleline">A few rows from the live tool</span>
           <span class="spacer"></span>
           <span class="tiny">Real rows &middot; Nov 19</span>
         </div>
         <div class="bar" id="ar-filters"></div>
-        <div class="scroll">
+        <div class="scroll ar-scroll" tabindex="0" aria-label="Artist rows">
           <table>
             <thead><tr>
               <th scope="col">Artist</th><th scope="col">Listeners: found &rarr; now</th><th scope="col">Instagram</th>
@@ -314,7 +321,6 @@
       </div>
       <div class="screen">
         <div class="bar tight">
-          <span class="brand">SHOWS</span>
           <span class="scaleline">New York, Chicago and LA</span>
           <span class="spacer"></span>
         </div>
@@ -322,7 +328,7 @@
         <div class="cities" id="sh-cities"></div>
         <div class="bar tight">
           <button id="sh-nosup" class="ghost" type="button" aria-pressed="false">No support only</button>
-          <input type="search" id="sh-q" placeholder="Search artist or venue">
+          <input type="search" id="sh-q" placeholder="Search artist or venue" aria-label="Search shows by artist or venue">
         </div>
         <div id="sh-list" class="sh-scroll" tabindex="0" aria-label="Show list"></div>
         <div class="screen-foot" id="sh-foot"></div>
@@ -335,7 +341,6 @@
       </div>
       <div class="screen">
         <div class="bar tight">
-          <span class="brand">NEW TOUR PLAN</span>
           <span class="scaleline">Example plan, 2027 to 2030</span>
           <span class="spacer"></span>
           <span class="tiny">Illustrative</span>
@@ -359,18 +364,21 @@
     <h2 id="lm-h">Major-label ownership map</h2>
     <p>Type a label and see who really owns it. Covers the three majors and the big indie groups.
       <a href="https://ilovemyphone30000.github.io/labelmap/">Open the full map &#8599;</a></p>
-    <div class="lm-ask">
-      <label class="tiny" for="lm-q">Label</label>
-      <input id="lm-q" type="search" list="lm-list" placeholder="Try Sub Pop" autocomplete="off">
-      <datalist id="lm-list"></datalist>
+    <div class="screen lm-box">
+      <div class="lm-left">
+        <label class="tiny" for="lm-q">Search a label</label>
+        <input id="lm-q" type="search" list="lm-list" placeholder="Try Sub Pop" autocomplete="off">
+        <datalist id="lm-list"></datalist>
+        <div class="tiny lm-own">Ownership</div>
+        <ol class="lm-path" id="lm-path" aria-live="polite"></ol>
+      </div>
+      <div class="lm-grid" id="lm-grid"></div>
     </div>
-    <div class="lm-path" id="lm-path" aria-live="polite"></div>
-    <div class="lm-grid" id="lm-grid"></div>
   </section>
 
   <section class="resale" aria-labelledby="rs-h">
     <h2 id="rs-h">Resale tracker</h2>
-    <p>Checks every three days for shows where resale prices beat face value.</p>
+    <p>Checks for shows where official resale is lower than face value.</p>
   </section>
 
   </main>
@@ -416,24 +424,8 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
     panel.insertBefore(head, panel.firstChild);
   });
 
-  var ROWS = 4, arFilter = "all", arQ = "", starred = {};
-  var FILTERS = [
-    { k:"all", label:"All", f:function(){return true;}, hideCount:true },
-    { k:"jump", label:"Jumped", f:function(r){return !!r.jp;} },
-    { k:"rostr", label:"Unsigned", f:function(r){return !r.ag;} },
-    { k:"mine", label:"My list", f:function(r){return !!starred[r.a];} }
-  ];
+  var ROWS = 4, arQ = "";
   var arFilters=document.getElementById("ar-filters"), arBody=document.getElementById("ar-body"), arFoot=document.getElementById("ar-foot");
-  var flabel=document.createElement("span");
-  flabel.className="tiny"; flabel.textContent="Filter these 12";
-  arFilters.appendChild(flabel);
-  FILTERS.forEach(function (f) {
-    var b=document.createElement("button");
-    b.type="button"; b.dataset.k=f.k; b.innerHTML=esc(f.label)+" <span class='n'></span>";
-    b.setAttribute("aria-pressed", String(f.k===arFilter));
-    b.addEventListener("click", function(){ arFilter=f.k; drawAR(); });
-    arFilters.appendChild(b);
-  });
   var arQi=document.createElement("input");
   arQi.type="search"; arQi.id="ar-q"; arQi.placeholder="Artist or outlet";
   var arQl=document.createElement("label"); arQl.className="tiny"; arQl.htmlFor="ar-q"; arQl.textContent="Search";
@@ -447,13 +439,7 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
       (r.pl||[]).map(function(p){return p.t;})).join(" ").toLowerCase().indexOf(arQ) > -1;
   }
   function drawAR() {
-    Array.prototype.forEach.call(arFilters.querySelectorAll("button"), function (b) {
-      var f=FILTERS.filter(function(x){return x.k===b.dataset.k;})[0];
-      b.setAttribute("aria-pressed", String(b.dataset.k===arFilter));
-      b.querySelector(".n").textContent = f.hideCount ? "" : AR.filter(f.f).length;
-    });
-    var f=FILTERS.filter(function(x){return x.k===arFilter;})[0];
-    var all=AR.filter(f.f).filter(arMatch).sort(function(x,y){return (x.ag?1:0)-(y.ag?1:0);}), rows=all.slice(0,ROWS);
+    var all=AR.filter(arMatch).sort(function(x,y){return (x.ag?1:0)-(y.ag?1:0);}), rows=all;
     arBody.innerHTML="";
     rows.forEach(function (r) {
       var tr=document.createElement("tr");
@@ -465,9 +451,7 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
         return "<a class='chip pl' href='"+esc(p.u)+"' target='_blank' rel='noopener'>"+esc(p.t)+(/^lorem$/i.test(p.t)?" &middot; Spotify":"")+"</a>";
       }).join("") || "<span class='dash'>&ndash;</span>";
       tr.innerHTML =
-        "<td class='who'><button class='star' type='button' aria-pressed='"+(starred[r.a]?"true":"false")+
-          "' aria-label='Save "+esc(r.a)+"'>"+(starred[r.a]?"★":"☆")+"</button>"+
-          "<a class='nm' href='"+esc(r.u||"#")+"' target='_blank' rel='noopener'>"+esc(r.a)+"</a>"+
+        "<td class='who'><a class='nm' href='"+esc(r.u||"#")+"' target='_blank' rel='noopener'>"+esc(r.a)+"</a>"+
           "</td>"+
         "<td class='num' data-label='Listeners'>"+(r.l==null?"<span class='dash'>&ndash;</span>":
           "<span class='v' title='When found'>"+K(r.l)+"</span><span class='to-now' aria-label='now'>&rarr;</span><span class='v now' title='Now'>"+K(r.ls&&r.ls.length?r.ls[r.ls.length-1]:r.l)+"</span>"+spark(r.ls)+growth([r.l, r.ls&&r.ls.length?r.ls[r.ls.length-1]:r.l])+
@@ -476,11 +460,9 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
           "<a href='"+esc(r.igu||"#")+"' target='_blank' rel='noopener'><span class='v'>"+K(r.ig)+"</span></a>"+
           spark(r.igs)+growth(r.igs))+"</td>"+
         "<td data-label='Press'>"+press+"</td><td data-label='Playlists'>"+pls+"</td>";
-      tr.querySelector(".star").addEventListener("click", function(){ starred[r.a]=!starred[r.a]; drawAR(); });
       arBody.appendChild(tr);
     });
-    arFoot.innerHTML="<span>"+rows.length+" of "+all.length+" examples shown</span>"+
-      "";
+    arFoot.innerHTML="<span>"+all.length+(all.length===1?" artist":" artists")+(all.length>4?", scroll for more":"")+"</span>";
   }
 
   var shView="up", shCity="New York", shNoSup=false, shQ="";
@@ -600,12 +582,21 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
     if (!x && q.length>2) { for (var i=0;i<LM.length;i++){ if (LM[i][0].toLowerCase().indexOf(q)===0){ x=LM[i]; break; } } }
     if (!x && q.length>2) { for (var j=0;j<LM.length;j++){ if (LM[j][0].toLowerCase().indexOf(q)>=0){ x=LM[j]; break; } } }
     Array.prototype.forEach.call(lmGrid.querySelectorAll("li button"), function(b){ b.setAttribute("aria-pressed", String(!!x && b.textContent===x[0])); });
-    if (!q) { lmPath.innerHTML="<span class='none'>Pick a label below, or type one.</span>"; return; }
-    if (!x) { lmPath.innerHTML="<span class='none'>Not on the map yet.</span>"; return; }
-    var chain=[lmNode(x[0],"hit")];
-    x[1].slice().reverse().forEach(function(n,i){ if (x[2]==="ind" || n!==MAJ[x[2]]) chain.push(lmNode(n,"")); });
-    chain.push("<span class='node top'>"+esc(x[2]==="ind" ? (x[1].length?"Independent":"Independent group") : MAJ[x[2]])+"</span>");
-    lmPath.innerHTML=chain.join("<span class='arr' aria-hidden='true'>&rarr;</span>");
+    if (!q) { lmPath.innerHTML="<li class='none'>Pick a label on the right, or type one.</li>"; return; }
+    if (!x) { lmPath.innerHTML="<li class='none'>Not on the map yet.</li>"; return; }
+    var names=[x[0]];
+    x[1].slice().reverse().forEach(function(n){ if (x[2]==="ind" || n!==MAJ[x[2]]) names.push(n); });
+    var topName = x[2]==="ind" ? (x[1].length ? null : null) : MAJ[x[2]];
+    var html="";
+    names.forEach(function(n,i){
+      var r=lmRel[n], last=(i===names.length-1)&&!topName;
+      html+="<li><span class='node"+(i===0?" hit":"")+"'>"+esc(n)+"</span>";
+      if (!last) html+="<span class='by'>"+(r==="49%"?"49% owned by":r==="DIST"?"distributed by":r==="JV"?"joint venture with":"owned by")+"</span>";
+      html+="</li>";
+    });
+    if (topName) html+="<li><span class='node top'>"+esc(topName)+"</span></li>";
+    else html+="<li><span class='by' style='border:0;margin:0;padding:6px 0 0'>Independent</span></li>";
+    lmPath.innerHTML=html;
   }
   ["umg","sony","wmg","ind"].forEach(function(k){
     var top=LM.filter(function(x){ return x[2]===k && !x[4] && x[1].length===(k==="ind"?0:1); });
