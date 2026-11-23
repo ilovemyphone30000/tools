@@ -161,6 +161,8 @@
   .pitch-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; }
   @media (max-width: 760px) { .pitch-list { grid-template-columns: 1fr; } }
   .pitch-list li { border: 1px solid var(--grey1); background: #fff; padding: 16px 18px; min-width: 0; }
+  .pitch-list img { display: block; width: calc(100% + 36px); max-width: none; margin: -16px -18px 14px; aspect-ratio: 1 / 1; height: auto; object-fit: cover; background: var(--grey1); }
+  @media (max-width: 760px) { .pitch-list img { aspect-ratio: 4 / 3; } }
   .pitch-list .who { display: block; font-family: var(--display); font-size: 24px; line-height: 1.1; white-space: normal; }
   .pitch-list .st { display: inline-block; margin-top: 10px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border: 1px solid var(--green); color: var(--green); background: var(--tint); }
   .pitch-list .st.prog { border-color: var(--grey4); color: var(--muted); background: none; }
@@ -254,11 +256,14 @@
     <h2 id="pi-h">Artist pitches</h2>
     <p>I pitched three artists. Two have signed, and one is being actively chased.</p>
     <ul class="pitch-list">
-      <li><span class="who">Billboard Style</span><span class="st">Signed</span>
-        <span class="to">Agent: Greg Horbal</span><span class="how">Found by the A&amp;R Instinct scan, Aug 10</span></li>
-      <li><span class="who">Zayok</span><span class="st">Signed</span>
+      <li><img src="img/zayok.webp" alt="Zayok" width="720" height="720" loading="lazy">
+        <span class="who">Zayok</span><span class="st">Signed</span>
         <span class="to">Agent: Max Braun</span><span class="how">Personal connection</span></li>
-      <li><span class="who">Ruby Rose Turner</span><span class="st prog">Actively chased</span>
+      <li><img src="img/billboard-style.webp" alt="Billboard Style" width="720" height="720" loading="lazy">
+        <span class="who">Billboard Style</span><span class="st">Signed</span>
+        <span class="to">Agent: Greg Horbal</span><span class="how">Found by the A&amp;R Instinct scan, Aug 10</span></li>
+      <li><img src="img/ruby-rose-turner.webp" alt="Ruby Rose Turner" width="614" height="614" loading="lazy">
+        <span class="who">Ruby Rose Turner</span><span class="st prog">Actively chased</span>
         <span class="to">Agent: Zac Bluestone</span><span class="how">Personal connection</span></li>
     </ul>
   </section>
