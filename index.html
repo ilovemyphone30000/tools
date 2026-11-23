@@ -28,15 +28,15 @@
     -webkit-text-size-adjust: 100%;
   }
   .wrap {
-    max-width: 64rem; margin: 0 auto;
-    padding-left: max(28px, env(safe-area-inset-left, 0px));
-    padding-right: max(28px, env(safe-area-inset-right, 0px));
+    max-width: 74rem; margin: 0 auto;
+    padding-left: max(20px, env(safe-area-inset-left, 0px));
+    padding-right: max(20px, env(safe-area-inset-right, 0px));
   }
 
   /* masthead: small, gets out of the way */
   .mast {
     display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
-    gap: 10px 32px; padding-block: 40px 0;
+    gap: 8px 24px; padding-block: 26px 0;
   }
   .mast .mark {
     font-family: var(--display); font-size: 21px; letter-spacing: 0.02em;
@@ -48,43 +48,43 @@
   .mast nav a:hover { color: var(--green); border-bottom-color: var(--green); }
 
   /* the lead: the signing */
-  .lead { padding-block: 44px 46px; }
+  .lead { padding-block: 26px 30px; border-bottom: 4px solid var(--ink); }
   .kicker { font-family: var(--sans); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--green); }
   .lead h1 {
-    margin: 18px 0 0; font-family: var(--serif); font-weight: 400;
-    font-size: clamp(32px, 5vw, 58px); line-height: 1.08; letter-spacing: -0.025em;
-    max-width: 20ch;
+    margin: 12px 0 0; font-family: var(--serif); font-weight: 400;
+    font-size: clamp(32px, 5.4vw, 64px); line-height: 1.04; letter-spacing: -0.025em;
+    max-width: 22ch;
   }
-  .lead h1 em { display: block; margin-top: 10px; font-style: italic; color: var(--green); }
+  .lead h1 em { font-style: italic; color: var(--green); }
   .lead ol {
-    margin: 38px 0 0; padding: 0; list-style: none;
-    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 44px;
+    margin: 22px 0 0; padding: 0; list-style: none;
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 30px;
+    max-width: 62rem;
   }
-  .lead li { font-family: var(--sans); font-size: 13px; line-height: 1.5; border-top: 1px solid var(--grey1); padding-top: 14px; }
+  .lead li { font-family: var(--sans); font-size: 13px; line-height: 1.45; border-top: 1px solid var(--grey1); padding-top: 10px; }
   .lead li b { display: block; font-family: var(--mono); font-weight: 700; font-size: 15px; margin-bottom: 4px; }
   .lead .when { display: block; color: var(--muted); font-size: 11px; margin-top: 3px; }
-  .onlyone { margin: 30px 0 0; font-size: 13px; color: var(--muted); font-family: var(--sans); }
+  .onlyone { margin: 18px 0 0; font-size: 13px; color: var(--muted); font-family: var(--sans); }
   @media (max-width: 760px) { .lead ol { grid-template-columns: 1fr; } }
 
   /* the four numbers that matter */
   .nums {
     display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 34px 44px; padding: 40px 0 44px;
-    border-top: 1px solid var(--grey1); border-bottom: 1px solid var(--grey1);
+    gap: 22px 30px; padding: 26px 0 28px; border-bottom: 1px solid var(--grey1);
   }
   .nums .n {
     display: block; font-family: var(--display); font-weight: 400;
     font-size: clamp(38px, 5.4vw, 64px); line-height: 0.82;
     letter-spacing: -0.02em; color: var(--green);
   }
-  .nums .c { display: block; margin-top: 13px; font-family: var(--sans); font-size: 12px; line-height: 1.45; max-width: 24ch; }
-  .nums .s { display: block; margin-top: 7px; font-family: var(--sans); font-size: 11px; line-height: 1.45; color: var(--muted); max-width: 24ch; }
+  .nums .c { display: block; margin-top: 9px; font-family: var(--sans); font-size: 12px; line-height: 1.4; }
+  .nums .s { display: block; margin-top: 5px; font-family: var(--sans); font-size: 11px; line-height: 1.4; color: var(--muted); }
   @media (max-width: 860px) { .nums { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
   /* evidence */
-  .tools { padding-block: 44px 10px; }
-  .tools h2 { margin: 0 0 20px; font-family: var(--sans); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
-  .tabstrip { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+  .tools { padding-block: 24px 10px; }
+  .tools h2 { margin: 0 0 14px; font-family: var(--sans); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .tabstrip { display: flex; flex-wrap: wrap; gap: 2px; margin-bottom: 16px; }
   .tabstrip button {
     font-family: var(--sans); font-size: 11px; letter-spacing: 0.04em;
     background: none; border: 1px solid var(--grey4); border-radius: 0;
@@ -97,7 +97,7 @@
   .tabstrip button:hover { color: var(--ink); }
   .tabstrip button[aria-selected="true"]:hover { color: var(--bg); }
 
-  .panel-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 20px; margin-bottom: 18px; }
+  .panel-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 20px; margin-bottom: 12px; }
   .panel-head h3 { margin: 0; font-family: var(--mono); font-weight: 700; font-size: 17px; }
   .panel-head p { margin: 0; font-size: 14px; color: var(--muted); max-width: 56ch; }
   .panel-head a { color: var(--green); }
@@ -128,9 +128,9 @@
   .screen th {
     text-align: left; font-weight: 400; font-size: 10px; letter-spacing: 0.08em;
     text-transform: uppercase; color: var(--muted);
-    padding: 9px 16px 8px 0; border-bottom: 1px solid var(--grey1); white-space: nowrap;
+    padding: 7px 14px 6px 0; border-bottom: 1px solid var(--grey1); white-space: nowrap;
   }
-  .screen td { padding: 11px 16px 11px 0; border-bottom: 1px solid #f4f3ef; vertical-align: top; }
+  .screen td { padding: 8px 14px 8px 0; border-bottom: 1px solid #f1f0ec; vertical-align: top; }
   .screen td:last-child, .screen th:last-child { padding-right: 0; }
   .screen a { color: inherit; text-decoration: none; }
   .screen a:hover { text-decoration: underline; }
@@ -183,14 +183,14 @@
   tr.open td { background: #f7fbf8; }
 
   /* the ask */
-  .ask { border-top: 1px solid var(--grey1); margin-top: 48px; padding-block: 36px 8px; }
+  .ask { border-top: 4px solid var(--ink); margin-top: 26px; padding-block: 22px 8px; }
   .ask p { margin: 0; font-size: 17px; max-width: 60ch; }
   .ask p em { font-family: var(--serif); font-style: italic; color: var(--green); font-size: 1.1em; }
-  .also { margin: 28px 0 0; padding-top: 18px; border-top: 1px solid var(--grey1); font-family: var(--sans); font-size: 12px; color: var(--muted); }
+  .also { margin: 18px 0 0; padding-top: 14px; border-top: 1px solid var(--grey1); font-family: var(--sans); font-size: 12px; color: var(--muted); }
   .also a { color: var(--ink); }
   .also a:hover { color: var(--green); }
 
-  footer { padding-block: 36px 64px; font-size: 12px; color: var(--muted); }
+  footer { padding-block: 20px 44px; font-size: 12px; color: var(--muted); }
   footer p { margin: 0; max-width: 82ch; }
   footer a { color: var(--ink); }
 </style>
@@ -213,16 +213,38 @@
     <h1>Billboard Style, caught on their first single and signed.
       <em>Fresh Finds got there 100 days later.</em></h1>
     <ol>
-      <li><b>Aug 10</b>The scan logs them
+      <li><b>Aug 10</b>The scan finds them on their first single, &ldquo;Billboard Style&rdquo;
         <span class="when">81,057 monthly listeners &middot; Superplaylist #4</span></li>
-      <li><b>Signed</b>To Greg Horbal
+      <li><b>Signed</b>To Greg Horbal, off that find
         <span class="when">Booking: Earth Music Agency</span></li>
-      <li><b>Nov 18</b>Fresh Finds adds them
-        <span class="when">100,519 listeners by then, up 24%</span></li>
+      <li><b>Nov 18</b>Spotify's Fresh Finds adds them, 100 days after the scan did
+        <span class="when">100,519 monthly listeners by then, up 24%</span></li>
     </ol>
-    <p class="onlyone">One signing so far.</p>
+    <p class="onlyone">One signing so far. The rest of this page is what the tools are holding right now.</p>
   </section>
 
+  <section class="nums" aria-label="What the tools are holding">
+    <div>
+      <span class="n">69</span>
+      <span class="c">unsigned artists already carrying a booking agent</span>
+      <span class="s">Someone with money backed them. No label has moved.</span>
+    </div>
+    <div>
+      <span class="n">706</span>
+      <span class="c">shows next month with no support booked</span>
+      <span class="s">45% of everything tracked in New York, Chicago and LA.</span>
+    </div>
+    <div>
+      <span class="n">31%</span>
+      <span class="c">of Spotify's Fresh Finds was already in the log</span>
+      <span class="s">53 of the 171 artists, before Spotify ran the list.</span>
+    </div>
+    <div>
+      <span class="n">0</span>
+      <span class="c">people running any of it</span>
+      <span class="s">Six scheduled jobs. Nobody watches them.</span>
+    </div>
+  </section>
 
   <section class="tools">
     <h2>The evidence</h2>
@@ -258,7 +280,8 @@
     <div id="p-sh" role="tabpanel" hidden>
       <div class="panel-head">
         <h3>Show calendar</h3>
-        <p><a href="https://ilovemyphone30000.github.io/nyc-shows/">Open it &#8599;</a></p>
+        <p>Everything playing tomorrow, and everything announced since the last check.
+          <a href="https://ilovemyphone30000.github.io/nyc-shows/">Open it &#8599;</a></p>
       </div>
       <div class="screen">
         <div class="bar tight">
@@ -282,7 +305,7 @@
     <div id="p-it" role="tabpanel" hidden>
       <div class="panel-head">
         <h3>Itinerary routing engine</h3>
-        <p>An intake form in, a routed itinerary out.</p>
+        <p>An intake form in, a routed multi-year itinerary out.</p>
       </div>
       <div class="screen">
         <div class="bar tight">
@@ -307,15 +330,16 @@
   </section>
 
   <section class="ask">
-    <p>69 unsigned artists in the log already carry a booking agent.
-      <em>Say the word and that becomes a weekly report.</em></p>
-    <p class="also">Also running: a resale tracker, every three days, flagging shows where resale
-      beats face value. And <a href="https://ilovemyphone30000.github.io/labelmap/">the label map</a>.</p>
+    <p>Those 69 artists are a target list, not a statistic.
+      <em>Say the word and it becomes a weekly report.</em></p>
+    <p class="also">Also running: a resale tracker that flags shows where resale beats face value,
+      every three days, and <a href="https://ilovemyphone30000.github.io/labelmap/">the major-label
+      ownership map</a>.</p>
   </section>
 
   <footer>
-    <p>Real rows, November 2026. Client rows left out, the A&amp;R and show pages password-protected.
-      <a href="https://github.com/ilovemyphone30000/tools">Source</a></p>
+    <p>Real rows from the live tools, November 2026. Client rows left out; the A&amp;R and show pages are
+      password-protected. <a href="https://github.com/ilovemyphone30000/tools">Source</a></p>
   </footer>
 </div>
 
