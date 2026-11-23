@@ -4,147 +4,964 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AI tools I've built</title>
-<meta name="description" content="Five AI agents built for A&amp;R, show listings, tour routing, resale pricing and label ownership.">
+<meta name="description" content="Five AI agents built for A&amp;R, show listings, tour routing, resale pricing and label ownership, each with a working demo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Courier+Prime:wght@400;700&family=Montserrat:wght@400;500&display=swap">
 <style>
-  /* One reading column. Each tool is a name, then a line about what it does. Space between, no boxes. */
+  /* OJAS layout (mono prose hero, engraved strip, heavy rules, fat condensed name)
+     on THE·TEAM's palette (Digital White, Softened Black, Forest Green used once per section).
+     Single light look on purpose: the identity has no dark mode. */
   :root {
-    --bg: #fbfbfa;
-    --fg: #1a1a1a;
-    --muted: #6b6b6b;
-    --line: #e6e6e3;
-    --accent: #2a5db0;
-    --sans: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", sans-serif;
+    --bg: #fffdf8;
+    --ink: #100906;
+    --grey7: #97999b;
+    --grey4: #bbbcbc;
+    --grey1: #d9d9d6;
+    --muted: #6f7173;
+    --green: #2e7040;
+    --tint: #e2ece4;
+
+    --mono: "Courier Prime", ui-monospace, "SF Mono", Menlo, monospace;
+    --sans: "Gotham", "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    --serif: "Times New Roman", Times, serif;
+    --display: "Anton", "Oswald", Impact, sans-serif;
+    --tracking: -0.02em;
+
     color-scheme: light;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #161615;
-      --fg: #ededeb;
-      --muted: #9b9b96;
-      --line: #2e2e2b;
-      --accent: #8fb4ef;
-      color-scheme: dark;
-    }
   }
 
   * { box-sizing: border-box; }
 
+  html, body { margin: 0; }
   body {
     background: var(--bg);
-    color: var(--fg);
-    font-family: var(--sans);
+    color: var(--ink);
+    font-family: var(--mono);
     font-size: 16px;
-    line-height: 1.55;
-    margin: 0;
+    line-height: 1.5;
     -webkit-text-size-adjust: 100%;
   }
-  .page {
-    max-width: 42rem;
+
+  .wrap {
+    max-width: 68rem;
     margin: 0 auto;
-    padding-left: max(16px, env(safe-area-inset-left, 0px));
-    padding-right: max(16px, env(safe-area-inset-right, 0px));
-    padding-block: 48px 64px;
+    padding-left: max(20px, env(safe-area-inset-left, 0px));
+    padding-right: max(20px, env(safe-area-inset-right, 0px));
   }
 
-  h1 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    margin: 0 0 8px;
+  /* ---------- hero ---------- */
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: 32px 48px;
+    align-items: end;
+    padding-block: 56px 40px;
   }
-  .lede {
-    color: var(--muted);
+  .hero p {
     margin: 0;
-    max-width: 60ch;
+    max-width: 50ch;
+    font-size: 16px;
+    line-height: 1.55;
   }
-
-  ul {
-    list-style: none;
-    margin: 48px 0 0;
-    padding: 0;
+  .hero p + p { margin-top: 16px; }
+  .lede em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.14em;
+    color: var(--green);
+    letter-spacing: var(--tracking);
+  }
+  .hero .right {
+    justify-self: end;
+    text-align: right;
+  }
+  .toplinks {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    align-items: flex-end;
+    gap: 2px;
+    margin-bottom: 18px;
   }
-  li {
-    border-top: 1px solid var(--line);
-    padding-top: 24px;
+  .toplinks a {
+    font-family: var(--sans);
+    font-size: 17px;
+    letter-spacing: var(--tracking);
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--grey4);
+    padding-bottom: 1px;
   }
-  .name {
-    font-weight: 600;
+  .toplinks a:hover { color: var(--green); border-bottom-color: var(--green); }
+  .hero .wordmark {
+    max-width: none;
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(56px, 13vw, 132px);
+    line-height: 0.82;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
     margin: 0;
   }
-  .what {
+
+  .rule-heavy {
+    height: 4px;
+    background: var(--ink);
+    margin: 0;
+    border: 0;
+  }
+
+  /* ---------- tool items ---------- */
+  .tool {
+    border-bottom: 1px solid var(--grey1);
+    padding-block: 40px 44px;
+  }
+  .tool:last-of-type { border-bottom: 0; }
+
+  .tool-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 24px;
+  }
+  .tool-head h2 {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 21px;
+    letter-spacing: 0;
+    margin: 0;
+  }
+  .meta {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     color: var(--muted);
-    margin: 4px 0 0;
-    max-width: 68ch;
+  }
+  .tool-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+    gap: 28px 48px;
+    margin-top: 18px;
+    align-items: start;
+  }
+  .tool-body p {
+    margin: 0;
+    max-width: 62ch;
+    font-size: 15px;
+  }
+  .tool-body p + p { margin-top: 12px; }
+
+  /* the one result that matters, under the section it belongs to */
+  .result {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 10px 28px;
+    align-items: center;
+    margin-top: 4px;
+    padding-top: 22px;
+    border-top: 2px solid var(--ink);
+  }
+  .result .big {
+    font-family: var(--display);
+    font-size: clamp(72px, 11vw, 124px);
+    line-height: 0.78;
+    color: var(--green);
+    letter-spacing: -0.02em;
+  }
+  .result .big span {
+    display: block;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+  .result p { margin: 0; font-size: 16px; max-width: 54ch; }
+  .result p + p { margin-top: 10px; }
+  .result .said {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.16em;
+    letter-spacing: var(--tracking);
+  }
+  .result .src {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: var(--tracking);
+    color: var(--muted);
+  }
+  @media (max-width: 560px) {
+    .result { grid-template-columns: 1fr; }
+  }
+  .runs {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--grey1);
+    font-family: var(--sans);
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--muted);
+    letter-spacing: var(--tracking);
+  }
+  .runs b {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .out {
+    display: inline-block;
+    margin-top: 14px;
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--ink);
+    letter-spacing: var(--tracking);
+    text-decoration: none;
+    border-bottom: 1px solid var(--grey4);
+  }
+  .out:hover { color: var(--green); border-bottom-color: var(--green); }
+
+  /* ---------- demo panel ---------- */
+  .demo {
+    border: 1px solid var(--grey4);
+    background: #fff;
+  }
+  .demo-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 16px;
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--grey1);
+    background: var(--bg);
+  }
+  .demo-bar .meta { color: var(--ink); }
+  .demo-bar .note { font-family: var(--sans); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey7); }
+  .demo-in {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px;
+    border-bottom: 1px solid var(--grey1);
+    align-items: flex-end;
+  }
+  .field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .field label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .field input, .field select {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--grey4);
+    border-radius: 0;
+    padding: 6px 8px;
+    min-width: 0;
+    width: 100%;
+  }
+  .field input:focus, .field select:focus, button:focus-visible, a:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 1px;
+  }
+  .field.grow { flex: 1 1 10rem; }
+
+  button {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--grey4);
+    border-radius: 0;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  button:hover { border-color: var(--ink); }
+  button.go {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+  button.go:hover { background: var(--green); border-color: var(--green); }
+  button[aria-pressed="true"] {
+    background: var(--green);
+    border-color: var(--green);
+    color: #fff;
   }
 
-  a { color: var(--accent); }
-  a:hover { color: var(--fg); }
-  a:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+  .demo-out { padding: 12px; }
+  .scroll { overflow-x: auto; }
 
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 0 10px 6px 0;
+    border-bottom: 1px solid var(--grey1);
+    white-space: nowrap;
+  }
+  td {
+    padding: 5px 10px 5px 0;
+    border-bottom: 1px solid #f0efe9;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  td.num, th.num { text-align: right; padding-right: 0; }
+  tr.flag td { background: var(--tint); }
+  tr.flag td:first-child { box-shadow: inset 3px 0 0 var(--green); padding-left: 8px; }
+  .green { color: var(--green); }
+  .strike { color: var(--grey7); text-decoration: line-through; }
+
+  .tally {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+    padding: 10px 12px;
+    border-top: 1px solid var(--grey1);
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: var(--tracking);
+    color: var(--muted);
+  }
+  .tally b { font-weight: 500; color: var(--green); }
+
+  /* overlap demo */
+  .lists {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .list {
+    border: 1px solid var(--grey1);
+    padding: 8px;
+    min-width: 0;
+  }
+  .list.off { opacity: 0.38; }
+  .list h4 {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0 0 6px;
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+  }
+  .list ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 3px; }
+  .list li {
+    font-size: 12px;
+    line-height: 1.3;
+    padding: 3px 4px;
+    border: 1px solid transparent;
+    overflow-wrap: anywhere;
+  }
+  .list li.hit {
+    background: var(--tint);
+    border-color: var(--green);
+    color: var(--green);
+  }
+  .kept {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 14px;
+  }
+  .kept li { display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid #f0efe9; padding-bottom: 4px; }
+  .kept .n { font-family: var(--sans); font-size: 11px; color: var(--green); white-space: nowrap; }
+  .empty { font-size: 14px; color: var(--muted); margin: 0; }
+
+  /* show list demo */
+  .filters { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px; border-bottom: 1px solid var(--grey1); }
+  .shows { margin: 0; padding: 0; list-style: none; }
+  .shows li {
+    display: grid;
+    grid-template-columns: 4.6rem minmax(0, 1fr) auto;
+    gap: 4px 12px;
+    align-items: baseline;
+    padding: 6px 0;
+    border-bottom: 1px solid #f0efe9;
+    font-size: 14px;
+  }
+  .shows .day { font-family: var(--sans); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+  .shows .where { color: var(--muted); font-size: 13px; }
+  .shows .tag {
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    border: 1px solid var(--green);
+    padding: 1px 5px;
+    white-space: nowrap;
+  }
+  .shows .tag.hidden { visibility: hidden; }
+
+  /* ---------- footer ---------- */
   footer {
-    border-top: 1px solid var(--line);
-    margin-top: 48px;
-    padding-top: 24px;
+    padding-block: 32px 56px;
+    font-size: 13px;
     color: var(--muted);
-    font-size: 0.875rem;
   }
-  footer p {
-    margin: 0;
-    max-width: 60ch;
+  footer p { margin: 0 0 6px; max-width: 70ch; }
+  footer a { color: var(--ink); }
+  footer a:hover { color: var(--green); }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; align-items: start; padding-block: 36px 28px; }
+    .hero .right { justify-self: start; text-align: left; }
+    .toplinks { align-items: flex-start; }
+    .tool-body { grid-template-columns: 1fr; }
+    .lists { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .list, .list li { transition: opacity .12s linear, background-color .12s linear, border-color .12s linear; }
   }
 </style>
 </head>
 <body>
-<div class="page">
-  <header>
-    <h1>AI tools I've built</h1>
-    <p class="lede">Five agents I run for music work. Each one gathers its own numbers on a schedule and reports
-      into a spreadsheet or a page.</p>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div>
+      <p class="lede">Five agents I built and run for music work. Each one reads the sources a person
+        would open by hand, writes what it finds into a sheet or a page, and <em>does the boring part</em>
+        on a schedule, every day or every few days, without being asked.</p>
+      <p>Nothing here is a chatbot. They are scrapers, matchers and builders with strict rules about what
+        they may touch. Each section below runs a small working version in your browser.</p>
+    </div>
+    <div class="right">
+      <nav class="toplinks">
+        <a href="https://ilovemyphone30000.github.io/instinct/">A&amp;R Instinct &#8599;</a>
+        <a href="https://ilovemyphone30000.github.io/labelmap/">Label map &#8599;</a>
+        <a href="https://github.com/ilovemyphone30000/tools">Source &#8599;</a>
+      </nav>
+      <p class="wordmark">AI<br>Tools</p>
+    </div>
   </header>
 
-  <ul>
-    <li>
-      <p class="name"><a href="https://ilovemyphone30000.github.io/instinct/">A&amp;R Superplaylist</a></p>
-      <p class="what">Scans 44 Spotify discovery playlists every day for songs that two or more lists picked up in
-        the same week, keeps the small artists, logs them in a shared sheet with their streaming and follower
-        numbers, and publishes a password-protected dashboard that tracks how each artist grows. Builds a private
-        playlist of the week's finds three times a week.</p>
-    </li>
-    <li>
-      <p class="name">Show list and announcements</p>
-      <p class="what">Gathers the next two weeks of concerts in New York, Chicago and Los Angeles, plus everything
-        newly announced, from public listings, 19 venue calendars and the Ticketmaster Discovery API. Clears the
-        duplicates, marks the team's own artists, and publishes one password-protected page.</p>
-    </li>
-    <li>
-      <p class="name">Itinerary builder</p>
-      <p class="what">Turns five answers (artist, length, start and end room size, fixed dates) into a multi-year
-        touring routing in the label's sheet format. A fuller version audits an itinerary that already exists: fills
-        the gaps, fixes the room ladder, and researches comparable artists' venues city by city.</p>
-    </li>
-    <li>
-      <p class="name">AXS resale scan</p>
-      <p class="what">Every three days it re-checks the standard, official resale and SeatGeek price for every
-        upcoming show in the tracker sheet, and flags the ones where a fan gets in cheaper on resale than at face
-        value. It reads prices only, never buys or holds a ticket.</p>
-    </li>
-    <li>
-      <p class="name"><a href="https://ilovemyphone30000.github.io/labelmap/">Label map</a></p>
-      <p class="what">A single-page reference to who owns whom across the major labels, built from a company
-        directory plus manual research. One self-contained HTML file with the logos inlined, and a matching one-page
-        PDF poster generated from that same file, so the two can't drift apart.</p>
-    </li>
-  </ul>
+  <hr class="rule-heavy">
 
-  <footer>
-    <p>As of Nov 22, 2026. The Superplaylist and show pages are password-protected; the label map is open.</p>
+  <!-- ============ 1. Superplaylist ============ -->
+  <section class="tool">
+    <div class="tool-head">
+      <h2>A&amp;R Superplaylist</h2>
+      <span class="meta">Daily &middot; Spotify &rarr; Sheet &rarr; Site</span>
+    </div>
+    <div class="tool-body">
+      <div>
+        <p>Scans 44 discovery playlists for everything added in the last seven days. A song is only
+          interesting if two or more lists picked it up in the same week, so that overlap is the whole
+          test. What survives gets filtered down to small artists, logged with its streaming and follower
+          numbers, and tracked week over week so growth is visible.</p>
+        <p>The dashboard it publishes is encrypted and password-protected. It is a mirror of the sheet,
+          so the team reads one set of numbers.</p>
+        <div class="runs"><b>Runs:</b> every morning. Writes new rows to the music tab only, never to
+          flags or notes. Builds a private playlist of the week's finds three times a week.</div>
+        <a class="out" href="https://ilovemyphone30000.github.io/instinct/">Open the dashboard &#8599;</a>
+      </div>
+
+      <div class="demo" id="overlap">
+        <div class="demo-bar">
+          <span class="meta">Demo &middot; the overlap rule</span>
+          <span class="note">Invented songs</span>
+        </div>
+        <div class="demo-in">
+          <span class="meta" style="color:var(--muted)">Click a list to drop it from the scan</span>
+        </div>
+        <div class="demo-out">
+          <div class="lists" id="ov-lists"></div>
+        </div>
+        <div class="demo-out" style="border-top:1px solid var(--grey1)">
+          <div class="meta" style="margin-bottom:8px">Kept &mdash; on two or more lists</div>
+          <ul class="kept" id="ov-kept"></ul>
+        </div>
+        <div class="tally" id="ov-tally"></div>
+      </div>
+
+      <div class="result">
+        <p class="big">22<span>days earlier, on average</span></p>
+        <div>
+          <p>Across the songs this scan and Spotify's Fresh Finds both picked up, the scan had them
+            first by an average of 22 days.</p>
+          <p>Billboard Style came out of it as a flagged artist and was <span class="said">signed by
+            Greg Horbal</span> after that.</p>
+          <p class="src">Counted from the scan's own run records against Fresh Finds, on the overlapping
+            songs. As of November 2026.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. Show list ============ -->
+  <section class="tool">
+    <div class="tool-head">
+      <h2>Show list and announcements</h2>
+      <span class="meta">Daily &middot; NYC / CHI / LA</span>
+    </div>
+    <div class="tool-body">
+      <div>
+        <p>Pulls the next two weeks of concerts in three cities, plus everything newly announced, from
+          public listings, 19 venue calendars and the official Ticketmaster API. It clears duplicates
+          across sources, matches artist names that are spelled three different ways, and marks the rows
+          the team cares about.</p>
+        <p>One page comes out of it, password-protected, with a change report showing what moved since
+          the last run.</p>
+        <div class="runs"><b>Runs:</b> a venue sweep most days, a full three-city scan on Mondays, and a
+          review pass weekly. Reads only public pages and the official API.</div>
+      </div>
+
+      <div class="demo" id="shows">
+        <div class="demo-bar">
+          <span class="meta">Demo &middot; the listing</span>
+          <span class="note">Invented shows</span>
+        </div>
+        <div class="filters" id="sh-filters"></div>
+        <div class="demo-out">
+          <ul class="shows" id="sh-list"></ul>
+        </div>
+        <div class="tally" id="sh-tally"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. Itinerary builder ============ -->
+  <section class="tool">
+    <div class="tool-head">
+      <h2>Itinerary builder</h2>
+      <span class="meta">On demand &middot; Sheet out</span>
+    </div>
+    <div class="tool-body">
+      <div>
+        <p>Five answers in: artist, how many shows, the room size to start in and the room size to finish
+          in. It lays out the dates, routes the cities so nobody drives backwards, and climbs the room
+          ladder evenly from the first night to the last, then writes the whole thing into the label's
+          sheet format.</p>
+        <p>A fuller version audits a routing that already exists: finds the gaps, fixes a ladder that
+          jumps too fast, and researches what comparable artists played in each city.</p>
+        <div class="runs"><b>Runs:</b> when asked. The real one picks named rooms from a venue bank; the
+          demo shows the ladder and the routing only.</div>
+      </div>
+
+      <div class="demo" id="itin">
+        <div class="demo-bar">
+          <span class="meta">Demo &middot; build a routing</span>
+          <span class="note">Example output</span>
+        </div>
+        <div class="demo-in">
+          <div class="field grow">
+            <label for="it-artist">Artist</label>
+            <input id="it-artist" type="text" value="New signing" maxlength="28">
+          </div>
+          <div class="field">
+            <label for="it-n">Shows</label>
+            <select id="it-n">
+              <option>8</option><option selected>12</option><option>16</option><option>20</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="it-start">Start room</label>
+            <select id="it-start">
+              <option value="150">150</option>
+              <option value="250" selected>250</option>
+              <option value="450">450</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="it-end">End room</label>
+            <select id="it-end">
+              <option value="800">800</option>
+              <option value="1200" selected>1,200</option>
+              <option value="2400">2,400</option>
+            </select>
+          </div>
+          <button class="go" id="it-go" type="button">Build</button>
+        </div>
+        <div class="demo-out scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th><th>Date</th><th>City</th><th>Room</th><th class="num">Cap</th>
+              </tr>
+            </thead>
+            <tbody id="it-body"></tbody>
+          </table>
+        </div>
+        <div class="tally" id="it-tally"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. Resale scan ============ -->
+  <section class="tool">
+    <div class="tool-head">
+      <h2>AXS resale scan</h2>
+      <span class="meta">Every 3 days &middot; Sheet in and out</span>
+    </div>
+    <div class="tool-body">
+      <div>
+        <p>Walks every upcoming show in the tracker and re-reads three prices: the standard ticket,
+          the official resale, and the open market. When the cheapest way in is resale rather than face
+          value, the row gets flagged, because that says something about how the on-sale went.</p>
+        <p>Fees change the answer, so the comparison can be run before or after them. It reads prices
+          only. It never signs in, never holds a ticket and never buys.</p>
+        <div class="runs"><b>Runs:</b> every three days. Updates each tab in place and reports what
+          changed.</div>
+      </div>
+
+      <div class="demo" id="resale">
+        <div class="demo-bar">
+          <span class="meta">Demo &middot; the flag test</span>
+          <span class="note">Invented prices</span>
+        </div>
+        <div class="demo-in">
+          <button id="rs-fees" type="button" aria-pressed="false">Add fees (+18%)</button>
+          <span class="meta" style="color:var(--muted); align-self:center">Flags a show when the cheapest
+            resale beats the standard price</span>
+        </div>
+        <div class="demo-out scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Show</th><th class="num">Standard</th><th class="num">Official resale</th>
+                <th class="num">Open market</th><th class="num">Cheapest</th>
+              </tr>
+            </thead>
+            <tbody id="rs-body"></tbody>
+          </table>
+        </div>
+        <div class="tally" id="rs-tally"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. Label map ============ -->
+  <section class="tool">
+    <div class="tool-head">
+      <h2>Label map</h2>
+      <span class="meta">Reference &middot; One file</span>
+    </div>
+    <div class="tool-body">
+      <div>
+        <p>A single-page answer to who owns whom across the majors: the three parents, the labels under
+          each, and the distribution arms that confuse everyone. Built from a company directory plus
+          manual research, with the logos inlined so the file works offline and forever.</p>
+        <p>The PDF poster is generated by parsing the HTML, so the page and the print version can never
+          drift apart.</p>
+        <div class="runs"><b>Runs:</b> rebuilt by hand when ownership changes. No network calls, no
+          dependencies.</div>
+        <a class="out" href="https://ilovemyphone30000.github.io/labelmap/">Open the map &#8599;</a>
+      </div>
+      <div class="demo">
+        <div class="demo-bar">
+          <span class="meta">Live &middot; the real page</span>
+          <span class="note">Public</span>
+        </div>
+        <div class="demo-out">
+          <p style="margin:0 0 10px; font-size:15px">This one needs no demo. It is already one static
+            page, and it is the only tool here with nothing hidden behind a password.</p>
+          <a class="out" style="margin-top:0" href="https://ilovemyphone30000.github.io/labelmap/">ilovemyphone30000.github.io/labelmap &#8599;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="wrap">
+  <footer style="border-top:1px solid var(--grey1); margin-top:8px">
+    <p>As of November 22, 2026. Every demo on this page runs on invented data, in your browser, with
+      nothing connected to it. Artists, venues, songs and prices here are made up.</p>
+    <p>The dashboard and the show page are password-protected. The
+      <a href="https://ilovemyphone30000.github.io/labelmap/">label map</a> is open.
+      Source: <a href="https://github.com/ilovemyphone30000/tools">github.com/ilovemyphone30000/tools</a></p>
   </footer>
 </div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------------- 1. overlap ---------------- */
+  var LISTS = [
+    { name: "List A", tracks: ["Wrist Radio — Low Ceiling", "Panel Van — Sunday Teeth", "Marla Quay — Half Hour", "Cedar Flats — Winter Count", "Dry Season — Tin Roof", "Ocean Pine — Slow Exit"] },
+    { name: "List B", tracks: ["Panel Van — Sunday Teeth", "Hollis Dane — Paper Weather", "Ninth Floor — Glass Harbour", "Cold Pantry — Nineteen", "Ribbon Creek — Hold Still", "Two Doors — Elm"] },
+    { name: "List C", tracks: ["Panel Van — Sunday Teeth", "Marla Quay — Half Hour", "Still Yard — Blue Garage", "Fern & Flint — Outbound", "Kite Month — Even Odds", "Hollis Dane — Paper Weather"] },
+    { name: "List D", tracks: ["Wrist Radio — Low Ceiling", "Cold Pantry — Nineteen", "Night Ferry — Cassette", "Birch Row — Overtime", "Sable Hills — Tide", "Verge & Co — Daylight"] }
+  ];
+  var listOn = [true, true, true, true];
+  var ovLists = document.getElementById("ov-lists");
+  var ovKept = document.getElementById("ov-kept");
+  var ovTally = document.getElementById("ov-tally");
+
+  function countTracks() {
+    var counts = {};
+    LISTS.forEach(function (l, i) {
+      if (!listOn[i]) return;
+      l.tracks.forEach(function (t) { counts[t] = (counts[t] || 0) + 1; });
+    });
+    return counts;
+  }
+
+  function drawOverlap() {
+    var counts = countTracks();
+    ovLists.innerHTML = "";
+    LISTS.forEach(function (l, i) {
+      var box = document.createElement("div");
+      box.className = "list" + (listOn[i] ? "" : " off");
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.setAttribute("aria-pressed", String(listOn[i]));
+      btn.style.cssText = "all:unset;cursor:pointer;display:block;width:100%";
+      var h = document.createElement("h4");
+      h.innerHTML = "<span>" + l.name + "</span><span>" + (listOn[i] ? "on" : "off") + "</span>";
+      var ul = document.createElement("ul");
+      l.tracks.forEach(function (t) {
+        var li = document.createElement("li");
+        li.textContent = t;
+        if (listOn[i] && counts[t] > 1) li.className = "hit";
+        ul.appendChild(li);
+      });
+      btn.appendChild(h);
+      btn.appendChild(ul);
+      btn.addEventListener("click", function () { listOn[i] = !listOn[i]; drawOverlap(); });
+      box.appendChild(btn);
+      ovLists.appendChild(box);
+    });
+
+    var kept = Object.keys(counts).filter(function (t) { return counts[t] > 1; })
+      .sort(function (a, b) { return counts[b] - counts[a] || a.localeCompare(b); });
+
+    ovKept.innerHTML = "";
+    if (!kept.length) {
+      var p = document.createElement("li");
+      p.className = "empty";
+      p.textContent = "Nothing is on two lists. Turn a list back on.";
+      ovKept.appendChild(p);
+    } else {
+      kept.forEach(function (t) {
+        var li = document.createElement("li");
+        var a = document.createElement("span");
+        a.textContent = t;
+        var b = document.createElement("span");
+        b.className = "n";
+        b.textContent = counts[t] + " lists";
+        li.appendChild(a); li.appendChild(b);
+        ovKept.appendChild(li);
+      });
+    }
+
+    var scanned = listOn.filter(Boolean).length;
+    var seen = Object.keys(counts).length;
+    ovTally.innerHTML = "<span>" + scanned + " of 4 lists scanned</span><span>" + seen +
+      " songs seen</span><span><b>" + kept.length + " kept</b></span>";
+  }
+
+  /* ---------------- 2. show list ---------------- */
+  var SHOWS = [
+    { day: "Tue 02", city: "NYC", who: "Panel Van", where: "The Tin Shed", time: "8:00", neu: false },
+    { day: "Tue 02", city: "LA",  who: "Kite Month", where: "Room 19", time: "9:00", neu: true },
+    { day: "Wed 03", city: "CHI", who: "Dry Season", where: "Half Note Hall", time: "7:30", neu: false },
+    { day: "Wed 03", city: "NYC", who: "Marla Quay", where: "Beacon Yard", time: "7:00", neu: true },
+    { day: "Thu 04", city: "NYC", who: "Still Yard", where: "Paper Mill", time: "8:30", neu: false },
+    { day: "Thu 04", city: "LA",  who: "Hollis Dane", where: "The Long Room", time: "8:00", neu: false },
+    { day: "Fri 05", city: "CHI", who: "Cold Pantry", where: "Union Annex", time: "9:00", neu: true },
+    { day: "Fri 05", city: "NYC", who: "Fern & Flint", where: "The Tin Shed", time: "10:00", neu: false },
+    { day: "Sat 06", city: "LA",  who: "Ninth Floor", where: "Cedar Room", time: "8:00", neu: true },
+    { day: "Sat 06", city: "NYC", who: "Wrist Radio", where: "Paper Mill", time: "9:30", neu: false },
+    { day: "Sun 07", city: "CHI", who: "Marla Quay", where: "Third Ward", time: "7:00", neu: false },
+    { day: "Mon 08", city: "NYC", who: "Kite Month", where: "Beacon Yard", time: "8:00", neu: true }
+  ];
+  var cityPick = "ALL", newOnly = false;
+  var shFilters = document.getElementById("sh-filters");
+  var shList = document.getElementById("sh-list");
+  var shTally = document.getElementById("sh-tally");
+
+  ["ALL", "NYC", "CHI", "LA"].forEach(function (c) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.textContent = c;
+    b.setAttribute("aria-pressed", String(c === cityPick));
+    b.addEventListener("click", function () {
+      cityPick = c;
+      Array.prototype.forEach.call(shFilters.querySelectorAll("button[data-city]"), function (x) {
+        x.setAttribute("aria-pressed", String(x.dataset.city === cityPick));
+      });
+      drawShows();
+    });
+    b.dataset.city = c;
+    shFilters.appendChild(b);
+  });
+  var neuBtn = document.createElement("button");
+  neuBtn.type = "button";
+  neuBtn.textContent = "Just announced";
+  neuBtn.setAttribute("aria-pressed", "false");
+  neuBtn.addEventListener("click", function () {
+    newOnly = !newOnly;
+    neuBtn.setAttribute("aria-pressed", String(newOnly));
+    drawShows();
+  });
+  shFilters.appendChild(neuBtn);
+
+  function drawShows() {
+    var rows = SHOWS.filter(function (s) {
+      return (cityPick === "ALL" || s.city === cityPick) && (!newOnly || s.neu);
+    });
+    shList.innerHTML = "";
+    if (!rows.length) {
+      var li = document.createElement("li");
+      li.style.cssText = "display:block;color:var(--muted);font-size:14px";
+      li.textContent = "Nothing matches that filter.";
+      shList.appendChild(li);
+    }
+    rows.forEach(function (s) {
+      var li = document.createElement("li");
+      var d = document.createElement("span");
+      d.className = "day";
+      d.textContent = s.day + " · " + s.city;
+      var mid = document.createElement("span");
+      mid.innerHTML = "<span>" + s.who + "</span><br><span class='where'>" + s.where + " · " + s.time + "</span>";
+      var tag = document.createElement("span");
+      tag.className = "tag" + (s.neu ? "" : " hidden");
+      tag.textContent = "just announced";
+      li.appendChild(d); li.appendChild(mid); li.appendChild(tag);
+      shList.appendChild(li);
+    });
+    var neu = rows.filter(function (s) { return s.neu; }).length;
+    shTally.innerHTML = "<span>" + rows.length + " of " + SHOWS.length + " shows</span><span><b>" +
+      neu + " just announced</b></span>";
+  }
+
+  /* ---------------- 3. itinerary ---------------- */
+  var ROUTE = [
+    "Brooklyn", "Philadelphia", "Washington", "Pittsburgh", "Cleveland", "Detroit", "Chicago",
+    "Minneapolis", "Denver", "Salt Lake City", "Seattle", "Portland", "San Francisco",
+    "Los Angeles", "San Diego", "Phoenix", "Austin", "Dallas", "Atlanta", "Nashville"
+  ];
+  var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  function roomFor(cap) {
+    if (cap < 320) return "Club";
+    if (cap < 700) return "Ballroom";
+    if (cap < 1500) return "Theatre";
+    return "Hall";
+  }
+  function roundCap(c) {
+    if (c < 500) return Math.round(c / 25) * 25;
+    if (c < 1500) return Math.round(c / 50) * 50;
+    return Math.round(c / 100) * 100;
+  }
+
+  function buildItinerary() {
+    var n = parseInt(document.getElementById("it-n").value, 10);
+    var a = parseInt(document.getElementById("it-start").value, 10);
+    var b = parseInt(document.getElementById("it-end").value, 10);
+    var artist = document.getElementById("it-artist").value.trim() || "New signing";
+    var body = document.getElementById("it-body");
+    var d = new Date(Date.UTC(2027, 2, 4));
+    body.innerHTML = "";
+
+    for (var i = 0; i < n; i++) {
+      var cap = roundCap(a * Math.pow(b / a, n === 1 ? 0 : i / (n - 1)));
+      var city = ROUTE[i % ROUTE.length];
+      var tr = document.createElement("tr");
+      if (i === n - 1) tr.className = "flag";
+      tr.innerHTML =
+        "<td>" + (i + 1 < 10 ? "0" : "") + (i + 1) + "</td>" +
+        "<td>" + MONTHS[d.getUTCMonth()] + " " + (d.getUTCDate() < 10 ? "0" : "") + d.getUTCDate() + "</td>" +
+        "<td>" + city + "</td>" +
+        "<td>" + roomFor(cap) + "</td>" +
+        "<td class='num'>" + cap.toLocaleString("en-US") + "</td>";
+      body.appendChild(tr);
+      d = new Date(d.getTime() + (i % 3 === 2 ? 3 : 2) * 86400000);
+    }
+
+    var last = new Date(d.getTime() - 2 * 86400000);
+    document.getElementById("it-tally").innerHTML =
+      "<span>" + artist + "</span>" +
+      "<span>" + n + " shows</span>" +
+      "<span>Mar 04 &ndash; " + MONTHS[last.getUTCMonth()] + " " + last.getUTCDate() + ", 2027</span>" +
+      "<span><b>" + a.toLocaleString("en-US") + " &rarr; " + b.toLocaleString("en-US") + " cap</b></span>";
+  }
+
+  /* ---------------- 4. resale ---------------- */
+  var PRICES = [
+    { show: "Show 1 · Brooklyn", std: 45, res: 38, mkt: 41 },
+    { show: "Show 2 · Chicago", std: 60, res: 72, mkt: 68 },
+    { show: "Show 3 · Los Angeles", std: 38, res: 34, mkt: 30 },
+    { show: "Show 4 · Atlanta", std: 52, res: 55, mkt: 49 },
+    { show: "Show 5 · Seattle", std: 29, res: 31, mkt: 33 },
+    { show: "Show 6 · Austin", std: 75, res: 61, mkt: 66 }
+  ];
+  var withFees = false;
+  var rsBody = document.getElementById("rs-body");
+  var rsTally = document.getElementById("rs-tally");
+  var rsBtn = document.getElementById("rs-fees");
+
+  function money(n) { return "$" + n.toFixed(0); }
+
+  function drawResale() {
+    rsBody.innerHTML = "";
+    var flagged = 0;
+    PRICES.forEach(function (p) {
+      var res = withFees ? p.res * 1.18 : p.res;
+      var mkt = withFees ? p.mkt * 1.18 : p.mkt;
+      var cheapest = Math.min(res, mkt);
+      var hit = cheapest < p.std;
+      if (hit) flagged++;
+      var tr = document.createElement("tr");
+      if (hit) tr.className = "flag";
+      tr.innerHTML =
+        "<td>" + p.show + "</td>" +
+        "<td class='num'>" + money(p.std) + "</td>" +
+        "<td class='num'>" + money(res) + "</td>" +
+        "<td class='num'>" + money(mkt) + "</td>" +
+        "<td class='num'>" + (hit ? "<span class='green'>" + money(cheapest) + "</span>" :
+          "<span class='strike'>" + money(cheapest) + "</span>") + "</td>";
+      rsBody.appendChild(tr);
+    });
+    rsTally.innerHTML = "<span>" + (withFees ? "After fees" : "Before fees") + "</span><span>" +
+      PRICES.length + " shows checked</span><span><b>" + flagged + " cheaper on resale</b></span>";
+  }
+
+  rsBtn.addEventListener("click", function () {
+    withFees = !withFees;
+    rsBtn.setAttribute("aria-pressed", String(withFees));
+    rsBtn.textContent = withFees ? "Fees on (+18%)" : "Add fees (+18%)";
+    drawResale();
+  });
+
+  document.getElementById("it-go").addEventListener("click", buildItinerary);
+  document.getElementById("it-artist").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") buildItinerary();
+  });
+
+  drawOverlap();
+  drawShows();
+  buildItinerary();
+  drawResale();
+})();
+</script>
 </body>
 </html>
