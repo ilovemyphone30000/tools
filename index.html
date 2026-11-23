@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&display=swap">
 <style>
   :root {
-    --bg: #fffdf8; --ink: #100906;
+    --bg: #fbfbfa; --ink: #100906;
     --grey7: #97999b; --grey4: #bbbcbc; --grey1: #d9d9d6; --muted: #555759;
     --green: #2e7040; --tint: #e2ece4;
     --yellow: #fff4a3; --pink: #ffd6ea; --red: #b00020;
@@ -115,7 +115,15 @@
   .num { white-space: nowrap; font-variant-numeric: tabular-nums; }
   .num .v { display: inline-block; min-width: 2.6rem; }
   .num .v.now { font-weight: 600; min-width: 2.4rem; }
-  .to-now { color: var(--grey7); margin: 0 4px 0 -6px; }
+  .to-now { color: var(--grey7); margin: 0 5px 0 -6px; }
+  .to-now svg { width: 11px; height: 8px; vertical-align: middle; }
+  .ico { width: 0.7em; height: 0.7em; vertical-align: 0.02em; margin-left: 1px; }
+  .screen table.rs td { padding-block: 10px; font-size: 13px; }
+  .screen table.rs td.low { color: var(--green); font-weight: 600; }
+  @media (max-width: 520px) { .screen table.rs th:last-child, .screen table.rs td:last-child { display: none; } }
+  .screen-foot .jump { margin: 0 6px 0 0; }
+  .bar-note { font-size: 12px; color: var(--muted); }
+  #ar-filters { padding-block: 8px; }
   .spark { vertical-align: middle; margin: 0 5px; }
   .up { color: var(--green); } .down { color: var(--red); } .flat { color: var(--muted); }
   .chip { display: inline-block; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 5px; margin: 0 3px 3px 0; white-space: nowrap; }
@@ -144,7 +152,7 @@
   .cities button .n { font-size: 12px; }
   .viewline { font-family: var(--sans); font-weight: 600; font-size: 20px; color: var(--green); padding: 8px 12px 10px; margin: 0; }
   .sh-date { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
-  .sh-day { background: #fff; padding: 14px 16px 6px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--grey1); }
+  .sh-day { background: #fff; padding: 14px 16px 6px; font-size: 13px; font-weight: 600; color: var(--muted); border-bottom: 1px solid var(--grey1); }
   .sh-rows { list-style: none; margin: 0; padding: 0; }
   .sh-rows li { display: grid; grid-template-columns: 4rem minmax(0, 1.4fr) minmax(0, 1fr) 7.5rem; gap: 4px 16px; align-items: baseline; padding: 12px 16px; border-bottom: 1px solid #f1f0ec; }
   .sh-time { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
@@ -183,38 +191,50 @@
   .pitch-list .how { display: block; margin-top: 4px; font-size: 14px; color: var(--muted); }
 
   /* routing engine */
-  .it-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 24px; align-items: start; margin-bottom: 16px; }
-  @media (max-width: 760px) { .it-grid { grid-template-columns: 1fr; } }
-  .it-form { margin: 0; padding: 14px 16px 4px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; }
-  @media (max-width: 500px) { .it-form { grid-template-columns: 1fr; } }
-  .it-form .wide { grid-column: 1 / -1; }
-  .it-form dt { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
-  .it-form dt span { text-transform: none; letter-spacing: 0; color: var(--grey7); margin-left: 4px; }
-  .it-form dd { margin: 0; border: 1px solid var(--grey4); padding: 8px 10px; font-size: 14px; background: #fff; }
+  .it-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: start; margin-bottom: 20px; }
+  @media (max-width: 760px) { .it-grid { grid-template-columns: 1fr; gap: 20px; } }
+  .it-intake { background: #efede6; padding: 14px 16px 10px; }
+  .it-cap { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .it-form { margin: 0; display: block; }
+  .it-form > div { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 12px; padding: 7px 0; border-top: 1px solid #dedad0; font-size: 13px; }
+  .it-form dt { color: var(--muted); }
+  .it-form dt span { color: var(--grey7); margin-left: 4px; }
+  .it-form dd { margin: 0; color: var(--ink); }
   .it-form dd.empty { color: var(--grey7); }
-  .it-go { padding: 12px 16px 16px; }
-  .it-go span { display: inline-block; background: var(--ink); color: var(--bg); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; padding: 9px 14px; }
-  .it-out { padding-top: 4px; }
-  .it-out ul { list-style: none; margin: 8px 0 0; padding: 0; }
-  .it-out li { font-size: 15px; padding: 10px 0; border-top: 1px solid var(--grey1); }
+  .it-out p { margin: 0 0 4px; font-size: 13px; font-weight: 600; }
+  .it-out ul { list-style: none; margin: 0; padding: 0; }
+  .it-out li { font-size: 14px; padding: 8px 0; border-top: 1px solid var(--grey1); }
   .it-out li:last-child { border-bottom: 1px solid var(--grey1); }
-  .it-flow { list-style: none; margin: 0; padding: 22px 16px; display: flex; align-items: center; gap: 0; }
-  .it-flow > li { display: flex; align-items: center; flex: 1 1 0; min-width: 0; }
-  .it-flow > li + li::before { content: "→"; color: var(--grey7); padding: 0 10px; flex: none; }
-  .it-flow .step { display: block; border: 1px solid var(--grey4); background: #fff; padding: 10px 12px; font-size: 14px; text-align: center; width: 100%; }
-  .it-flow .end { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-  .it-flow .lanes { flex: 1.5 1 0; display: flex; flex-direction: column; align-items: stretch; gap: 6px; }
-  .it-flow li.lanes { position: relative; }
-  .it-flow li.lanes::before { position: absolute; left: 0; top: 50%; transform: translateY(-50%); }
-  .it-flow .lanes .tiny { text-align: center; }
-  .it-flow .lane { border-color: var(--green); color: var(--green); }
-  .it-flow .lanes { padding-left: 30px; }
-  @media (max-width: 760px) {
-    .it-flow { flex-direction: column; align-items: stretch; }
-    .it-flow > li { flex-direction: column; }
-    .it-flow > li + li::before { content: "↓"; padding: 6px 0; }
-    .it-flow .lanes { padding-left: 0; }
-    .it-flow li.lanes::before { position: static; transform: none; text-align: center; }
+  .pipe { --pbg: #15120f; --pline: #3b362f; --pdim: #9a958c; --pfg: #f3efe6; --pacc: #7fc28f;
+    background: var(--pbg); color: var(--pfg); font-family: var(--sans); }
+  .pipe-top, .pipe-foot { display: flex; justify-content: space-between; gap: 12px; padding: 10px 16px; font-size: 12px; color: var(--pdim); letter-spacing: 0.04em; }
+  .pipe-top { border-bottom: 1px solid var(--pline); color: var(--pfg); font-weight: 600; font-size: 13px; }
+  .pipe-top span:first-child { color: var(--pfg); }
+  .pipe-foot { border-top: 1px solid var(--pline); }
+  .pipe-row { list-style: none; margin: 0; padding: 14px 16px 8px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 22px; }
+  .stg { position: relative; border: 1px solid var(--pline); padding: 9px 10px 10px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .stg + .stg::before { content: ""; position: absolute; left: -17px; top: 16px; width: 12px; height: 8px; background: var(--pdim); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 12 8%27%3E%3Cpath d=%27M1 4h9M7 1l3 3-3 3%27 fill=%27none%27 stroke=%27black%27 stroke-width=%271.3%27/%3E%3C/svg%3E") no-repeat center / contain; mask: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 12 8%27%3E%3Cpath d=%27M1 4h9M7 1l3 3-3 3%27 fill=%27none%27 stroke=%27black%27 stroke-width=%271.3%27/%3E%3C/svg%3E") no-repeat center / contain; }
+  .stg .no { font-size: 12px; color: var(--pacc); font-variant-numeric: tabular-nums; }
+  .stg b { font-family: var(--sans); font-weight: 600; font-size: 14px; color: var(--pfg); }
+  .stg .d { font-size: 12px; line-height: 1.4; color: var(--pdim); }
+  .stg .tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: auto; padding-top: 4px; }
+  .stg .tags i { font-style: normal; font-size: 10.5px; border: 1px solid var(--pline); padding: 1px 5px; color: var(--pfg); overflow-wrap: anywhere; }
+  .stg .agents { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 2px; }
+  .stg .ag { font-size: 12px; color: var(--pacc); border: 1px solid var(--pacc); padding: 1px 5px; white-space: nowrap; }
+  .stg.fan { grid-row: span 1; }
+  .stg.out { border-color: var(--pacc); }
+  .stg.out b { color: var(--pacc); }
+  .pipe-loop { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 22px; padding: 0 16px 12px; }
+  .pipe-loop span { grid-column: 4 / 6; border: 1px dashed var(--pdim); border-top: 0; padding: 4px 8px; font-size: 12px; color: var(--pdim); text-align: center; }
+  @media (max-width: 1000px) {
+    .pipe-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .stg:nth-child(4)::before { display: none; }
+    .pipe-loop { grid-template-columns: 1fr; }
+    .pipe-loop span { grid-column: 1; border-top: 1px dashed var(--pdim); }
+  }
+  @media (max-width: 600px) {
+    .pipe-row { grid-template-columns: 1fr; gap: 18px; }
+    .stg + .stg::before, .stg:nth-child(4)::before { display: block; left: calc(50% - 6px); top: -14px; transform: rotate(90deg); }
   }
 
   .resale h2 { margin: 0 0 6px; font-family: var(--display); font-weight: 400; font-size: 30px; letter-spacing: 0.01em; }
@@ -268,11 +288,11 @@
   <header class="mast">
     <div class="mast-id">
       <h1 class="mark">Jonah Bierman Fall Intern Project: A&amp;R + AI Admin Systems</h1>
-      <a class="resume" href="jonah-bierman-resume.pdf" target="_blank" rel="noopener">Resume (PDF) &#8599;</a>
+      <a class="resume" href="jonah-bierman-resume.pdf" target="_blank" rel="noopener">Resume (PDF) <svg class="ico" viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2.5h5.5V8M9.5 2.5 2.5 9.5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
     </div>
     <nav>
-      <a href="https://ilovemyphone30000.github.io/instinct/">A&amp;R Instinct &#8599;</a>
-      <a href="https://ilovemyphone30000.github.io/nyc-shows/">Shows &#8599;</a>
+      <a href="https://ilovemyphone30000.github.io/instinct/">A&amp;R Instinct <svg class="ico" viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2.5h5.5V8M9.5 2.5 2.5 9.5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+      <a href="https://ilovemyphone30000.github.io/nyc-shows/">Shows <svg class="ico" viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2.5h5.5V8M9.5 2.5 2.5 9.5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
     </nav>
   </header>
 
@@ -282,14 +302,14 @@
     <ul class="pitch-list">
       <li class="done"><a class="card" href="https://intranet.the.team/music-artists/zayok" target="_blank" rel="noopener"><img src="img/zayok.webp" alt="Zayok" width="720" height="720" loading="lazy">
         <span class="who">Zayok</span><span class="st">Signed</span>
-        <span class="to">Agent: Max Braun</span><span class="how">Personal connection</span></a></li>
+        <span class="to">Booking agent: Max Braun</span><span class="how">Personal connection</span></a></li>
       <li><a class="card" href="https://intranet.the.team/pursuits/12609" target="_blank" rel="noopener"><img src="img/ruby-rose-turner.webp" alt="Ruby Rose Turner" width="614" height="614" loading="lazy">
         <span class="who">Ruby Rose Turner</span><span class="st prog">Actively chasing</span>
-        <span class="to">Agent: Zac Bluestone</span><span class="how">Personal connection</span></a></li>
+        <span class="to">Booking agent: Zac Bluestone</span><span class="how">Personal connection</span></a></li>
       <li class="done"><a class="card" href="https://intranet.the.team/music-artists/billboard-style" target="_blank" rel="noopener"><img src="img/billboard-style.webp" alt="Billboard Style" width="720" height="720" loading="lazy">
         <span class="who">Billboard Style<sup class="ast">*</sup></span><span class="st">Signed</span>
-        <span class="to">Agent: Greg Horbal</span><span class="how">Found by the A&amp;R Instinct scan, Aug 10</span>
-        <span class="note">*Also flagged in Underground, two weeks after my A&amp;R scanner found them.</span></a></li>
+        <span class="to">Booking agent: Greg Horbal</span><span class="how">Found by the A&amp;R Instinct scan, Aug 10</span>
+        <span class="note">*Also flagged in Underground, two weeks after A&amp;R Instinct found them.</span></a></li>
     </ul>
   </section>
 
@@ -301,16 +321,11 @@
         <h3>A&amp;R Instinct</h3>
       </div>
       <div class="screen">
-        <div class="bar tight">
-          <span class="scaleline">A few rows from the live tool</span>
-          <span class="spacer"></span>
-          <span class="tiny">Real rows &middot; Nov 19</span>
-        </div>
         <div class="bar" id="ar-filters"></div>
         <div class="scroll">
           <table>
             <thead><tr>
-              <th scope="col">Artist</th><th scope="col">Listeners: found &rarr; now</th><th scope="col">Instagram</th>
+              <th scope="col">Artist</th><th scope="col">Listeners, found to now</th><th scope="col">Instagram</th>
               <th scope="col">Press</th><th scope="col">Playlists</th>
             </tr></thead>
             <tbody id="ar-body"></tbody>
@@ -325,10 +340,6 @@
         <h3>Show calendar</h3>
       </div>
       <div class="screen">
-        <div class="bar tight">
-          <span class="scaleline">New York, Chicago and LA</span>
-          <span class="spacer"></span>
-        </div>
         <div class="subtabs" id="sh-tabs"></div>
         <div class="cities" id="sh-cities"></div>
         <div class="bar tight">
@@ -342,54 +353,78 @@
 
     <div id="p-it" class="tool">
       <div class="it-grid">
-        <div class="screen it-intake">
-          <div class="bar tight"><span class="scaleline">New tour plan</span><span class="spacer"></span><span class="tiny">Illustrative intake form</span></div>
+        <div class="it-intake" aria-label="Example intake form, not interactive">
+          <div class="it-cap">Example intake</div>
           <dl class="it-form">
             <div><dt>Artist</dt><dd>Dillom</dd></div>
-            <div><dt>Or a comparable artist <span>Optional</span></dt><dd class="empty">&ndash;</dd></div>
             <div><dt>Starting capacity</dt><dd>250</dd></div>
             <div><dt>Target venue</dt><dd>Brooklyn Paramount (2,700)</dd></div>
             <div><dt>Planning window</dt><dd>Jan 2027 to Jan 2030</dd></div>
             <div><dt>Festival targets</dt><dd>Lollapalooza, ACL</dd></div>
             <div class="wide"><dt>Constraints</dt><dd>17 locked dates, Thu to Sat preferred, no Mondays</dd></div>
           </dl>
-          <div class="it-go"><span>Build itinerary</span></div>
         </div>
         <div class="it-out">
-          <div class="tiny">Output</div>
+          <p>What comes back:</p>
           <ul>
             <li>Venues picked from similar artists' past tours</li>
             <li>Writing, recording and press weeks built in</li>
-            <li>Rule breaks flagged</li>
-            <li>Exports to a live Google Sheet</li>
           </ul>
         </div>
       </div>
 
-      <div class="screen it-flow-box">
-        <div class="bar tight"><span class="scaleline">How it works</span></div>
-        <ol class="it-flow" aria-label="How the routing engine works">
-          <li><span class="step">Intake form</span></li>
-          <li><span class="step">Similar artists</span></li>
-          <li class="lanes">
-            <span class="tiny">Regional agents</span>
-            <span class="step lane">West Coast venues</span>
-            <span class="step lane">Southern venues</span>
-            <span class="step lane">North / East Coast venues</span>
+      <div class="pipe" id="pipe" role="figure" aria-label="How the routing engine works: an agent pipeline">
+        <div class="pipe-top">How it works</div>
+        <ol class="pipe-row">
+          <li class="stg">
+            <b>Intake</b>
+            <span class="d">Brief becomes a rules file: locked dates, finale, blackouts</span>
           </li>
-          <li><span class="step">Rule check</span></li>
-          <li><span class="step end">Itinerary</span></li>
+          <li class="stg fan">
+            <b>Comp research</b>
+            <span class="d">3 subagents run in parallel, one per region</span>
+            <span class="agents"><span class="ag">West</span><span class="ag">South</span><span class="ag">North / East</span></span>
+          </li>
+          <li class="stg">
+            <b>Venue bank</b>
+            <span class="d">Every market and room with its capacity</span>
+          </li>
+          <li class="stg loopa">
+            <b>Planner</b>
+            <span class="d">Tries several settings, keeps the best-scoring plan</span>
+          </li>
+          <li class="stg loopb">
+            <b>Validation</b>
+            <span class="d">Rule, gap and distance checks, then a read-only audit agent</span>
+          </li>
+          <li class="stg out">
+            <b>Publish</b>
+            <span class="d">Formatted itinerary in a new Google Sheet tab</span>
+          </li>
         </ol>
-        <div class="screen-foot"><span>Example: Dillom, 2027 to 2030. 310 shows in 47 markets, plus press and writing weeks.</span></div>
+        <div class="pipe-loop"><span>If a check fails, the plan goes back to the planner</span></div>
+        <div class="pipe-foot">Example: Dillom, 2027 to 2030. 310 shows in 47 markets, plus press and writing weeks.</div>
       </div>
+    </div>
+
+    <div id="p-rs" class="tool">
+      <div class="screen">
+        <div class="bar tight"><span class="bar-note">Illustrative example</span></div>
+        <div class="scroll">
+          <table class="rs">
+            <thead><tr><th scope="col">Show</th><th scope="col">Face value</th><th scope="col">Official resale</th><th scope="col"></th></tr></thead>
+            <tbody>
+              <tr><td>Example show, Chicago, Mar 14</td><td class="num">$45</td><td class="num low">$38</td><td><span class="nosup">Resale lower</span></td></tr>
+              <tr><td>Example show, Los Angeles, Mar 20</td><td class="num">$40</td><td class="num">$52</td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
     </div>
   </section>
 
 
-  <section class="resale" aria-labelledby="rs-h">
-    <h2 id="rs-h">Resale tracker</h2>
-    <p>Checks for shows where official resale is lower than face value.</p>
-  </section>
 
   </main>
 
@@ -417,14 +452,14 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
     return "<svg class='spark' width='"+w+"' height='"+h+"' viewBox='0 0 "+w+" "+h+"' aria-hidden='true'><polyline points='"+pts+"' fill='none' stroke='#100906' stroke-width='1'/><circle cx='"+last[0]+"' cy='"+last[1]+"' r='1.7' fill='#2e7040'/></svg>";
   }
   function growth(series) {
-    if (!series || series.length < 2 || !series[0]) return "<span class='flat'>&#9679; 0%</span>";
+    if (!series || series.length < 2 || !series[0]) return "<span class='flat'>0%</span>";
     var p = Math.round((series[series.length-1]-series[0])/series[0]*100);
-    if (p > 0) return "<span class='up'>&#9650;"+p+"%</span>";
-    if (p < 0) return "<span class='down'>&#9660;"+Math.abs(p)+"%</span>";
-    return "<span class='flat'>&#9679; 0%</span>";
+    if (p > 0) return "<span class='up'>+"+p+"%</span>";
+    if (p < 0) return "<span class='down'>&minus;"+Math.abs(p)+"%</span>";
+    return "<span class='flat'>0%</span>";
   }
 
-  var TABS = [["ar","A&R Instinct","Finds unsigned artists from editorial playlists, user playlists, press and listener jumps."],["sh","Show calendar","Every show in NYC, LA and Chicago, and which new announcements don't have support."],["it","Routing engine","Turns a short intake form into a multi-year tour plan for visa submissions."]];
+  var TABS = [["ar","A&R Instinct","Finds unsigned artists from editorial playlists, user playlists, press and listener jumps."],["sh","Show calendar","Every show in NYC, LA and Chicago, and which new announcements don't have support."],["it","Routing engine","Turns a short intake form into a multi-year tour plan for visa submissions."],["rs","Resale tracker","Checks for shows where official resale is lower than face value."]];
   TABS.forEach(function (t) {
     var panel = document.getElementById("p-"+t[0]);
     panel.hidden = false;
@@ -438,9 +473,10 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
   var arFilters=document.getElementById("ar-filters"), arBody=document.getElementById("ar-body"), arFoot=document.getElementById("ar-foot");
   var arQi=document.createElement("input");
   arQi.type="search"; arQi.id="ar-q"; arQi.placeholder="Artist or outlet";
-  var arQl=document.createElement("label"); arQl.className="tiny"; arQl.htmlFor="ar-q"; arQl.textContent="Search";
+  arQi.setAttribute("aria-label","Search artists, press or playlists");
   arQi.addEventListener("input", function(e){ arQ=e.target.value.toLowerCase(); drawAR(); });
-  arFilters.appendChild(arQl); arFilters.appendChild(arQi);
+  arFilters.appendChild(arQi);
+  var arNote=document.createElement("span"); arNote.className="bar-note"; arNote.textContent="Live rows, Nov 19"; arFilters.appendChild(arNote);
 
   function arMatch(r) {
     if (!arQ) return true;
@@ -464,15 +500,15 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
         "<td class='who'><a class='nm' href='"+esc(r.u||"#")+"' target='_blank' rel='noopener'>"+esc(r.a)+"</a>"+
           "</td>"+
         "<td class='num' data-label='Listeners'>"+(r.l==null?"<span class='dash'>&ndash;</span>":
-          "<span class='v' title='When found'>"+K(r.l)+"</span><span class='to-now' aria-label='now'>&rarr;</span><span class='v now' title='Now'>"+K(r.ls&&r.ls.length?r.ls[r.ls.length-1]:r.l)+"</span>"+spark(r.ls)+growth([r.l, r.ls&&r.ls.length?r.ls[r.ls.length-1]:r.l])+
-          (r.jp?"<span class='jump'>&#9650; Jump</span>":""))+"</td>"+
+          "<span class='v' title='When found'>"+K(r.l)+"</span><span class='to-now' aria-label='to'><svg viewBox='0 0 12 8' aria-hidden='true'><path d='M1 4h9M7 1l3 3-3 3' fill='none' stroke='currentColor' stroke-width='1.3'/></svg></span><span class='v now' title='Now'>"+K(r.ls&&r.ls.length?r.ls[r.ls.length-1]:r.l)+"</span>"+spark(r.ls)+growth([r.l, r.ls&&r.ls.length?r.ls[r.ls.length-1]:r.l])+
+          (r.jp?"<span class='jump'>Jump</span>":""))+"</td>"+
         "<td class='num' data-label='Instagram'>"+(r.ig==null?"<span class='dash'>&ndash;</span>":
           "<a href='"+esc(r.igu||"#")+"' target='_blank' rel='noopener'><span class='v'>"+K(r.ig)+"</span></a>"+
           spark(r.igs)+growth(r.igs))+"</td>"+
         "<td data-label='Press'>"+press+"</td><td data-label='Playlists'>"+pls+"</td>";
       arBody.appendChild(tr);
     });
-    arFoot.innerHTML="";
+    arFoot.innerHTML="<span><span class='jump'>Jump</span> the scan flagged a sudden listener spike</span>";
   }
 
   var shView="up", shCity="New York", shNoSup=false, shQ="";
