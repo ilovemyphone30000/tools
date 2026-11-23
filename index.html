@@ -170,6 +170,8 @@
   .pitch-list li.done { background: #efede6; border-color: var(--grey4); }
   .pitch-list .st.prog { border-color: var(--grey4); color: var(--muted); background: none; }
   .pitch-list .to { display: block; margin-top: 10px; font-size: 15px; }
+  .pitch-list .ast { font-family: var(--sans); font-size: 18px; color: var(--green); margin-left: 2px; vertical-align: top; }
+  .pitch-list .note { display: block; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--grey4); font-size: 13px; color: var(--muted); }
   .pitch-list .how { display: block; margin-top: 4px; font-size: 14px; color: var(--muted); }
 
   /* label map */
@@ -255,17 +257,18 @@
 
   <main id="main" tabindex="-1">
   <section class="pitches" aria-labelledby="pi-h">
-    <h2 id="pi-h">Artist pitches</h2>
+    <h2 id="pi-h">Artist flags</h2>
     <ul class="pitch-list">
       <li class="done"><img src="img/zayok.webp" alt="Zayok" width="720" height="720" loading="lazy">
         <span class="who">Zayok</span><span class="st">Signed</span>
         <span class="to">Agent: Max Braun</span><span class="how">Personal connection</span></li>
-      <li class="done"><img src="img/billboard-style.webp" alt="Billboard Style" width="720" height="720" loading="lazy">
-        <span class="who">Billboard Style</span><span class="st">Signed</span>
-        <span class="to">Agent: Greg Horbal</span><span class="how">Found by the A&amp;R Instinct scan, Aug 10</span></li>
       <li><img src="img/ruby-rose-turner.webp" alt="Ruby Rose Turner" width="614" height="614" loading="lazy">
         <span class="who">Ruby Rose Turner</span><span class="st prog">Actively chasing</span>
         <span class="to">Agent: Zac Bluestone</span><span class="how">Personal connection</span></li>
+      <li class="done"><img src="img/billboard-style.webp" alt="Billboard Style" width="720" height="720" loading="lazy">
+        <span class="who">Billboard Style<sup class="ast">*</sup></span><span class="st">Signed</span>
+        <span class="to">Agent: Greg Horbal</span><span class="how">Found by the A&amp;R Instinct scan, Aug 10</span>
+        <span class="note">*Also flagged in Underground, two weeks after A&amp;R Instinct found them.</span></li>
     </ul>
   </section>
 
@@ -300,8 +303,6 @@
     <div id="p-sh" role="tabpanel" hidden>
       <div class="panel-head">
         <h3>Show calendar</h3>
-        <p>Everything playing tomorrow, and everything announced since the last check.
-          <a href="https://ilovemyphone30000.github.io/nyc-shows/">Open it &#8599;</a></p>
       </div>
       <div class="screen">
         <div class="bar tight">
@@ -403,7 +404,7 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
     return "<span class='flat'>&#9679; 0%</span>";
   }
 
-  var TABS = [["ar","A&R Instinct","Finds artists with no agent yet, from playlists, press and listener jumps."],["sh","Show calendar","Every show in New York, Chicago and LA, and which ones still have no support."],["it","Routing engine","Turns a short intake form into a multi-year tour plan."]];
+  var TABS = [["ar","A&R Instinct","Finds artists with no agent yet, from playlists, press and listener jumps."],["sh","Show calendar","Every show in NYC, LA and Chicago, and which new announcements don't have support."],["it","Routing engine","Turns a short intake form into a multi-year tour plan."]];
   var strip = document.getElementById("tabstrip");
   TABS.forEach(function (t, i) {
     var b = document.createElement("button");
