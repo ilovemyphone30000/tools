@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AI tools I've built</title>
-<meta name="description" content="Five tools built for A&amp;R, show listings, tour routing, resale pricing and label ownership, with the results up front.">
+<meta name="description" content="Tools that find artists before the market does. One signing, 69 unsigned artists already carrying agents, 706 open support slots.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Courier+Prime:wght@400;700&display=swap">
@@ -28,76 +28,86 @@
     -webkit-text-size-adjust: 100%;
   }
   .wrap {
-    max-width: 76rem; margin: 0 auto;
+    max-width: 74rem; margin: 0 auto;
     padding-left: max(20px, env(safe-area-inset-left, 0px));
     padding-right: max(20px, env(safe-area-inset-right, 0px));
   }
 
-  .hero {
-    display: grid; grid-template-columns: minmax(0, 1fr) auto;
-    gap: 20px 40px; align-items: end; padding-block: 36px 22px;
+  /* masthead: small, gets out of the way */
+  .mast {
+    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+    gap: 8px 24px; padding-block: 26px 0;
   }
-  .hero p { margin: 0; max-width: 40ch; font-size: 15px; }
-  .hero em { font-family: var(--serif); font-style: italic; font-size: 1.14em; color: var(--green); }
-  .right { text-align: right; }
-  .toplinks { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 14px; margin-bottom: 12px; }
-  .toplinks a { font-family: var(--sans); font-size: 14px; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--grey4); }
-  .toplinks a:hover { color: var(--green); border-bottom-color: var(--green); }
-  .hero h1 {
-    margin: 0; font-family: var(--display); font-weight: 400;
-    font-size: clamp(44px, 8vw, 92px); line-height: 0.82;
-    letter-spacing: -0.015em; text-transform: uppercase;
+  .mast .mark {
+    font-family: var(--display); font-size: 21px; letter-spacing: 0.02em;
+    text-transform: uppercase;
   }
+  .mast p { margin: 0; font-size: 14px; color: var(--muted); max-width: 52ch; }
+  .mast nav { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+  .mast nav a { font-family: var(--sans); font-size: 13px; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--grey4); }
+  .mast nav a:hover { color: var(--green); border-bottom-color: var(--green); }
 
-  .strip {
-    display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 18px 26px; padding: 20px 0 24px;
-    border-top: 4px solid var(--ink); border-bottom: 1px solid var(--grey1);
+  /* the lead: the signing */
+  .lead { padding-block: 26px 30px; border-bottom: 4px solid var(--ink); }
+  .kicker { font-family: var(--sans); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--green); }
+  .lead h1 {
+    margin: 12px 0 0; font-family: var(--serif); font-weight: 400;
+    font-size: clamp(32px, 5.4vw, 64px); line-height: 1.04; letter-spacing: -0.025em;
+    max-width: 22ch;
   }
-  .strip .n {
+  .lead h1 em { font-style: italic; color: var(--green); }
+  .lead ol {
+    margin: 22px 0 0; padding: 0; list-style: none;
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 30px;
+    max-width: 62rem;
+  }
+  .lead li { font-family: var(--sans); font-size: 13px; line-height: 1.45; border-top: 1px solid var(--grey1); padding-top: 10px; }
+  .lead li b { display: block; font-family: var(--mono); font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+  .lead .when { display: block; color: var(--muted); font-size: 11px; margin-top: 3px; }
+  .onlyone { margin: 18px 0 0; font-size: 13px; color: var(--muted); font-family: var(--sans); }
+  @media (max-width: 760px) { .lead ol { grid-template-columns: 1fr; } }
+
+  /* the four numbers that matter */
+  .nums {
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px 30px; padding: 26px 0 28px; border-bottom: 1px solid var(--grey1);
+  }
+  .nums .n {
     display: block; font-family: var(--display); font-weight: 400;
-    font-size: clamp(32px, 4.4vw, 54px); line-height: 0.82;
+    font-size: clamp(38px, 5.4vw, 64px); line-height: 0.82;
     letter-spacing: -0.02em; color: var(--green);
   }
-  .strip .c { display: block; margin-top: 8px; font-family: var(--sans); font-size: 11px; line-height: 1.35; color: var(--muted); }
-  @media (max-width: 760px) { .strip { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .nums .c { display: block; margin-top: 9px; font-family: var(--sans); font-size: 12px; line-height: 1.4; }
+  .nums .s { display: block; margin-top: 5px; font-family: var(--sans); font-size: 11px; line-height: 1.4; color: var(--muted); }
+  @media (max-width: 860px) { .nums { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
-  .case {
-    display: grid; grid-template-columns: auto minmax(0, 1fr);
-    gap: 14px 30px; align-items: start;
-    padding: 24px 0 26px; border-bottom: 1px solid var(--grey1);
-  }
-  .case .tag { font-family: var(--sans); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); white-space: nowrap; padding-top: 6px; }
-  .case h2 { margin: 0 0 10px; font-family: var(--serif); font-weight: 400; font-size: clamp(25px, 3.2vw, 36px); letter-spacing: -0.02em; }
-  .case h2 em { font-style: italic; color: var(--green); }
-  .case ol { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 26px; }
-  .case li { font-family: var(--sans); font-size: 13px; line-height: 1.45; }
-  .case li b { display: block; font-family: var(--mono); font-weight: 700; font-size: 15px; margin-bottom: 3px; }
-  .case .when { display: block; color: var(--muted); font-size: 11px; margin-top: 2px; }
-  @media (max-width: 760px) { .case, .case ol { grid-template-columns: 1fr; } }
-
+  /* evidence */
   .tools { padding-block: 24px 10px; }
+  .tools h2 { margin: 0 0 14px; font-family: var(--sans); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
   .tabstrip { display: flex; flex-wrap: wrap; gap: 2px; margin-bottom: 16px; }
   .tabstrip button {
-    font-family: var(--sans); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    font-family: var(--sans); font-size: 11px; letter-spacing: 0.04em;
     background: none; border: 1px solid var(--grey4); border-radius: 0;
-    padding: 8px 14px; cursor: pointer; color: var(--muted);
+    padding: 7px 13px; cursor: pointer; color: var(--muted); text-align: left; line-height: 1.3;
   }
+  .tabstrip button .tn { display: block; text-transform: uppercase; letter-spacing: 0.08em; font-size: 10px; }
+  .tabstrip button .tv { display: block; font-family: var(--display); font-size: 17px; color: var(--green); letter-spacing: -0.01em; margin-top: 2px; }
   .tabstrip button[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+  .tabstrip button[aria-selected="true"] .tv { color: var(--bg); }
   .tabstrip button:hover { color: var(--ink); }
   .tabstrip button[aria-selected="true"]:hover { color: var(--bg); }
 
-  .panel-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 22px; margin-bottom: 13px; }
-  .panel-head h3 { margin: 0; font-family: var(--mono); font-weight: 700; font-size: 18px; }
+  .panel-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 20px; margin-bottom: 12px; }
+  .panel-head h3 { margin: 0; font-family: var(--mono); font-weight: 700; font-size: 17px; }
   .panel-head p { margin: 0; font-size: 14px; color: var(--muted); max-width: 56ch; }
   .panel-head a { color: var(--green); }
-  .panel-head .one-stat { margin-left: auto; font-family: var(--sans); font-size: 11px; color: var(--muted); text-align: right; white-space: nowrap; }
-  .panel-head .one-stat b { font-family: var(--display); font-weight: 400; font-size: 26px; color: var(--green); letter-spacing: -0.02em; margin-right: 7px; vertical-align: -2px; }
 
   .screen { border: 1px solid var(--grey4); background: #fff; font-family: var(--sans); color: var(--ink); }
   .bar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; padding: 8px 12px; border-bottom: 1px solid var(--grey1); }
   .bar.tight { padding: 6px 12px; }
   .brand { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; }
+  .scaleline { font-family: var(--sans); font-size: 11px; color: var(--ink); }
+  .scaleline b { font-weight: 400; color: var(--green); }
   .spacer { flex: 1 1 auto; }
   .tiny { font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
   .screen button {
@@ -133,7 +143,6 @@
   .lab.unsigned { color: var(--green); letter-spacing: 0.06em; text-transform: uppercase; font-size: 8.5px; }
   .lab { font-size: 9.5px; color: var(--muted); margin-top: 3px; display: flex; align-items: center; gap: 4px; }
   .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--grey4); display: inline-block; }
-  .dot.I { background: #3b7ed2; } .dot.M { background: var(--red); } .dot.S { background: var(--grey7); }
   .num { white-space: nowrap; font-variant-numeric: tabular-nums; }
   .num .v { display: inline-block; min-width: 2.6rem; }
   .spark { vertical-align: middle; margin: 0 5px; }
@@ -163,7 +172,7 @@
   }
   .cities button[aria-pressed="true"] { color: var(--ink) !important; border-bottom-color: var(--ink) !important; }
   .cities button .n { font-size: 9px; }
-  .viewline { font-family: var(--serif); font-style: italic; font-size: 24px; color: var(--green); padding: 8px 12px 10px; margin: 0; }
+  .viewline { font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--green); padding: 8px 12px 10px; margin: 0; }
   .daygroup { padding: 12px 12px 4px; font-family: var(--serif); font-size: 14px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
   .daygroup span { font-family: var(--sans); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
   .sh-date { font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
@@ -173,77 +182,86 @@
   .nosup { font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); background: var(--tint); border: 1px solid var(--green); padding: 1px 5px; white-space: nowrap; }
   tr.open td { background: #f7fbf8; }
 
-  .closer { padding-block: 20px 12px; border-top: 1px solid var(--grey1); margin-top: 24px; font-size: 15px; }
-  .closer a { color: var(--green); }
-  footer { padding-block: 0 44px; font-size: 12px; color: var(--muted); }
-  footer p { margin: 0; max-width: 80ch; }
-  footer a { color: var(--ink); }
+  /* the ask */
+  .ask { border-top: 4px solid var(--ink); margin-top: 26px; padding-block: 22px 8px; }
+  .ask p { margin: 0; font-size: 17px; max-width: 60ch; }
+  .ask p em { font-family: var(--serif); font-style: italic; color: var(--green); font-size: 1.1em; }
+  .also { margin: 18px 0 0; padding-top: 14px; border-top: 1px solid var(--grey1); font-family: var(--sans); font-size: 12px; color: var(--muted); }
+  .also a { color: var(--ink); }
+  .also a:hover { color: var(--green); }
 
-  @media (max-width: 860px) {
-    .hero { grid-template-columns: 1fr; align-items: start; }
-    .right { text-align: left; }
-    .toplinks { justify-content: flex-start; }
-    .panel-head .one-stat { margin-left: 0; text-align: left; }
-  }
+  footer { padding-block: 20px 44px; font-size: 12px; color: var(--muted); }
+  footer p { margin: 0; max-width: 82ch; }
+  footer a { color: var(--ink); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <header class="hero">
-    <div>
-      <p>Five tools I built and run for music work. They read what a person would read and
-        <em>do the boring part</em> on a schedule.</p>
-    </div>
-    <div class="right">
-      <nav class="toplinks">
-        <a href="https://ilovemyphone30000.github.io/instinct/">A&amp;R Instinct &#8599;</a>
-        <a href="https://ilovemyphone30000.github.io/nyc-shows/">Shows &#8599;</a>
-        <a href="https://ilovemyphone30000.github.io/labelmap/">Label map &#8599;</a>
-        <a href="https://github.com/ilovemyphone30000/tools">Source &#8599;</a>
-      </nav>
-      <h1>AI<br>Tools</h1>
-    </div>
+  <header class="mast">
+    <span class="mark">AI Tools</span>
+    <p>Five tools, built and run in-house.</p>
+    <nav>
+      <a href="https://ilovemyphone30000.github.io/instinct/">A&amp;R Instinct &#8599;</a>
+      <a href="https://ilovemyphone30000.github.io/nyc-shows/">Shows &#8599;</a>
+      <a href="https://github.com/ilovemyphone30000/tools">Source &#8599;</a>
+    </nav>
   </header>
 
-  <section class="strip" aria-label="Results">
-    <div><span class="n">31%</span><span class="c">of the artists on Fresh Finds last week were already in the log</span></div>
-    <div><span class="n">100</span><span class="c">days the scan was ahead of Fresh Finds on Billboard Style</span></div>
-    <div><span class="n">1,283</span><span class="c">shows tracked across three cities, next two weeks</span></div>
-    <div><span class="n">310</span><span class="c">shows routed across 47 markets, 2027 to 2030</span></div>
-    <div><span class="n">945</span><span class="c">artists tracked and kept current</span></div>
+  <section class="lead">
+    <span class="kicker">What it produced</span>
+    <h1>Billboard Style, caught on their first single and signed.
+      <em>Fresh Finds got there 100 days later.</em></h1>
+    <ol>
+      <li><b>Aug 10</b>The scan finds them on their first single, &ldquo;Billboard Style&rdquo;
+        <span class="when">81,057 monthly listeners &middot; Superplaylist #4</span></li>
+      <li><b>Signed</b>To Greg Horbal, off that find
+        <span class="when">Booking: Earth Music Agency</span></li>
+      <li><b>Nov 18</b>Spotify's Fresh Finds adds them, 100 days after the scan did
+        <span class="when">100,519 monthly listeners by then, up 24%</span></li>
+    </ol>
+    <p class="onlyone">One signing so far. The rest of this page is what the tools are holding right now.</p>
   </section>
 
-  <section class="case">
-    <div class="tag">Case study</div>
+  <section class="nums" aria-label="What the tools are holding">
     <div>
-      <h2>Billboard Style, caught on their first single and signed.
-        <em>Fresh Finds got there 100 days later</em></h2>
-      <ol>
-        <li><b>Aug 10</b>The scan finds them on their first single, &ldquo;Billboard Style&rdquo;
-          <span class="when">81,057 monthly listeners &middot; Superplaylist #4</span></li>
-        <li><b>Signed</b>To Greg Horbal, off that find
-          <span class="when">Booking: Earth Music Agency</span></li>
-        <li><b>Nov 18</b>Spotify's Fresh Finds adds them, 100 days after the scan did
-          <span class="when">100,519 monthly listeners by then, up 24%</span></li>
-      </ol>
+      <span class="n">69</span>
+      <span class="c">unsigned artists already carrying a booking agent</span>
+      <span class="s">Someone with money backed them. No label has moved.</span>
+    </div>
+    <div>
+      <span class="n">706</span>
+      <span class="c">shows next month with no support booked</span>
+      <span class="s">45% of everything tracked in New York, Chicago and LA.</span>
+    </div>
+    <div>
+      <span class="n">31%</span>
+      <span class="c">of Spotify's Fresh Finds was already in the log</span>
+      <span class="s">53 of the 171 artists, before Spotify ran the list.</span>
+    </div>
+    <div>
+      <span class="n">0</span>
+      <span class="c">people running any of it</span>
+      <span class="s">Six scheduled jobs. Nobody watches them.</span>
     </div>
   </section>
 
   <section class="tools">
+    <h2>The evidence</h2>
     <div class="tabstrip" role="tablist" id="tabstrip"></div>
 
     <div id="p-ar" role="tabpanel">
       <div class="panel-head">
         <h3>A&amp;R Instinct</h3>
-        <p>An aggregate A&amp;R tool. The whole case for an artist in one row.
+        <p>The whole case for an artist in one row.
           <a href="https://ilovemyphone30000.github.io/instinct/">Open it &#8599;</a></p>
-        <div class="one-stat"><b>945</b>artists tracked</div>
       </div>
       <div class="screen">
         <div class="bar tight">
-          <span class="brand">A&amp;R INSTINCT</span><span class="spacer"></span>
-          <span class="tiny">Real rows &middot; updated Nov 19</span>
+          <span class="brand">A&amp;R INSTINCT</span>
+          <span class="scaleline"><b>823</b> tracked, <b>657</b> unsigned &middot; 12 shown</span>
+          <span class="spacer"></span>
+          <span class="tiny">Real rows &middot; Nov 19</span>
         </div>
         <div class="bar" id="ar-filters"></div>
         <div class="scroll">
@@ -262,11 +280,16 @@
     <div id="p-sh" role="tabpanel" hidden>
       <div class="panel-head">
         <h3>Show calendar</h3>
-        <p>Everything playing tomorrow in three cities, and everything announced since the last check.
+        <p>Everything playing tomorrow, and everything announced since the last check.
           <a href="https://ilovemyphone30000.github.io/nyc-shows/">Open it &#8599;</a></p>
-        <div class="one-stat"><b>1,283</b>shows, next two weeks</div>
       </div>
       <div class="screen">
+        <div class="bar tight">
+          <span class="brand">SHOWS</span>
+          <span class="scaleline"><b>1,578</b> shows tracked &middot; <b>706</b> with no support</span>
+          <span class="spacer"></span>
+          <span class="tiny">Client rows withheld</span>
+        </div>
         <div class="subtabs" id="sh-tabs"></div>
         <div class="cities" id="sh-cities"></div>
         <p class="viewline" id="sh-view"></p>
@@ -283,11 +306,12 @@
       <div class="panel-head">
         <h3>Itinerary routing engine</h3>
         <p>An intake form in, a routed multi-year itinerary out.</p>
-        <div class="one-stat"><b>310</b>shows, 47 markets</div>
       </div>
       <div class="screen">
         <div class="bar tight">
-          <span class="brand">NEW TOUR PLAN</span><span class="spacer"></span>
+          <span class="brand">NEW TOUR PLAN</span>
+          <span class="scaleline"><b>310</b> shows across <b>47</b> markets, 2027 to 2030</span>
+          <span class="spacer"></span>
           <span class="tiny">Illustrative</span>
         </div>
         <div class="bar" id="it-form"></div>
@@ -303,39 +327,19 @@
         <div class="screen-foot" id="it-foot"></div>
       </div>
     </div>
-
-    <div id="p-rs" role="tabpanel" hidden>
-      <div class="panel-head">
-        <h3>Resale tracker</h3>
-        <p>Flags the shows where resale beats face value. Reads prices only.</p>
-        <div class="one-stat"><b>3</b>days between checks</div>
-      </div>
-      <div class="screen">
-        <div class="bar tight">
-          <button id="rs-fees" type="button" aria-pressed="false">Add fees (+18%)</button>
-          <span class="spacer"></span><span class="tiny">Example prices</span>
-        </div>
-        <div class="scroll">
-          <table>
-            <thead><tr>
-              <th scope="col">Show</th><th scope="col">Standard</th><th scope="col">Official resale</th>
-              <th scope="col">SeatGeek</th><th scope="col">Cheapest</th>
-            </tr></thead>
-            <tbody id="rs-body"></tbody>
-          </table>
-        </div>
-        <div class="screen-foot" id="rs-foot"></div>
-      </div>
-    </div>
   </section>
 
-  <p class="closer">Also: <a href="https://ilovemyphone30000.github.io/labelmap/">the major-label
-    ownership map &#8599;</a>, one page, built from a company directory plus manual research.</p>
+  <section class="ask">
+    <p>Those 69 artists are a target list, not a statistic.
+      <em>Say the word and it becomes a weekly report.</em></p>
+    <p class="also">Also running: a resale tracker that flags shows where resale beats face value,
+      every three days, and <a href="https://ilovemyphone30000.github.io/labelmap/">the major-label
+      ownership map</a>.</p>
+  </section>
 
   <footer>
-    <p>Real rows from the live tools, November 2026, client rows left out. Resale prices are examples.
-      The A&amp;R and show pages are password-protected.
-      Source: <a href="https://github.com/ilovemyphone30000/tools">github.com/ilovemyphone30000/tools</a></p>
+    <p>Real rows from the live tools, November 2026. Client rows left out; the A&amp;R and show pages are
+      password-protected. <a href="https://github.com/ilovemyphone30000/tools">Source</a></p>
   </footer>
 </div>
 
@@ -368,11 +372,12 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
     return "<span class='flat'>&#9679; 0%</span>";
   }
 
-  var TABS = [["ar","A&R Instinct"],["sh","Show calendar"],["it","Routing engine"],["rs","Resale tracker"]];
+  var TABS = [["ar","A&R Instinct","69 to sign"],["sh","Show calendar","706 open slots"],["it","Routing engine","310 shows"]];
   var strip = document.getElementById("tabstrip");
   TABS.forEach(function (t, i) {
     var b = document.createElement("button");
-    b.type="button"; b.textContent=t[1]; b.dataset.p=t[0];
+    b.type="button"; b.dataset.p=t[0];
+    b.innerHTML = "<span class='tn'>"+esc(t[1])+"</span><span class='tv'>"+esc(t[2])+"</span>";
     b.setAttribute("role","tab"); b.setAttribute("aria-selected", String(i===0));
     b.setAttribute("aria-controls","p-"+t[0]);
     b.addEventListener("click", function () {
@@ -386,13 +391,15 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
 
   var ROWS = 4, arFilter = "all", arQ = "", starred = {};
   var FILTERS = [
-    { k:"all", label:"All", f:function(){return true;} },
-    { k:"press", label:"Has press", f:function(r){return r.pr && r.pr.length;} },
+    { k:"all", label:"All", f:function(){return true;}, hideCount:true },
     { k:"jump", label:"Jumped", f:function(r){return !!r.jp;} },
     { k:"rostr", label:"Has agent", f:function(r){return !!r.ag;} },
     { k:"mine", label:"My list", f:function(r){return !!starred[r.a];} }
   ];
   var arFilters=document.getElementById("ar-filters"), arBody=document.getElementById("ar-body"), arFoot=document.getElementById("ar-foot");
+  var flabel=document.createElement("span");
+  flabel.className="tiny"; flabel.textContent="Filter these 12";
+  arFilters.appendChild(flabel);
   FILTERS.forEach(function (f) {
     var b=document.createElement("button");
     b.type="button"; b.dataset.k=f.k; b.innerHTML=esc(f.label)+" <span class='n'></span>";
@@ -407,7 +414,7 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
 
   function arMatch(r) {
     if (!arQ) return true;
-    return [r.a,r.song,r.ag,r.agt,r.lb].concat(
+    return [r.a,r.song,r.ag,r.agt].concat(
       (r.pr||[]).map(function(p){return p.t;}),
       (r.pl||[]).map(function(p){return p.t;})).join(" ").toLowerCase().indexOf(arQ) > -1;
   }
@@ -415,7 +422,7 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
     Array.prototype.forEach.call(arFilters.querySelectorAll("button"), function (b) {
       var f=FILTERS.filter(function(x){return x.k===b.dataset.k;})[0];
       b.setAttribute("aria-pressed", String(b.dataset.k===arFilter));
-      b.querySelector(".n").textContent = AR.filter(f.f).length;
+      b.querySelector(".n").textContent = f.hideCount ? "" : AR.filter(f.f).length;
     });
     var f=FILTERS.filter(function(x){return x.k===arFilter;})[0];
     var all=AR.filter(f.f).filter(arMatch), rows=all.slice(0,ROWS);
@@ -435,8 +442,7 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
         "<td class='who'><button class='star' type='button' aria-pressed='"+(starred[r.a]?"true":"false")+
           "' aria-label='Save "+esc(r.a)+"'>"+(starred[r.a]?"★":"☆")+"</button>"+
           "<a class='nm' href='"+esc(r.u||"#")+"' target='_blank' rel='noopener'>"+esc(r.a)+"</a>"+
-          (r.lb?"<div class='lab'><span class='dot "+esc(r.lbk||"")+"'></span>"+esc(r.lb)+"</div>":
-            (r.unsigned?"<div class='lab unsigned'>unsigned</div>":""))+"</td>"+
+          (r.unsigned?"<div class='lab unsigned'>unsigned</div>":"")+"</td>"+
         "<td class='num'>"+(r.l==null?"<span class='dash'>&ndash;</span>":
           "<span class='v'>"+K(r.l)+"</span>"+spark(r.ls)+growth(r.ls)+
           (r.jp?"<span class='jump'>&#9650; Jump</span>":""))+"</td>"+
@@ -447,9 +453,8 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
       tr.querySelector(".star").addEventListener("click", function(){ starred[r.a]=!starred[r.a]; drawAR(); });
       arBody.appendChild(tr);
     });
-    arFoot.innerHTML="<span>"+rows.length+" of "+all.length+" shown</span>"+
-      "<span>945 tracked on the live site</span>"+
-      "<span><b>"+Object.keys(starred).filter(function(k){return starred[k];}).length+" on my list</b></span>";
+    arFoot.innerHTML="<span>"+rows.length+" of "+all.length+" unsigned examples shown</span>"+
+      "<span><b>823</b> artists in the live tool, <b>657</b> of them unsigned</span>";
   }
 
   var shView="up", shCity="New York", shNoSup=false, shQ="";
@@ -519,8 +524,7 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
       tbody.appendChild(tr);
     });
     shFoot.innerHTML="<span>"+rows.length+" of "+all.length+" shown</span>"+
-      "<span>"+CITY[shCity]+" in "+esc(shCity)+" on the live site</span>"+
-      "<span><b>"+all.filter(function(s){return !s.sup||!s.sup.length;}).length+" with no support added</b></span>";
+      "<span><b>"+all.filter(function(s){return !s.sup||!s.sup.length;}).length+"</b> of these have no support booked</span>";
   }
 
   var INTAKE=[["Artist","Dillom",12],["Starting capacity","250",5],["Target venue","Brooklyn Paramount (2,700)",20],
@@ -556,34 +560,11 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
     document.getElementById("it-foot").innerHTML=
       "<span>"+esc(document.getElementById("it0").value)+"</span>"+
       "<span>"+esc(document.getElementById("it3").value)+"</span>"+
-      "<span><b>310 shows, 47 markets</b></span>";
+      "<span><b>310</b> shows, 47 markets</span>";
   }
   itGo.addEventListener("click", drawItin);
 
-  var PRICES=[["Show 1 · Brooklyn",45,38,41],["Show 2 · Chicago",60,72,68],["Show 3 · Los Angeles",38,34,30],["Show 4 · Austin",75,61,66]];
-  var fees=false, rsBtn=document.getElementById("rs-fees");
-  function drawResale() {
-    var b=document.getElementById("rs-body"); b.innerHTML=""; var n=0;
-    PRICES.forEach(function (p) {
-      var res=fees?p[2]*1.18:p[2], sg=fees?p[3]*1.18:p[3], low=Math.min(res,sg), hit=low<p[1];
-      if (hit) n++;
-      var tr=document.createElement("tr");
-      if (hit) tr.className="open";
-      tr.innerHTML="<td>"+p[0]+"</td><td class='num'>$"+p[1].toFixed(0)+"</td><td class='num'>$"+res.toFixed(0)+
-        "</td><td class='num'>$"+sg.toFixed(0)+"</td><td class='num'>"+
-        (hit?"<span class='up'>$"+low.toFixed(0)+"</span>":"<span class='dash'>$"+low.toFixed(0)+"</span>")+"</td>";
-      b.appendChild(tr);
-    });
-    document.getElementById("rs-foot").innerHTML="<span>"+(fees?"After fees":"Before fees")+
-      "</span><span><b>"+n+" cheaper on resale</b></span>";
-  }
-  rsBtn.addEventListener("click", function () {
-    fees=!fees; rsBtn.setAttribute("aria-pressed",String(fees));
-    rsBtn.textContent = fees ? "Fees on (+18%)" : "Add fees (+18%)";
-    drawResale();
-  });
-
-  drawAR(); drawShows(); drawItin(); drawResale();
+  drawAR(); drawShows(); drawItin();
 })();
 </script>
 </body>
