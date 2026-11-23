@@ -4,18 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AI tools I've built</title>
-<meta name="description" content="Five tools built for A&amp;R, show listings, tour routing, resale pricing and label ownership, each shown working on real data.">
+<meta name="description" content="Five tools built for A&amp;R, show listings, tour routing, resale pricing and label ownership, with the results up front.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Courier+Prime:wght@400;700&display=swap">
 <style>
-  /* Page: OJAS layout on THE·TEAM's palette.
-     Demos: built to match the real tools, which use the same tokens. */
   :root {
     --bg: #fffdf8; --ink: #100906;
     --grey7: #97999b; --grey4: #bbbcbc; --grey1: #d9d9d6; --muted: #6f7173;
     --green: #2e7040; --tint: #e2ece4;
-    --yellow: #fff4a3; --pink: #ffd6ea; --open: #bff0c9; --red: #b00020;
+    --yellow: #fff4a3; --pink: #ffd6ea; --red: #b00020;
     --mono: "Courier Prime", ui-monospace, "SF Mono", Menlo, monospace;
     --sans: Arial, "Helvetica Neue", Helvetica, sans-serif;
     --serif: "Times New Roman", Tinos, Times, serif;
@@ -36,53 +34,72 @@
   }
 
   .hero {
-    display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-    gap: 28px 48px; align-items: end; padding-block: 52px 36px;
+    display: grid; grid-template-columns: minmax(0, 1fr) auto;
+    gap: 20px 40px; align-items: end; padding-block: 36px 22px;
   }
-  .hero p { margin: 0; max-width: 46ch; }
-  .hero em { font-family: var(--serif); font-style: italic; font-size: 1.14em; color: var(--green); letter-spacing: -0.02em; }
-  .right { justify-self: end; text-align: right; }
-  .toplinks { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; margin-bottom: 16px; }
-  .toplinks a { font-family: var(--sans); font-size: 16px; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--grey4); }
+  .hero p { margin: 0; max-width: 40ch; font-size: 15px; }
+  .hero em { font-family: var(--serif); font-style: italic; font-size: 1.14em; color: var(--green); }
+  .right { text-align: right; }
+  .toplinks { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 14px; margin-bottom: 12px; }
+  .toplinks a { font-family: var(--sans); font-size: 14px; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--grey4); }
   .toplinks a:hover { color: var(--green); border-bottom-color: var(--green); }
-  .hero .wordmark { margin: 0;
-    max-width: none; font-family: var(--display); font-size: clamp(56px, 12vw, 128px);
-    line-height: 0.82; letter-spacing: -0.015em; text-transform: uppercase;
+  .hero h1 {
+    margin: 0; font-family: var(--display); font-weight: 400;
+    font-size: clamp(44px, 8vw, 92px); line-height: 0.82;
+    letter-spacing: -0.015em; text-transform: uppercase;
   }
-  .rule-heavy { height: 4px; background: var(--ink); border: 0; margin: 0; }
 
-  .tool { border-bottom: 1px solid var(--grey1); padding-block: 36px 40px; }
-  .tool:last-of-type { border-bottom: 0; }
-  .tool-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 24px; }
-  .tool-head h2 { font-family: var(--mono); font-weight: 700; font-size: 20px; margin: 0; }
-  .meta { font-family: var(--sans); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-  .one { margin: 10px 0 0; max-width: 76ch; font-size: 15px; }
-  .one a { color: var(--green); }
+  .strip {
+    display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 18px 26px; padding: 20px 0 24px;
+    border-top: 4px solid var(--ink); border-bottom: 1px solid var(--grey1);
+  }
+  .strip .n {
+    display: block; font-family: var(--display); font-weight: 400;
+    font-size: clamp(32px, 4.4vw, 54px); line-height: 0.82;
+    letter-spacing: -0.02em; color: var(--green);
+  }
+  .strip .c { display: block; margin-top: 8px; font-family: var(--sans); font-size: 11px; line-height: 1.35; color: var(--muted); }
+  @media (max-width: 760px) { .strip { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
-  .stats { display: flex; flex-wrap: wrap; gap: 18px 44px; margin: 22px 0 0; padding-top: 18px; border-top: 2px solid var(--ink); }
-  .stat b { display: block; font-family: var(--display); font-size: clamp(38px, 5vw, 58px); line-height: 0.82; letter-spacing: -0.02em; color: var(--green); }
-  .stat span { display: block; margin-top: 7px; max-width: 26ch; font-family: var(--sans); font-size: 11px; line-height: 1.35; color: var(--muted); }
-  .said { font-family: var(--serif); font-style: italic; font-size: 1.1em; }
+  .case {
+    display: grid; grid-template-columns: auto minmax(0, 1fr);
+    gap: 14px 30px; align-items: start;
+    padding: 24px 0 26px; border-bottom: 1px solid var(--grey1);
+  }
+  .case .tag { font-family: var(--sans); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); white-space: nowrap; padding-top: 6px; }
+  .case h2 { margin: 0 0 10px; font-family: var(--serif); font-weight: 400; font-size: clamp(25px, 3.2vw, 36px); letter-spacing: -0.02em; }
+  .case h2 em { font-style: italic; color: var(--green); }
+  .case ol { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 26px; }
+  .case li { font-family: var(--sans); font-size: 13px; line-height: 1.45; }
+  .case li b { display: block; font-family: var(--mono); font-weight: 700; font-size: 15px; margin-bottom: 3px; }
+  .case .when { display: block; color: var(--muted); font-size: 11px; margin-top: 2px; }
+  @media (max-width: 760px) { .case, .case ol { grid-template-columns: 1fr; } }
 
-  /* ---------- the embedded tool screens ---------- */
-  .screen {
-    margin-top: 24px; border: 1px solid var(--grey4); background: #fff;
-    font-family: var(--sans); color: var(--ink);
+  .tools { padding-block: 24px 10px; }
+  .tabstrip { display: flex; flex-wrap: wrap; gap: 2px; margin-bottom: 16px; }
+  .tabstrip button {
+    font-family: var(--sans); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    background: none; border: 1px solid var(--grey4); border-radius: 0;
+    padding: 8px 14px; cursor: pointer; color: var(--muted);
   }
-  .screen-label {
-    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px;
-    padding: 8px 12px; background: var(--bg); border-bottom: 1px solid var(--grey1);
-  }
-  .screen-label .meta { color: var(--ink); }
-  .bar {
-    display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px;
-    padding: 8px 12px; border-bottom: 1px solid var(--grey1);
-  }
+  .tabstrip button[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+  .tabstrip button:hover { color: var(--ink); }
+  .tabstrip button[aria-selected="true"]:hover { color: var(--bg); }
+
+  .panel-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 22px; margin-bottom: 13px; }
+  .panel-head h3 { margin: 0; font-family: var(--mono); font-weight: 700; font-size: 18px; }
+  .panel-head p { margin: 0; font-size: 14px; color: var(--muted); max-width: 56ch; }
+  .panel-head a { color: var(--green); }
+  .panel-head .one-stat { margin-left: auto; font-family: var(--sans); font-size: 11px; color: var(--muted); text-align: right; white-space: nowrap; }
+  .panel-head .one-stat b { font-family: var(--display); font-weight: 400; font-size: 26px; color: var(--green); letter-spacing: -0.02em; margin-right: 7px; vertical-align: -2px; }
+
+  .screen { border: 1px solid var(--grey4); background: #fff; font-family: var(--sans); color: var(--ink); }
+  .bar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; padding: 8px 12px; border-bottom: 1px solid var(--grey1); }
   .bar.tight { padding: 6px 12px; }
   .brand { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; }
   .spacer { flex: 1 1 auto; }
   .tiny { font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-
   .screen button {
     font-family: var(--sans); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
     color: var(--ink); background: #fff; border: 1px solid var(--grey4);
@@ -93,10 +110,7 @@
   .screen button.ghost[aria-pressed="true"] { background: #fff; color: var(--green); border-color: var(--green); }
   .screen button .n { color: var(--grey7); margin-left: 5px; }
   .screen button[aria-pressed="true"] .n { color: #fff; opacity: .7; }
-  .screen input[type="search"] {
-    font-family: var(--sans); font-size: 11px; color: var(--ink);
-    border: 1px solid var(--grey4); border-radius: 0; padding: 5px 8px; min-width: 0; flex: 1 1 14rem;
-  }
+  .screen input[type="search"] { font-family: var(--sans); font-size: 11px; color: var(--ink); border: 1px solid var(--grey4); border-radius: 0; padding: 5px 8px; min-width: 0; flex: 1 1 12rem; }
   :focus-visible { outline: 2px solid var(--green); outline-offset: 1px; }
 
   .scroll { overflow-x: auto; }
@@ -116,74 +130,59 @@
   .who { white-space: nowrap; }
   .who .nm { font-size: 12.5px; letter-spacing: 0.03em; text-transform: uppercase; }
   .jump { font-size: 8.5px; background: var(--ink); color: #fff; padding: 1px 4px; margin-left: 6px; white-space: nowrap; }
-  .rn { font-size: 8.5px; color: var(--green); border: 1px solid var(--green); padding: 0 3px; margin-left: 5px; vertical-align: 1px; }
   .lab { font-size: 9.5px; color: var(--muted); margin-top: 3px; display: flex; align-items: center; gap: 4px; }
   .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--grey4); display: inline-block; }
   .dot.I { background: #3b7ed2; } .dot.M { background: var(--red); } .dot.S { background: var(--grey7); }
   .num { white-space: nowrap; font-variant-numeric: tabular-nums; }
   .num .v { display: inline-block; min-width: 2.6rem; }
   .spark { vertical-align: middle; margin: 0 5px; }
-  .up { color: var(--green); } .down { color: var(--red); } .flat { color: var(--grey7); }
-  .chip {
-    display: inline-block; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase;
-    padding: 2px 5px; margin: 0 3px 3px 0; white-space: nowrap;
-  }
+  .up { color: var(--green); } .down { color: var(--red); } .flat { color: var(--muted); }
+  .chip { display: inline-block; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 5px; margin: 0 3px 3px 0; white-space: nowrap; }
   .chip.pl { background: var(--yellow); }
   .chip.pr { background: var(--pink); }
   .chip .dt { opacity: .55; margin-left: 4px; }
   .rostr .ag { font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; }
   .rostr .agt { font-size: 9.5px; color: var(--muted); margin-top: 2px; }
   .dash { color: var(--muted); }
-  .screen-foot {
-    display: flex; flex-wrap: wrap; gap: 4px 20px; padding: 8px 12px;
-    border-top: 1px solid var(--grey1); font-size: 10px; color: var(--muted);
-  }
+  .screen-foot { display: flex; flex-wrap: wrap; gap: 4px 20px; padding: 8px 12px; border-top: 1px solid var(--grey1); font-size: 10px; color: var(--muted); }
   .screen-foot b { font-weight: 400; color: var(--green); }
 
-  /* shows screen */
-  .tabs { display: flex; gap: 22px; padding: 10px 12px 0; }
-  .tabs button {
+  .subtabs { display: flex; gap: 20px; padding: 10px 12px 0; }
+  .subtabs button {
     border: 0 !important; background: none !important; padding: 0 0 7px !important;
     font-size: 10.5px !important; letter-spacing: 0.1em; color: var(--muted) !important;
     border-bottom: 2px solid transparent !important;
   }
-  .tabs button[aria-pressed="true"] { color: var(--ink) !important; border-bottom-color: var(--ink) !important; }
-  .cities { display: flex; flex-wrap: wrap; gap: 18px; padding: 14px 12px 0; align-items: baseline; }
+  .subtabs button[aria-pressed="true"] { color: var(--ink) !important; border-bottom-color: var(--ink) !important; }
+  .cities { display: flex; flex-wrap: wrap; gap: 16px; padding: 12px 12px 0; align-items: baseline; }
   .cities button {
     border: 0 !important; background: none !important; padding: 0 0 4px !important;
-    font-family: var(--serif) !important; font-size: 19px !important; text-transform: none !important;
-    letter-spacing: -0.01em; border-bottom: 1px solid transparent !important;
+    font-family: var(--serif) !important; font-size: 17px !important; text-transform: none !important;
+    border-bottom: 1px solid transparent !important;
   }
   .cities button[aria-pressed="true"] { color: var(--ink) !important; border-bottom-color: var(--ink) !important; }
   .cities button .n { font-size: 9px; }
-  .viewline {
-    font-family: var(--serif); font-style: italic; font-size: 30px; color: var(--green);
-    letter-spacing: -0.02em; padding: 10px 12px 12px; margin: 0;
-  }
-  .daygroup {
-    padding: 14px 12px 4px; font-family: var(--serif); font-size: 15px;
-    display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
-  }
+  .viewline { font-family: var(--serif); font-style: italic; font-size: 24px; color: var(--green); padding: 8px 12px 10px; margin: 0; }
+  .daygroup { padding: 12px 12px 4px; font-family: var(--serif); font-size: 14px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
   .daygroup span { font-family: var(--sans); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
   .sh-date { font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
   .sh-act { font-size: 12.5px; }
   .acts { font-size: 11px; color: var(--muted); }
   .venue { color: var(--green) !important; font-size: 11.5px; }
-  .nosup {
-    font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--green); background: var(--tint); border: 1px solid var(--green);
-    padding: 1px 5px; white-space: nowrap;
-  }
+  .nosup { font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); background: var(--tint); border: 1px solid var(--green); padding: 1px 5px; white-space: nowrap; }
   tr.open td { background: #f7fbf8; }
 
-  footer { padding-block: 28px 56px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--grey1); margin-top: 8px; }
-  footer p { margin: 0 0 6px; max-width: 78ch; }
+  .closer { padding-block: 20px 12px; border-top: 1px solid var(--grey1); margin-top: 24px; font-size: 15px; }
+  .closer a { color: var(--green); }
+  footer { padding-block: 0 44px; font-size: 12px; color: var(--muted); }
+  footer p { margin: 0; max-width: 80ch; }
   footer a { color: var(--ink); }
 
   @media (max-width: 860px) {
-    .hero { grid-template-columns: 1fr; align-items: start; padding-block: 32px 24px; }
-    .right { justify-self: start; text-align: left; }
-    .toplinks { align-items: flex-start; }
+    .hero { grid-template-columns: 1fr; align-items: start; }
+    .right { text-align: left; }
+    .toplinks { justify-content: flex-start; }
+    .panel-head .one-stat { margin-left: 0; text-align: left; }
   }
 </style>
 </head>
@@ -192,8 +191,8 @@
 
   <header class="hero">
     <div>
-      <p>Five tools I built and run for music work. Each one reads what a person would read and
-        <em>does the boring part</em> on a schedule.</p>
+      <p>Five tools I built and run for music work. They read what a person would read and
+        <em>do the boring part</em> on a schedule.</p>
     </div>
     <div class="right">
       <nav class="toplinks">
@@ -202,156 +201,134 @@
         <a href="https://ilovemyphone30000.github.io/labelmap/">Label map &#8599;</a>
         <a href="https://github.com/ilovemyphone30000/tools">Source &#8599;</a>
       </nav>
-      <h1 class="wordmark">AI<br>Tools</h1>
+      <h1>AI<br>Tools</h1>
     </div>
   </header>
 
-  <hr class="rule-heavy">
+  <section class="strip" aria-label="Results">
+    <div><span class="n">31%</span><span class="c">of the artists on Fresh Finds last week were already in the log</span></div>
+    <div><span class="n">100</span><span class="c">days between the scan finding Billboard Style and Fresh Finds adding them</span></div>
+    <div><span class="n">1,283</span><span class="c">shows tracked across three cities, next two weeks</span></div>
+    <div><span class="n">310</span><span class="c">shows routed across 47 markets, 2027 to 2030</span></div>
+    <div><span class="n">945</span><span class="c">artists tracked and kept current</span></div>
+  </section>
 
-  <!-- 1 -->
-  <section class="tool">
-    <div class="tool-head">
-      <h2>A&amp;R Instinct</h2>
-      <span class="meta">Daily &middot; Aggregate A&amp;R tool</span>
-    </div>
-    <p class="one">An aggregate A&amp;R tool. The whole case for an artist in one row.
-      <a href="https://ilovemyphone30000.github.io/instinct/">Open the live site &#8599;</a></p>
-
-    <div class="stats">
-      <div class="stat"><b>22</b><span>median days ahead of Spotify's Fresh Finds</span></div>
-      <div class="stat"><b>31%</b><span>of the artists on Fresh Finds last week were already in the log (53 of 171)</span></div>
-      <div class="stat"><b>945</b><span>artists tracked</span></div>
-    </div>
-    <p class="one" style="margin-top:18px">Billboard Style came out of this one and was
-      <span class="said">signed by Greg Horbal</span> after.</p>
-
-    <div class="screen" id="ar">
-      <div class="screen-label">
-        <span class="meta">Real rows from the live site</span>
-        
-      </div>
-      <div class="bar tight">
-        <span class="brand">A&amp;R INSTINCT</span>
-        <span class="spacer"></span>
-        <span class="tiny">Updated Nov 19</span>
-      </div>
-      <div class="bar" id="ar-filters"></div>
-      <div class="bar tight">
-        <input type="search" id="ar-q" placeholder="Search artist, song, outlet, playlist, agency">
-      </div>
-      <div class="scroll">
-        <table>
-          <thead><tr>
-            <th scope="col">Artist</th><th scope="col">Monthly listeners</th><th scope="col">Instagram</th>
-            <th scope="col">Press</th><th scope="col">Rostr</th><th scope="col">Playlists</th>
-          </tr></thead>
-          <tbody id="ar-body"></tbody>
-        </table>
-      </div>
-      <div class="screen-foot" id="ar-foot"></div>
+  <section class="case">
+    <div class="tag">Case study</div>
+    <div>
+      <h2>Billboard Style, caught on their first single and <em>signed 100 days later</em></h2>
+      <ol>
+        <li><b>Aug 10</b>The scan logs them on &ldquo;Billboard Style&rdquo;, at 81,057 monthly listeners
+          <span class="when">Superplaylist #4</span></li>
+        <li><b>Nov 18</b>Spotify's Fresh Finds adds them, 100 days after the scan did
+          <span class="when">100,519 monthly listeners by then, up 24%</span></li>
+        <li><b>Signed</b>To Greg Horbal
+          <span class="when">Booking: Earth Music Agency</span></li>
+      </ol>
     </div>
   </section>
 
-  <!-- 2 -->
-  <section class="tool">
-    <div class="tool-head">
-      <h2>Show calendar</h2>
-      <span class="meta">Daily &middot; NYC / CHI / LA</span>
-    </div>
-    <p class="one">Every show in three cities, and everything announced since the last check.
-      <a href="https://ilovemyphone30000.github.io/nyc-shows/">Open the live site &#8599;</a></p>
+  <section class="tools">
+    <div class="tabstrip" role="tablist" id="tabstrip"></div>
 
-    <div class="stats">
-      <div class="stat"><b>1,283</b><span>shows in the next two weeks</span></div>
-      <div class="stat"><b>265</b><span>venues tracked</span></div>
-      <div class="stat"><b>5,228</b><span>announcements logged since September</span></div>
+    <div id="p-ar" role="tabpanel">
+      <div class="panel-head">
+        <h3>A&amp;R Instinct</h3>
+        <p>An aggregate A&amp;R tool. The whole case for an artist in one row.
+          <a href="https://ilovemyphone30000.github.io/instinct/">Open it &#8599;</a></p>
+        <div class="one-stat"><b>945</b>artists tracked</div>
+      </div>
+      <div class="screen">
+        <div class="bar tight">
+          <span class="brand">A&amp;R INSTINCT</span><span class="spacer"></span>
+          <span class="tiny">Real rows &middot; updated Nov 19</span>
+        </div>
+        <div class="bar" id="ar-filters"></div>
+        <div class="scroll">
+          <table>
+            <thead><tr>
+              <th scope="col">Artist</th><th scope="col">Monthly listeners</th><th scope="col">Instagram</th>
+              <th scope="col">Press</th><th scope="col">Rostr</th><th scope="col">Playlists</th>
+            </tr></thead>
+            <tbody id="ar-body"></tbody>
+          </table>
+        </div>
+        <div class="screen-foot" id="ar-foot"></div>
+      </div>
     </div>
 
-    <div class="screen" id="sh">
-      <div class="screen-label">
-        <span class="meta">Real listings from the live site</span>
-        <span class="tiny">Client rows withheld</span>
+    <div id="p-sh" role="tabpanel" hidden>
+      <div class="panel-head">
+        <h3>Show calendar</h3>
+        <p>Everything playing tomorrow in three cities, and everything announced since the last check.
+          <a href="https://ilovemyphone30000.github.io/nyc-shows/">Open it &#8599;</a></p>
+        <div class="one-stat"><b>1,283</b>shows, next two weeks</div>
       </div>
-      <div class="tabs" id="sh-tabs"></div>
-      <div class="cities" id="sh-cities"></div>
-      <p class="viewline" id="sh-view"></p>
-      <p class="tiny" id="sh-note" style="padding:0 12px 10px;margin:-6px 0 0;text-transform:none;letter-spacing:0;font-size:10.5px;max-width:70ch"></p>
-      <div class="bar tight">
-        <button id="sh-nosup" class="ghost" type="button" aria-pressed="false">No support only</button>
-        <input type="search" id="sh-q" placeholder="Search artist or venue">
+      <div class="screen">
+        <div class="subtabs" id="sh-tabs"></div>
+        <div class="cities" id="sh-cities"></div>
+        <p class="viewline" id="sh-view"></p>
+        <div class="bar tight">
+          <button id="sh-nosup" class="ghost" type="button" aria-pressed="false">No support only</button>
+          <input type="search" id="sh-q" placeholder="Search artist or venue">
+        </div>
+        <div id="sh-list"></div>
+        <div class="screen-foot" id="sh-foot"></div>
       </div>
-      <div id="sh-list"></div>
-      <div class="screen-foot" id="sh-foot"></div>
+    </div>
+
+    <div id="p-it" role="tabpanel" hidden>
+      <div class="panel-head">
+        <h3>Itinerary routing engine</h3>
+        <p>An intake form in, a routed multi-year itinerary out.</p>
+        <div class="one-stat"><b>310</b>shows, 47 markets</div>
+      </div>
+      <div class="screen">
+        <div class="bar tight">
+          <span class="brand">NEW TOUR PLAN</span><span class="spacer"></span>
+          <span class="tiny">Illustrative</span>
+        </div>
+        <div class="bar" id="it-form"></div>
+        <div class="scroll">
+          <table>
+            <thead><tr>
+              <th scope="col">Leg</th><th scope="col">When</th><th scope="col">Markets</th>
+              <th scope="col">Room</th><th scope="col">Cap</th>
+            </tr></thead>
+            <tbody id="it-body"></tbody>
+          </table>
+        </div>
+        <div class="screen-foot" id="it-foot"></div>
+      </div>
+    </div>
+
+    <div id="p-rs" role="tabpanel" hidden>
+      <div class="panel-head">
+        <h3>Resale tracker</h3>
+        <p>Flags the shows where resale beats face value. Reads prices only.</p>
+        <div class="one-stat"><b>3</b>days between checks</div>
+      </div>
+      <div class="screen">
+        <div class="bar tight">
+          <button id="rs-fees" type="button" aria-pressed="false">Add fees (+18%)</button>
+          <span class="spacer"></span><span class="tiny">Example prices</span>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr>
+              <th scope="col">Show</th><th scope="col">Standard</th><th scope="col">Official resale</th>
+              <th scope="col">SeatGeek</th><th scope="col">Cheapest</th>
+            </tr></thead>
+            <tbody id="rs-body"></tbody>
+          </table>
+        </div>
+        <div class="screen-foot" id="rs-foot"></div>
+      </div>
     </div>
   </section>
 
-  <!-- 3 -->
-  <section class="tool">
-    <div class="tool-head">
-      <h2>Itinerary routing engine</h2>
-      <span class="meta">On demand &middot; Exports to Sheets</span>
-    </div>
-    <p class="one">An intake form in, a routed multi-year itinerary out. Venues come from what
-      comparable artists actually played, and rule breaks are flagged, not fixed quietly.</p>
-
-    <div class="stats">
-      <div class="stat"><b>310</b><span>shows planned across 47 markets, 2027 to 2030</span></div>
-      <div class="stat"><b>17</b><span>locked dates the routing had to work around</span></div>
-      <div class="stat"><b>250&rarr;2,700</b><span>first room to target room</span></div>
-    </div>
-
-    <div class="screen" id="it">
-      <div class="screen-label">
-        <span class="meta">New tour plan &middot; intake form</span>
-        <span class="tiny">Illustrative</span>
-      </div>
-      <div class="bar" id="it-form"></div>
-      <div class="scroll">
-        <table>
-          <thead><tr><th scope="col">Leg</th><th scope="col">When</th><th scope="col">Markets</th><th scope="col">Room</th><th scope="col">Cap</th></tr></thead>
-          <tbody id="it-body"></tbody>
-        </table>
-      </div>
-      <div class="screen-foot" id="it-foot"></div>
-    </div>
-  </section>
-
-  <!-- 4 -->
-  <section class="tool">
-    <div class="tool-head">
-      <h2>Resale tracker</h2>
-      <span class="meta">Every 3 days &middot; Writes back to the sheet</span>
-    </div>
-    <p class="one">Standard and resale prices from AXS, Ticketmaster, DICE, Etix and SeatGeek, every
-      three days. Rows where resale beats face value get colored. It reads prices only.</p>
-
-    <div class="screen" id="rs">
-      <div class="screen-label">
-        <span class="meta">The flag test</span>
-        <span class="tiny">Example prices</span>
-      </div>
-      <div class="bar tight">
-        <button id="rs-fees" type="button" aria-pressed="false">Add fees (+18%)</button>
-      </div>
-      <div class="scroll">
-        <table>
-          <thead><tr><th scope="col">Show</th><th scope="col">Standard</th><th scope="col">Official resale</th><th scope="col">SeatGeek</th><th scope="col">Cheapest</th></tr></thead>
-          <tbody id="rs-body"></tbody>
-        </table>
-      </div>
-      <div class="screen-foot" id="rs-foot"></div>
-    </div>
-  </section>
-
-  <!-- 5 -->
-  <section class="tool">
-    <div class="tool-head">
-      <h2>Label map</h2>
-      <span class="meta">Reference &middot; One file</span>
-    </div>
-    <p class="one">Who owns whom across the majors, on one page.
-      <a href="https://ilovemyphone30000.github.io/labelmap/">Open it &#8599;</a></p>
-  </section>
+  <p class="closer">Also: <a href="https://ilovemyphone30000.github.io/labelmap/">the major-label
+    ownership map &#8599;</a>, one page, built from a company directory plus manual research.</p>
 
   <footer>
     <p>Real rows from the live tools, November 2026, client rows left out. Resale prices are examples.
@@ -362,292 +339,243 @@
 
 <script>
 var AR = [{"a": "bloodsports", "song": "Ten Thousand Feet", "u": "https://open.spotify.com/track/5pmua8ZOsIMwcMweSWTIT0", "l": 3464, "ls": [3464, 3772, 5488, 5923, 6241, 7028, 8702], "ig": 4881, "igu": "https://www.instagram.com/bloodsportsonline/", "igs": [4865, 4881, 4891, 4929, 4881, 4881, 4881, 5075], "pr": [{"t": "Stereogum", "u": "https://stereogum.com/2516011/bloodsports-ten-thousand-feet/music", "d": "2026-10-30"}, {"t": "The Line of Best Fit", "u": "https://www.thelineofbestfit.com/news/nycs-bloodsports-share-new-single-ten-thousand-feet-ahead-of-pitchfork-paris-and-london-shows", "d": "2026-10-30"}], "pl": [{"t": "The So Young List", "u": "https://open.spotify.com/playlist/2821abPmuo1yNb0By2hRE8"}, {"t": "Compact Cassette 🎃", "u": "https://open.spotify.com/playlist/6c6Ra1iI1JjhADV2gnT7p6"}], "ag": "Ground Control Touring", "agt": "Sydney Sanial", "lb": null, "lbk": null, "rn": null, "jp": 1}, {"a": "1000 Rabbits", "song": "Stupid Boy", "u": "https://open.spotify.com/track/0RfrWr1Ej0zVvJstp4MT68", "l": 7575, "ls": [6702, 6733, 7575, 10296, 11319, 12189, 14172, 17808], "ig": 6583, "igu": "https://www.instagram.com/1000rabbitsband/", "igs": [6355, 6423, 6435, 6499, 6499, 6499, 6583, 6608], "pr": [{"t": "Treble", "u": "https://www.treblezine.com/hear-a-new-song-from-1000-rabbits-stupid-boy/", "d": "2026-11-03"}, {"t": "Clash", "u": "https://www.clashmusic.com/?p=465046", "d": "2026-11-04"}], "pl": [{"t": "Fresh Finds UK & IE", "u": "https://open.spotify.com/playlist/37i9dQZF1DX7AqyNZFu97s"}, {"t": "new music discovery", "u": "https://open.spotify.com/playlist/5359l8Co8qztllR0Mxk4Zv"}], "ag": "ROAM", "agt": "Roxane Dumoulin", "lb": null, "lbk": null, "rn": null, "jp": 1}, {"a": "Trinket", "song": "If Not Soon Then Now", "u": "https://open.spotify.com/track/0GE8MLSbWYecG7SZszisyg", "l": 1398, "ls": [1753, 1753, 2331, 10345, 11150, 11847, 13287, 17654], "ig": 2189, "igu": "https://www.instagram.com/triiinket/", "igs": [2151, 2151, 2155, 2165, 2165, 2165, 2189, 2189], "pr": [{"t": "Stereogum", "u": "https://stereogum.com/2515648/trinket-if-not-soon-then-now/music", "d": "2026-10-27"}, {"t": "The Line of Best Fit", "u": "https://www.thelineofbestfit.com/news/trinket-sign-to-take-care-records-and-unveil-new-single-if-not-soon-then-now", "d": "2026-10-27"}], "pl": [{"t": "The So Young List", "u": "https://open.spotify.com/playlist/2821abPmuo1yNb0By2hRE8"}, {"t": "new music discovery", "u": "https://open.spotify.com/playlist/5359l8Co8qztllR0Mxk4Zv"}], "ag": null, "agt": null, "lb": "Take Care Records", "lbk": "I", "rn": null, "jp": 1}, {"a": "Porcelain", "song": "Yarn", "u": "https://open.spotify.com/track/5C10oudqxqXRZk86LBsa85", "l": 12582, "ls": [12582, 15491, 19062, 19062, 21132, 26138, 26769, 27215], "ig": 7251, "igu": "https://www.instagram.com/porcelain_band/", "igs": [6900, 6919, 6945, 6958, 6958, 6972, 7251, 7438], "pr": [{"t": "everythingisnoise.net", "u": "https://everythingisnoise.net/reviews/porcelain-todays-minor-victories/", "d": "2026-10-23"}, {"t": "twentycoreseven.co.uk", "u": "https://twentycoreseven.co.uk/release-reviews/todays-minor-victories-by-porcelain", "d": "2026-10-25"}], "pl": [{"t": "All New Rock", "u": "https://open.spotify.com/playlist/37i9dQZF1DWZryfp6NSvtz"}, {"t": "Fresh Finds Rock", "u": "https://open.spotify.com/playlist/37i9dQZF1DX78toxP7mOaJ"}, {"t": "New Noise", "u": "https://open.spotify.com/playlist/37i9dQZF1DWT2jS7NwYPVI"}], "ag": "Ground Control Touring", "agt": "Geoff McGovern", "lb": "TODO", "lbk": "I", "rn": null, "jp": 0}, {"a": "Big Red", "song": "Man Bites Dog", "u": "https://open.spotify.com/track/0sesBsbyKGy0ZkuTFjgZAs", "l": 12239, "ls": [11405, 12239, 13722, 19506, 20259, 20726, 21756, 24574], "ig": 1803, "igu": "https://www.instagram.com/bigreddddddddddddd/", "igs": [1721, 1731, 1738, 1758, 1738, 1738, 1803, 1865], "pr": [{"t": "DORK", "u": "https://readdork.com/track/big-red-man-bites-dog", "d": null}], "pl": [{"t": "new music discovery", "u": "https://open.spotify.com/playlist/5359l8Co8qztllR0Mxk4Zv"}, {"t": "Counter Culture", "u": "https://open.spotify.com/playlist/7zNMKf2Q4MG0l8dyJ7i8l0"}], "ag": "ROAM", "agt": "Sam Lister", "lb": null, "lbk": null, "rn": null, "jp": 1}, {"a": "Star's Revenge", "song": "Don’t Worry Dynamite", "u": "https://open.spotify.com/track/5U4ewHwID2c2113tSWCEOn", "l": 1730, "ls": [1730, 13684, 18385, 21653, 28571, 50924], "ig": 10000, "igu": "https://www.instagram.com/starsrevengeband/", "igs": [9069, 10000, 10000, 10000, 10000, 10000, 10000], "pr": [{"t": "Treble", "u": "https://www.treblezine.com/?p=110291", "d": "2026-11-05"}], "pl": [{"t": "All New Indie", "u": "https://open.spotify.com/playlist/37i9dQZF1DXdbXrPNafg9d"}, {"t": "Lorem", "u": "https://open.spotify.com/playlist/37i9dQZF1DXdwmD5Q7Gxah"}, {"t": "new music discovery", "u": "https://open.spotify.com/playlist/5359l8Co8qztllR0Mxk4Zv"}], "ag": null, "agt": null, "lb": null, "lbk": null, "rn": null, "jp": 1}, {"a": "Esme Emerson", "song": "Gun", "u": "https://open.spotify.com/track/6NOQu9hXk7LktFArN3OJzK", "l": 45979, "ls": [43915, 43915, 42841, 42239, 42351, 42488, 53887, 63845], "ig": 23000, "igu": "https://www.instagram.com/esmeemersonband/", "igs": [22000, 22000, 23000, 23000, 23000, 23000, 23000, 23000], "pr": [{"t": "Dork", "u": "https://readdork.com/news/esme-emerson-gun-single-video-509685f00b", "d": "2026-10-21"}, {"t": "Wonderland", "u": "https://www.wonderlandmagazine.com/2026/10/23/wonderlist-bicep/", "d": "2026-10-23"}], "pl": [{"t": "GRRRL Music: New Music Friday", "u": "https://open.spotify.com/playlist/08sWbwaA7wRu8oZNBHEpir"}, {"t": "#NowWatching", "u": "https://open.spotify.com/playlist/0EVzFau2kULH9e5dwK2OSI"}, {"t": "NME's New Bangers", "u": "https://open.spotify.com/playlist/0xXZWtbJsvFn2AnJUI0Y0z"}], "ag": "CAA", "agt": "Nikos Kazoleas", "lb": "Communion Records", "lbk": "I", "rn": null, "jp": 1}, {"a": "Sarah Meth", "song": "Fun", "u": "https://open.spotify.com/track/4msLenPX1FBgNM6FeFyeR5", "l": 64522, "ls": [35603, 51119, 64522, 77387, 79615, 81184, 86391, 95100], "ig": 8380, "igu": "https://www.instagram.com/sarahmeth/", "igs": [8272, 8284, 8297, 8299, 8299, 8306, 8380, 8426], "pr": [{"t": "The Line of Best Fit", "u": "https://www.thelineofbestfit.com/albums/on-something-shameful-sarah-meth-addresses-the-mess-of-casual-relationships", "d": "2026-10-29"}], "pl": [{"t": "All New Indie", "u": "https://open.spotify.com/playlist/37i9dQZF1DXdbXrPNafg9d"}, {"t": "Fresh Finds Indie", "u": "https://open.spotify.com/playlist/37i9dQZF1DWT0upuUFtT7o"}], "ag": null, "agt": null, "lb": "FADER", "lbk": "I", "rn": null, "jp": 1}, {"a": "Isabelle Mettle", "song": "STAINED GLASS", "u": "https://open.spotify.com/track/6IaGq2NMiVezfrC2VYUjxr", "l": 7263, "ls": [7263, 7769, 11188, 11504, 11762, 12156, 12959], "ig": 6723, "igu": "https://www.instagram.com/isabellemettle/", "igs": [6668, 6668, 6672, 6677, 6677, 6677, 6723, 6755], "pr": [{"t": "She Makes Music", "u": "https://shemakesmusic.co.uk/interviews/getting-to-know-isabelle-mettle/", "d": "2026-10-29"}], "pl": [{"t": "headphones ON!", "u": "https://open.spotify.com/playlist/4Od8Pkv3WggCyUsN7B2NWS"}, {"t": "#NowWatching", "u": "https://open.spotify.com/playlist/0EVzFau2kULH9e5dwK2OSI"}], "ag": null, "agt": null, "lb": null, "lbk": null, "rn": 1, "jp": 1}, {"a": "The Healing Power of Horses", "song": "xstick_xstick", "u": "https://open.spotify.com/track/3Wwrx1akChkCEsBU9Ix5Qd", "l": 38030, "ls": [46604, 46604, 49605, 55689, 56602, 57420, 61742, 69950], "ig": 1999, "igu": "https://www.instagram.com/thehealingpowerofhorses/", "igs": [1859, 1888, 1921, 1952, 1799, 1799, 1999, 1999], "pr": [{"t": "Stereogum", "u": "https://stereogum.com/2515638/the-healing-power-of-horses-announce-new-ep-8725-hear-xstick_xstick/music", "d": "2026-10-27"}], "pl": [{"t": "All New Indie", "u": "https://open.spotify.com/playlist/37i9dQZF1DXdbXrPNafg9d"}, {"t": "Lorem", "u": "https://open.spotify.com/playlist/37i9dQZF1DXdwmD5Q7Gxah"}, {"t": "new music discovery", "u": "https://open.spotify.com/playlist/5359l8Co8qztllR0Mxk4Zv"}], "ag": "UTA", "agt": "Steve Nickolls", "lb": "section1", "lbk": "I", "rn": null, "jp": 1}, {"a": "Becky and the Birds", "song": "Way back to You", "u": "https://open.spotify.com/track/5VxGvEGKHDw8AfoRqdfmcR", "l": 34436, "ls": [34436, 60826, 68655, 73846, 85531, 103321], "ig": 14000, "igu": "https://www.instagram.com/beckyandthebirds/", "igs": [13000, 13000, 13000, 13000, 13000, 14000, 14000], "pr": [{"t": "Stereogum", "u": "https://stereogum.com/2516783/becky-and-the-birds-way-back-to-you/music", "d": "2026-11-06"}], "pl": [{"t": "All New Indie", "u": "https://open.spotify.com/playlist/37i9dQZF1DXdbXrPNafg9d"}, {"t": "#NowWatching", "u": "https://open.spotify.com/playlist/0EVzFau2kULH9e5dwK2OSI"}, {"t": "Lorem", "u": "https://open.spotify.com/playlist/37i9dQZF1DXdwmD5Q7Gxah"}], "ag": null, "agt": null, "lb": null, "lbk": null, "rn": null, "jp": 1}, {"a": "Bone China", "song": "You're Wonderful", "u": "https://open.spotify.com/track/3m48zQPkuhS9iUavumpjcj", "l": 457, "ls": [457, 901, 1575, 1658, 1736, 1840, 2029], "ig": 426, "igu": "https://www.instagram.com/bonechinaband/", "igs": [421, 423, 423, 427, 426, 426, 426, 426], "pr": [{"t": "Atwood Magazine", "u": "https://atwoodmagazine.com/bchvn-bone-china-heaven-now-song-review/", "d": "2026-11-04"}], "pl": [{"t": "The So Young List", "u": "https://open.spotify.com/playlist/2821abPmuo1yNb0By2hRE8"}, {"t": "Compact Cassette", "u": "https://open.spotify.com/playlist/6c6Ra1iI1JjhADV2gnT7p6"}], "ag": null, "agt": null, "lb": "Blitzcat Records", "lbk": "I", "rn": null, "jp": 0}];
-var UP = [{"c": "New York", "d": "2026-11-16", "t": "18:00", "h": "HOHYUN", "sup": ["Sarah Kang"], "v": "Mercury Lounge", "u": "https://www.ticketmaster.com/hohyun-new-york-new-york-11-16-2026/event/0000650EE06F4152", "age": null}, {"c": "New York", "d": "2026-11-16", "t": "18:00", "h": "The Spill Canvas", "sup": ["Emo Orchestra", "Greywind"], "v": "The Brooklyn Monarch", "u": "https://kydlabs.com/e/EVcac31f42-a069-4440-ba20-e2d98bccc3a1", "age": "16+"}, {"c": "New York", "d": "2026-11-16", "t": "18:30", "h": "Qendressa", "sup": [], "v": "Baby's All Right", "u": "https://dice.fm/event/mxn58r-qendressa-16th-nov-babys-all-right-new-york-tickets", "age": "18+"}, {"c": "New York", "d": "2026-11-16", "t": "19:00", "h": "Stella Lefty", "sup": ["Grace Enger"], "v": "Bowery Ballroom", "u": "https://www.ticketmaster.com/stella-lefty-new-york-new-york-11-16-2026/event/000064AECC0B67EF", "age": "16+"}, {"c": "New York", "d": "2026-11-16", "t": "19:00", "h": "Angine de Poitrine", "sup": ["zouz"], "v": "Brooklyn Steel", "u": "https://www.axs.com/events/1448766/angine-de-poitrine-tickets", "age": "16+"}, {"c": "New York", "d": "2026-11-16", "t": "19:00", "h": "sahn", "sup": ["Lana Lou"], "v": "Elsewhere", "u": "https://www.eventbrite.com/e/sahn-tickets-2002953848880", "age": "16+"}, {"c": "Chicago", "d": "2026-11-16", "t": "18:00", "h": "Discontent", "sup": ["Ethic Another Enemy", "Viscera Crown", "Suffering"], "v": "Cobra Lounge", "u": "https://dice.fm/event/53kpbk-discontent-ethic-another-enemy-viscera-crown-suffering-absent-soul-kartika-55-16th-nov-cobra-lounge-chicago-tickets", "age": null}, {"c": "Chicago", "d": "2026-11-16", "t": "19:00", "h": "Sap", "sup": ["Sludge Mother", "Awannabe"], "v": "Beat Kitchen", "u": "https://wl.seetickets.us/event/saps-erasure-tour/702943", "age": null}, {"c": "Chicago", "d": "2026-11-16", "t": "19:00", "h": "Gene", "sup": ["Weston Loney"], "v": "Bottom Lounge", "u": "https://www.ticketweb.com/event/gene-bottom-lounge-tickets/14901513", "age": null}, {"c": "Chicago", "d": "2026-11-16", "t": "19:00", "h": "Lighthearted", "sup": ["Kate Stephenson", "Growing Boys"], "v": "Schubas", "u": "https://lh-st.com/shows/11-16-2026-lighthearted-kate-stephenson/", "age": null}, {"c": "Chicago", "d": "2026-11-16", "t": "19:00", "h": "Hank Garrett", "sup": [], "v": "Subterranean", "u": "https://wl.seetickets.us/event/hank-garrett/708108", "age": null}, {"c": "Chicago", "d": "2026-11-16", "t": "19:30", "h": "Laura Anglade", "sup": [], "v": "SPACE", "u": "https://www.ticketweb.com/event/laura-anglade-space-tickets/14290524", "age": null}, {"c": "Los Angeles", "d": "2026-11-16", "t": "18:00", "h": "John Mulaney", "sup": ["Sam and the Pinknotes"], "v": "Largo", "u": "https://wl.seetickets.us/event/john-mulaney-with-sam-and-the-pinknotes/710778", "age": "All Ages"}, {"c": "Los Angeles", "d": "2026-11-16", "t": "19:00", "h": "Dress Kit", "sup": ["Alex Carr"], "v": "Oblivion", "u": "https://dice.fm/event/mxw8rk-dress-kit-alex-carr-dj-evil-dj-16th-nov-oblivion-los-angeles-tickets", "age": "All Ages"}, {"c": "Los Angeles", "d": "2026-11-16", "t": "19:00", "h": "Josh Homme", "sup": ["The Kills", "St. Vincent", "Beck"], "v": "The Wiltern", "u": "https://www.ticketmaster.com/event/09006545F671117F", "age": "All Ages"}, {"c": "Los Angeles", "d": "2026-11-16", "t": "19:00", "h": "CHVRCHES", "sup": [], "v": "Troubadour", "u": "https://www.axs.com/events/1644956/chvrches-tickets", "age": "All Ages"}, {"c": "Los Angeles", "d": "2026-11-16", "t": "19:30", "h": "Colin Meloy (of The Decemberists)", "sup": [], "v": "The Grammy Museum", "u": "https://grammymuseum.org/event/celebrating-the-music-of-wildwood-with-the-decemberists-colin-meloy/", "age": "All Ages"}, {"c": "Los Angeles", "d": "2026-11-16", "t": "20:00", "h": "Gary Numan", "sup": ["Tremours"], "v": "Fonda Theatre", "u": "https://www.axs.com/events/1423297/gary-numan-tickets", "age": "All Ages"}];
-var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street", "sup": [], "v": "Racket", "u": "https://www.axs.com/events/1700559/76th-street-tickets", "age": "16+"}, {"c": "New York", "d": "2027-03-05", "t": "18:00", "h": "Johnnie Guilbert", "sup": [], "v": "Racket", "u": "https://www.axs.com/events/1704372/johnnie-guilbert-tickets", "age": "16+"}, {"c": "New York", "d": "2027-06-01", "t": "19:00", "h": "Xana", "sup": [], "v": "Gramercy Theatre", "u": "https://www.ticketmaster.com/xana-where-else-would-i-go-new-york-new-york-06-01-2027/event/0000656DC6F41271", "age": "16+"}, {"c": "New York", "d": "2026-12-30", "t": "22:30", "h": "Dylan Brady", "sup": [], "v": "Elsewhere", "u": "https://www.eventbrite.com/e/dylan-brady-nick-leon-tickets-2004655022135", "age": "21+"}, {"c": "New York", "d": "2026-12-12", "t": "19:00", "h": "Carter Vail", "sup": [], "v": "Night Club 101", "u": "https://www.ticketweb.com/event/carter-vails-secret-show-night-club-101-tickets/14412484", "age": "21+"}, {"c": "New York", "d": "2026-12-10", "t": "22:00", "h": "Chloe Scarlett", "sup": [], "v": "Night Club 101", "u": "https://www.ticketweb.com/event/chloe-scarlett-quib-grey-li-night-club-101-tickets/14416634", "age": "21+"}, {"c": "Chicago", "d": "2027-04-30", "t": "19:00", "h": "Tori Kelly", "sup": [], "v": "House of Blues Chicago", "u": "https://www.ticketmaster.com/tori-kelly-god-must-really-love-chicago-illinois-04-30-2027/event/0400656BD83EDCE9", "age": null}, {"c": "Chicago", "d": "2027-02-17", "t": "19:00", "h": "Adult DVD", "sup": [], "v": "Beat Kitchen", "u": "https://www.eventim.us/event/adult-dvd/710863", "age": null}, {"c": "Chicago", "d": "2027-05-28", "t": "19:00", "h": "Megadeth", "sup": [], "v": "Credit Union 1 Amphitheatre", "u": "https://www.ticketmaster.com/megadeth-vaccination-of-the-nations-tour-tinley-park-illinois-05-28-2027/event/04006569E91D8A6B", "age": null}, {"c": "Chicago", "d": "2026-12-02", "t": "20:00", "h": "Ryan Schreiber", "sup": [], "v": "Three Top Lounge", "u": "https://www.ticketweb.com/event/weird-era-how-pitchfork-changed-three-top-lounge-tickets/14445374", "age": "21+"}, {"c": "Chicago", "d": "2027-03-28", "t": "20:00", "h": "Noga Erez", "sup": [], "v": "The Salt Shed", "u": "https://www.ticketmaster.com/noga-erez-duck-season-tour-2027-chicago-illinois-03-28-2027/event/0400656AF2BBD903", "age": null}, {"c": "Chicago", "d": "2027-02-17", "t": "21:00", "h": "Bonny Doon", "sup": [], "v": "Empty Bottle", "u": "https://www.ticketweb.com/event/bonny-doon-empty-bottle-tickets/14438194", "age": null}, {"c": "Los Angeles", "d": "2027-01-09", "t": "20:00", "h": "Herman Dune", "sup": [], "v": "Gold-Diggers", "u": "https://gold-diggers.com/", "age": "21+"}, {"c": "Los Angeles", "d": "2026-12-13", "t": "17:00", "h": "Crush 40", "sup": [], "v": "The Regent Theater", "u": "https://www.eventticketscenter.com/crush-40-los-angeles-12-13-2026/8253999/t", "age": null}, {"c": "Los Angeles", "d": "2026-11-28", "t": "19:00", "h": "Moon Darling", "sup": [], "v": "Gold-Diggers", "u": "https://dice.fm/event/qnxylp-moon-darling-28th-nov-gold-diggers-los-angeles-tickets", "age": "21+"}, {"c": "Los Angeles", "d": "2027-01-02", "t": "19:00", "h": "Netherfriends", "sup": [], "v": "The Mint", "u": "https://dice.fm/event/bvl5gm-netherfriends-2nd-jan-the-mint-los-angeles-tickets", "age": "21+"}, {"c": "Los Angeles", "d": "2026-12-28", "t": "20:00", "h": "The Heaven", "sup": [], "v": "Zebulon", "u": "https://dice.fm/event/pgo2rk-the-heaven-decay-little-truck-28th-dec-zebulon-los-angeles-tickets", "age": "21+"}, {"c": "Los Angeles", "d": "2026-11-30", "t": "19:00", "h": "Frolicking", "sup": [], "v": "Oblivion", "u": "https://dice.fm/event/8v3nwv-frolicking-total-drag-drift-supergloom-30th-nov-oblivion-los-angeles-tickets", "age": "All Ages"}];
+var UP = [{"c": "Chicago", "d": "2026-11-23", "t": "18:30", "h": "Julia Shiplett", "sup": [], "v": "Hideout", "u": "https://www.hideoutchicago.com/shows/julia-shiplett-23-nov", "age": null, "ag": null, "agt": null}, {"c": "Chicago", "d": "2026-11-23", "t": "18:30", "h": "Amorphis", "sup": ["Insomnium"], "v": "House of Blues Chicago", "u": "https://www.ticketmaster.com/amorphis-insomnium-chicago-illinois-11-23-2026/event/04006518F16C09DD", "age": null, "ag": null, "agt": null}, {"c": "Chicago", "d": "2026-11-23", "t": "18:30", "h": "Jorja Smith", "sup": [], "v": "Riviera Theatre", "u": "https://www.jamusa.com/events/detail/jorja-smith-1541842", "age": null, "ag": null, "agt": null}, {"c": "Chicago", "d": "2026-11-23", "t": "19:00", "h": "Geordie Kieffer", "sup": [], "v": "Subterranean", "u": "https://wl.seetickets.us/event/geordie-kieffer/704070", "age": null, "ag": null, "agt": null}, {"c": "Chicago", "d": "2026-11-23", "t": "19:00", "h": "Kyle Kinane", "sup": [], "v": "Thalia Hall", "u": "https://www.ticketweb.com/event/kyle-kinane-thalia-hall-tickets/14834133", "age": null, "ag": null, "agt": null}, {"c": "Chicago", "d": "2026-11-23", "t": "20:00", "h": "Stella Lefty", "sup": ["Grace Enger"], "v": "Lincoln Hall", "u": "https://lh-st.com/shows/11-23-2026-stella-lefty/", "age": null, "ag": null, "agt": null}, {"c": "Chicago", "d": "2026-11-23", "t": "21:00", "h": "The Part Timers", "sup": ["Prathloons", "Petsit"], "v": "Empty Bottle", "u": "https://www.ticketweb.com/event/free-monday-w-the-part-empty-bottle-tickets/14413284", "age": null, "ag": null, "agt": null}, {"c": "Chicago", "d": "2026-11-23", "t": "21:00", "h": "3000 B.C.", "sup": ["Understudy", "Pretty Boy Thorsen & The Fallen Angels"], "v": "Hideout", "u": "https://www.hideoutchicago.com/shows/torn-light-presents-3000-b-c-ep-release-show-with-understudy-instrument-fallen-angels-23-nov", "age": null, "ag": null, "agt": null}, {"c": "Los Angeles", "d": "2026-11-23", "t": "18:30", "h": "Worry Club", "sup": [], "v": "Moroccan Lounge", "u": "https://www.ticketmaster.com/worry-club-los-angeles-california-11-23-2026/event/090064F0E0610B59", "age": null, "ag": null, "agt": null}, {"c": "Los Angeles", "d": "2026-11-23", "t": "19:00", "h": "Sabrina Claudio", "sup": [], "v": "Blue Note Los Angeles", "u": "https://www.ticketweb.com/event/sabrina-claudio-blue-note-los-angeles-tickets/14363514", "age": "All Ages", "ag": null, "agt": null}, {"c": "Los Angeles", "d": "2026-11-23", "t": "19:00", "h": "ZAQ", "sup": ["Dolly Ave"], "v": "El Cid", "u": "https://dice.fm/event/aaba8q-zaq-with-dolly-ave-23rd-nov-el-cid-los-angeles-tickets", "age": "All Ages", "ag": null, "agt": null}, {"c": "Los Angeles", "d": "2026-11-23", "t": "19:00", "h": "A Good Year", "sup": ["sofii", "Brilliant Gun"], "v": "The Echo", "u": "https://www.ticketmaster.com/a-good-year-los-angeles-california-11-23-2026/event/090064FD20522303", "age": "All Ages", "ag": null, "agt": null}, {"c": "Los Angeles", "d": "2026-11-23", "t": "20:00", "h": "Prateek Kuhad", "sup": [], "v": "Fonda Theatre", "u": "https://www.axs.com/events/1597311/an-acoustic-evening-with-prateek-kuhad-tickets", "age": "All Ages", "ag": null, "agt": null}, {"c": "Los Angeles", "d": "2026-11-23", "t": "20:00", "h": "Fred Eaglesmith", "sup": [], "v": "Zebulon", "u": "https://dice.fm/event/oeadag-fred-eaglesmith-23rd-nov-zebulon-los-angeles-tickets", "age": "21+", "ag": null, "agt": null}, {"c": "Los Angeles", "d": "2026-11-23", "t": "21:30", "h": "Sabrina Claudio", "sup": [], "v": "Blue Note Los Angeles", "u": "https://www.ticketweb.com/event/sabrina-claudio-blue-note-los-angeles-tickets/14363544", "age": "All Ages", "ag": null, "agt": null}, {"c": "New York", "d": "2026-11-23", "t": "18:30", "h": "Tim Kinsella", "sup": ["More Eaze", "Wendy Eisenberg"], "v": "Baby's All Right", "u": "https://www.eventim.us/event/tim-kinsella/708231", "age": "21+", "ag": null, "agt": null}, {"c": "New York", "d": "2026-11-23", "t": "18:30", "h": "Paul McCartney (in conversation with Terry Gross)", "sup": [], "v": "Town Hall", "u": "https://support.whyy.org/page/102791/event/1", "age": "All Ages", "ag": null, "agt": null}, {"c": "New York", "d": "2026-11-23", "t": "19:00", "h": "Lose Sight", "sup": ["Against The World", "New Society"], "v": "Gold Sounds", "u": "https://dice.fm/event/8ed65w-lose-sight-against-the-world-new-society-23rd-nov-gold-sounds-new-york-tickets", "age": "21+", "ag": null, "agt": null}, {"c": "New York", "d": "2026-11-23", "t": "19:00", "h": "sombr", "sup": ["Dove Cameron", "Hannah Jadagu"], "v": "Madison Square Garden", "u": "https://www.ticketmaster.com/sombr-you-are-the-reason-tour-new-york-new-york-11-23-2026/event/3B00648AD4475021", "age": "All Ages", "ag": null, "agt": null}, {"c": "New York", "d": "2026-11-23", "t": "19:00", "h": "Glassjaw", "sup": [], "v": "Music Hall of Williamsburg", "u": "https://www.axs.com/events/1610516/glassjaw-tickets", "age": "18+", "ag": null, "agt": null}, {"c": "New York", "d": "2026-11-23", "t": "19:00", "h": "Jacqueline Novak", "sup": [], "v": "The Bell House", "u": "https://www.ticketmaster.com/jacqueline-novak-brooklyn-new-york-11-23-2026/event/30006546423DA25E", "age": "21+", "ag": null, "agt": null}, {"c": "New York", "d": "2026-11-23", "t": "19:00", "h": "Silk", "sup": ["rosacade", "Silverdollar"], "v": "Trans-Pecos", "u": "https://www.thetranspecos.com/", "age": "All Ages", "ag": null, "agt": null}, {"c": "New York", "d": "2026-11-23", "t": "19:30", "h": "Shrines", "sup": ["A. Renee"], "v": "C'mon Everybody", "u": "https://dice.fm/event/ryea7y-shrines-the-wild-single-release-show-w-a-renee-23rd-nov-cmon-everybody-new-york-tickets", "age": "21+", "ag": null, "agt": null}, {"c": "New York", "d": "2026-11-23", "t": "20:00", "h": "Rozzi", "sup": [], "v": "Blue Note", "u": "https://www.ticketweb.com/event/rozzi-blue-note-jazz-club-tickets/14994063", "age": "21+", "ag": null, "agt": null}, {"c": "New York", "d": "2026-11-23", "t": "20:00", "h": "Bull Thieves", "sup": ["Anni Rossi", "Pearie Sol"], "v": "Bowery Palace", "u": "https://www.ticketweb.com/event/bull-thieves-anni-rossi-bowery-palace-tickets/14414884", "age": "21+", "ag": null, "agt": null}, {"c": "New York", "d": "2026-11-23", "t": "20:00", "h": "Talujon", "sup": ["Brian Chase (of YYYs)", "John Hollenbeck"], "v": "Roulette", "u": "https://roulette.org/event/talujon-brian-chase-john-hollenbeck/", "age": "All Ages", "ag": null, "agt": null}, {"c": "New York", "d": "2026-11-23", "t": "20:30", "h": "Alyssa Grace", "sup": [], "v": "Bowery Ballroom", "u": "https://www.ticketmaster.com/alyssa-grace-new-york-new-york-11-23-2026/event/000065231FEE8E3F", "age": "16+", "ag": null, "agt": null}, {"c": "New York", "d": "2026-11-23", "t": "21:00", "h": "Cab Ellis", "sup": [], "v": "KGB Bar", "u": "https://www.instagram.com/p/DfFLTcsJ8l9/", "age": "21+", "ag": null, "agt": null}, {"c": "New York", "d": "2026-11-23", "t": "21:30", "h": "Christeene", "sup": [], "v": "Joe's Pub", "u": "https://publictheater.org/performances-jp/2026/c/christeene/", "age": "All Ages", "ag": null, "agt": null}, {"c": "New York", "d": "2026-11-23", "t": "22:00", "h": "Rozzi", "sup": [], "v": "Blue Note", "u": "https://www.ticketweb.com/event/rozzi-blue-note-jazz-club-tickets/14994073", "age": "21+", "ag": null, "agt": null}];
+var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street", "sup": [], "v": "Racket", "u": "https://www.axs.com/events/1700559/76th-street-tickets", "age": "16+", "ag": null, "agt": null}, {"c": "New York", "d": "2027-03-05", "t": "18:00", "h": "Johnnie Guilbert", "sup": [], "v": "Racket", "u": "https://www.axs.com/events/1704372/johnnie-guilbert-tickets", "age": "16+", "ag": null, "agt": null}, {"c": "New York", "d": "2027-06-01", "t": "19:00", "h": "Xana", "sup": [], "v": "Gramercy Theatre", "u": "https://www.ticketmaster.com/xana-where-else-would-i-go-new-york-new-york-06-01-2027/event/0000656DC6F41271", "age": "16+", "ag": null, "agt": null}, {"c": "New York", "d": "2026-12-30", "t": "22:30", "h": "Dylan Brady", "sup": [], "v": "Elsewhere", "u": "https://www.eventbrite.com/e/dylan-brady-nick-leon-tickets-2004655022135", "age": "21+", "ag": null, "agt": null}, {"c": "New York", "d": "2026-12-12", "t": "19:00", "h": "Carter Vail", "sup": [], "v": "Night Club 101", "u": "https://www.ticketweb.com/event/carter-vails-secret-show-night-club-101-tickets/14412484", "age": "21+", "ag": null, "agt": null}, {"c": "New York", "d": "2026-12-10", "t": "22:00", "h": "Chloe Scarlett", "sup": [], "v": "Night Club 101", "u": "https://www.ticketweb.com/event/chloe-scarlett-quib-grey-li-night-club-101-tickets/14416634", "age": "21+", "ag": null, "agt": null}, {"c": "New York", "d": "2026-12-09", "t": "21:30", "h": "Joey Cash", "sup": [], "v": "Night Club 101", "u": "https://www.ticketweb.com/event/joey-cash-dgnr8-night-club-101-tickets/14393404", "age": "21+", "ag": null, "agt": null}, {"c": "New York", "d": "2026-12-13", "t": "19:00", "h": "Bentley Anderson", "sup": [], "v": "Night Club 101", "u": "https://www.ticketweb.com/event/bentley-anderson-african-american-sound-night-club-101-tickets/14441814", "age": "21+", "ag": null, "agt": null}, {"c": "Chicago", "d": "2027-04-30", "t": "19:00", "h": "Tori Kelly", "sup": [], "v": "House of Blues Chicago", "u": "https://www.ticketmaster.com/tori-kelly-god-must-really-love-chicago-illinois-04-30-2027/event/0400656BD83EDCE9", "age": null, "ag": null, "agt": null}, {"c": "Chicago", "d": "2027-02-17", "t": "19:00", "h": "Adult DVD", "sup": [], "v": "Beat Kitchen", "u": "https://www.eventim.us/event/adult-dvd/710863", "age": null, "ag": null, "agt": null}, {"c": "Chicago", "d": "2027-05-28", "t": "19:00", "h": "Megadeth", "sup": [], "v": "Credit Union 1 Amphitheatre", "u": "https://www.ticketmaster.com/megadeth-vaccination-of-the-nations-tour-tinley-park-illinois-05-28-2027/event/04006569E91D8A6B", "age": null, "ag": null, "agt": null}, {"c": "Chicago", "d": "2026-12-02", "t": "20:00", "h": "Ryan Schreiber", "sup": [], "v": "Three Top Lounge", "u": "https://www.ticketweb.com/event/weird-era-how-pitchfork-changed-three-top-lounge-tickets/14445374", "age": "21+", "ag": null, "agt": null}, {"c": "Chicago", "d": "2027-03-28", "t": "20:00", "h": "Noga Erez", "sup": [], "v": "The Salt Shed", "u": "https://www.ticketmaster.com/noga-erez-duck-season-tour-2027-chicago-illinois-03-28-2027/event/0400656AF2BBD903", "age": null, "ag": null, "agt": null}, {"c": "Chicago", "d": "2027-02-17", "t": "21:00", "h": "Bonny Doon", "sup": [], "v": "Empty Bottle", "u": "https://www.ticketweb.com/event/bonny-doon-empty-bottle-tickets/14438194", "age": null, "ag": null, "agt": null}, {"c": "Chicago", "d": "2027-01-02", "t": "21:00", "h": "Stomatopod", "sup": [], "v": "Empty Bottle", "u": "https://www.ticketweb.com/event/stomatopod-prichard-the-empty-bottle-tickets/14437354", "age": null, "ag": null, "agt": null}, {"c": "Chicago", "d": "2026-11-29", "t": "21:00", "h": "Uniflora", "sup": [], "v": "Empty Bottle", "u": "https://www.ticketweb.com/event/uniflora-instrument-lalibert-empty-bottle-tickets/14437404", "age": null, "ag": null, "agt": null}, {"c": "Los Angeles", "d": "2027-01-09", "t": "20:00", "h": "Herman Dune", "sup": [], "v": "Gold-Diggers", "u": "https://gold-diggers.com/", "age": "21+", "ag": null, "agt": null}, {"c": "Los Angeles", "d": "2026-12-13", "t": "17:00", "h": "Crush 40", "sup": [], "v": "The Regent Theater", "u": "https://www.eventticketscenter.com/crush-40-los-angeles-12-13-2026/8253999/t", "age": null, "ag": null, "agt": null}, {"c": "Los Angeles", "d": "2026-11-28", "t": "19:00", "h": "Moon Darling", "sup": [], "v": "Gold-Diggers", "u": "https://dice.fm/event/qnxylp-moon-darling-28th-nov-gold-diggers-los-angeles-tickets", "age": "21+", "ag": null, "agt": null}, {"c": "Los Angeles", "d": "2027-01-02", "t": "19:00", "h": "Netherfriends", "sup": [], "v": "The Mint", "u": "https://dice.fm/event/bvl5gm-netherfriends-2nd-jan-the-mint-los-angeles-tickets", "age": "21+", "ag": null, "agt": null}, {"c": "Los Angeles", "d": "2026-12-28", "t": "20:00", "h": "The Heaven", "sup": [], "v": "Zebulon", "u": "https://dice.fm/event/pgo2rk-the-heaven-decay-little-truck-28th-dec-zebulon-los-angeles-tickets", "age": "21+", "ag": null, "agt": null}, {"c": "Los Angeles", "d": "2026-11-30", "t": "19:00", "h": "Frolicking", "sup": [], "v": "Oblivion", "u": "https://dice.fm/event/8v3nwv-frolicking-total-drag-drift-supergloom-30th-nov-oblivion-los-angeles-tickets", "age": "All Ages", "ag": null, "agt": null}, {"c": "Los Angeles", "d": "2027-01-06", "t": "20:00", "h": "Tashaki Miyaki", "sup": [], "v": "Zebulon", "u": "https://dice.fm/event/x9vn8e-tashaki-miyaki-escape-ism-poppy-jean-crawford-dj-ana-calderon-6th-jan-zebulon-los-angeles-tickets", "age": "21+", "ag": null, "agt": null}, {"c": "Los Angeles", "d": "2026-12-02", "t": "20:00", "h": "Devon Ross", "sup": [], "v": "Zebulon", "u": "https://dice.fm/event/vvpbw7-devon-ross-friends-2nd-dec-zebulon-los-angeles-tickets", "age": "21+", "ag": null, "agt": null}];
 (function () {
   "use strict";
-  var esc = function (s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); };
+  var esc = function (s) { return String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;"); };
   var K = function (n) {
     if (n == null) return null;
-    if (n >= 1000000) return (n / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
-    if (n >= 10000) return Math.round(n / 1000) + "K";
-    if (n >= 1000) return (n / 1000).toFixed(1) + "K";
+    if (n >= 1000000) return (n/1000000).toFixed(1).replace(/\.0$/,"") + "M";
+    if (n >= 10000) return Math.round(n/1000) + "K";
+    if (n >= 1000) return (n/1000).toFixed(1) + "K";
     return String(n);
   };
   function spark(series) {
     if (!series || series.length < 2) return "";
-    var w = 42, h = 13, lo = Math.min.apply(null, series), hi = Math.max.apply(null, series);
-    var rng = (hi - lo) || 1;
-    var pts = series.map(function (v, i) {
-      return (i / (series.length - 1) * w).toFixed(1) + "," + (h - (v - lo) / rng * (h - 3) - 1.5).toFixed(1);
-    }).join(" ");
-    var last = pts.split(" ").pop().split(",");
-    return "<svg class='spark' width='" + w + "' height='" + h + "' viewBox='0 0 " + w + " " + h +
-      "' aria-hidden='true'><polyline points='" + pts + "' fill='none' stroke='#100906' stroke-width='1'/>" +
-      "<circle cx='" + last[0] + "' cy='" + last[1] + "' r='1.7' fill='#2e7040'/></svg>";
+    var w=42,h=13,lo=Math.min.apply(null,series),hi=Math.max.apply(null,series),rng=(hi-lo)||1;
+    var pts=series.map(function(v,i){return (i/(series.length-1)*w).toFixed(1)+","+(h-(v-lo)/rng*(h-3)-1.5).toFixed(1);}).join(" ");
+    var last=pts.split(" ").pop().split(",");
+    return "<svg class='spark' width='"+w+"' height='"+h+"' viewBox='0 0 "+w+" "+h+"' aria-hidden='true'><polyline points='"+pts+"' fill='none' stroke='#100906' stroke-width='1'/><circle cx='"+last[0]+"' cy='"+last[1]+"' r='1.7' fill='#2e7040'/></svg>";
   }
   function growth(series) {
-    if (!series || series.length < 2) return "<span class='flat'>&#9679; 0%</span>";
-    var a = series[0], b = series[series.length - 1];
-    if (!a) return "<span class='flat'>&#9679; 0%</span>";
-    var p = Math.round((b - a) / a * 100);
-    if (p > 0) return "<span class='up'>&#9650;" + p + "%</span>";
-    if (p < 0) return "<span class='down'>&#9660;" + Math.abs(p) + "%</span>";
+    if (!series || series.length < 2 || !series[0]) return "<span class='flat'>&#9679; 0%</span>";
+    var p = Math.round((series[series.length-1]-series[0])/series[0]*100);
+    if (p > 0) return "<span class='up'>&#9650;"+p+"%</span>";
+    if (p < 0) return "<span class='down'>&#9660;"+Math.abs(p)+"%</span>";
     return "<span class='flat'>&#9679; 0%</span>";
   }
 
-  /* ---------- A&R ---------- */
-  var arFilter = "all", arQ = "", starred = {};
-  var FILTERS = [
-    { k: "all", label: "All", f: function () { return true; } },
-    { k: "press", label: "Has press", f: function (r) { return r.pr && r.pr.length; } },
-    { k: "up", label: "Listeners up", f: function (r) { return r.ls && r.ls.length > 1 && r.ls[r.ls.length - 1] > r.ls[0]; } },
-    { k: "rostr", label: "Has agent", f: function (r) { return !!r.ag; } },
-    { k: "mine", label: "My list", f: function (r) { return !!starred[r.a]; } }
-  ];
-  var arFilters = document.getElementById("ar-filters");
-  var arBody = document.getElementById("ar-body");
-  var arFoot = document.getElementById("ar-foot");
-
-  FILTERS.forEach(function (f) {
+  var TABS = [["ar","A&R Instinct"],["sh","Show calendar"],["it","Routing engine"],["rs","Resale tracker"]];
+  var strip = document.getElementById("tabstrip");
+  TABS.forEach(function (t, i) {
     var b = document.createElement("button");
-    b.type = "button"; b.dataset.k = f.k;
-    b.innerHTML = esc(f.label) + " <span class='n'></span>";
-    b.setAttribute("aria-pressed", String(f.k === arFilter));
-    b.addEventListener("click", function () { arFilter = f.k; drawAR(); });
+    b.type="button"; b.textContent=t[1]; b.dataset.p=t[0];
+    b.setAttribute("role","tab"); b.setAttribute("aria-selected", String(i===0));
+    b.setAttribute("aria-controls","p-"+t[0]);
+    b.addEventListener("click", function () {
+      TABS.forEach(function (x) { document.getElementById("p-"+x[0]).hidden = (x[0] !== t[0]); });
+      Array.prototype.forEach.call(strip.children, function (c) {
+        c.setAttribute("aria-selected", String(c.dataset.p === t[0]));
+      });
+    });
+    strip.appendChild(b);
+  });
+
+  var ROWS = 4, arFilter = "all", arQ = "", starred = {};
+  var FILTERS = [
+    { k:"all", label:"All", f:function(){return true;} },
+    { k:"press", label:"Has press", f:function(r){return r.pr && r.pr.length;} },
+    { k:"jump", label:"Jumped", f:function(r){return !!r.jp;} },
+    { k:"rostr", label:"Has agent", f:function(r){return !!r.ag;} },
+    { k:"mine", label:"My list", f:function(r){return !!starred[r.a];} }
+  ];
+  var arFilters=document.getElementById("ar-filters"), arBody=document.getElementById("ar-body"), arFoot=document.getElementById("ar-foot");
+  FILTERS.forEach(function (f) {
+    var b=document.createElement("button");
+    b.type="button"; b.dataset.k=f.k; b.innerHTML=esc(f.label)+" <span class='n'></span>";
+    b.setAttribute("aria-pressed", String(f.k===arFilter));
+    b.addEventListener("click", function(){ arFilter=f.k; drawAR(); });
     arFilters.appendChild(b);
   });
-  document.getElementById("ar-q").addEventListener("input", function (e) { arQ = e.target.value.toLowerCase(); drawAR(); });
+  var arQi=document.createElement("input");
+  arQi.type="search"; arQi.placeholder="Search artist, outlet, agency";
+  arQi.addEventListener("input", function(e){ arQ=e.target.value.toLowerCase(); drawAR(); });
+  arFilters.appendChild(arQi);
 
   function arMatch(r) {
     if (!arQ) return true;
-    var hay = [r.a, r.song, r.ag, r.agt, r.lb].concat(
-      (r.pr || []).map(function (p) { return p.t; }),
-      (r.pl || []).map(function (p) { return p.t; })).join(" ").toLowerCase();
-    return hay.indexOf(arQ) > -1;
+    return [r.a,r.song,r.ag,r.agt,r.lb].concat(
+      (r.pr||[]).map(function(p){return p.t;}),
+      (r.pl||[]).map(function(p){return p.t;})).join(" ").toLowerCase().indexOf(arQ) > -1;
   }
-
   function drawAR() {
-    Array.prototype.forEach.call(arFilters.children, function (b) {
-      var f = FILTERS.filter(function (x) { return x.k === b.dataset.k; })[0];
-      b.setAttribute("aria-pressed", String(b.dataset.k === arFilter));
+    Array.prototype.forEach.call(arFilters.querySelectorAll("button"), function (b) {
+      var f=FILTERS.filter(function(x){return x.k===b.dataset.k;})[0];
+      b.setAttribute("aria-pressed", String(b.dataset.k===arFilter));
       b.querySelector(".n").textContent = AR.filter(f.f).length;
     });
-    var f = FILTERS.filter(function (x) { return x.k === arFilter; })[0];
-    var rows = AR.filter(f.f).filter(arMatch);
-    arBody.innerHTML = "";
+    var f=FILTERS.filter(function(x){return x.k===arFilter;})[0];
+    var all=AR.filter(f.f).filter(arMatch), rows=all.slice(0,ROWS);
+    arBody.innerHTML="";
     rows.forEach(function (r) {
-      var tr = document.createElement("tr");
-      var press = (r.pr || []).map(function (p) {
-        return "<a class='chip pr' href='" + esc(p.u) + "' target='_blank' rel='noopener'>" +
-          esc(p.t) + "<span class='dt'>" + esc((p.d || "").slice(5).replace("-", "/")) + "</span></a>";
+      var tr=document.createElement("tr");
+      var press=(r.pr||[]).map(function(p){
+        return "<a class='chip pr' href='"+esc(p.u)+"' target='_blank' rel='noopener'>"+esc(p.t)+
+          "<span class='dt'>"+esc((p.d||"").slice(5).replace("-","/"))+"</span></a>";
       }).join("") || "<span class='dash'>&ndash;</span>";
-      var pls = (r.pl || []).map(function (p) {
-        return "<a class='chip pl' href='" + esc(p.u) + "' target='_blank' rel='noopener'>" + esc(p.t) + "</a>";
+      var pls=(r.pl||[]).map(function(p){
+        return "<a class='chip pl' href='"+esc(p.u)+"' target='_blank' rel='noopener'>"+esc(p.t)+"</a>";
       }).join("") || "<span class='dash'>&ndash;</span>";
-      var rostr = r.ag
-        ? "<div class='ag'>" + esc(r.ag) + "</div>" + (r.agt ? "<div class='agt'>" + esc(r.agt) + "</div>" : "")
-        : "<span class='dash'>&ndash;</span>";
+      var rostr=r.ag ? "<div class='ag'>"+esc(r.ag)+"</div>"+(r.agt?"<div class='agt'>"+esc(r.agt)+"</div>":"")
+                     : "<span class='dash'>&ndash;</span>";
       tr.innerHTML =
-        "<td class='who'>" +
-          "<button class='star' type='button' aria-pressed='" + (starred[r.a] ? "true" : "false") +
-            "' aria-label='Save " + esc(r.a) + "'>" + (starred[r.a] ? "★" : "☆") + "</button>" +
-          "<a class='nm' href='" + esc(r.u || "#") + "' target='_blank' rel='noopener'>" + esc(r.a) + "</a>" +
-          (r.rn && r.rn > 1 ? "<span class='rn'>&#8635;" + r.rn + "</span>" : "") +
-          (r.lb ? "<div class='lab'><span class='dot " + esc(r.lbk || "") + "'></span>" + esc(r.lb) + "</div>" : "") +
-        "</td>" +
-        "<td class='num'>" + (r.l == null ? "<span class='dash'>&ndash;</span>" :
-          "<span class='v'>" + K(r.l) + "</span>" + spark(r.ls) + growth(r.ls) +
-          (r.jp ? "<span class='jump'>&#9650; Jump</span>" : "")) + "</td>" +
-        "<td class='num'>" + (r.ig == null ? "<span class='dash'>&ndash;</span>" :
-          "<a href='" + esc(r.igu || "#") + "' target='_blank' rel='noopener'><span class='v'>" + K(r.ig) + "</span></a>" +
-          spark(r.igs) + growth(r.igs)) + "</td>" +
-        "<td>" + press + "</td>" +
-        "<td class='rostr'>" + rostr + "</td>" +
-        "<td>" + pls + "</td>";
-      tr.querySelector(".star").addEventListener("click", function () {
-        starred[r.a] = !starred[r.a]; drawAR();
-      });
+        "<td class='who'><button class='star' type='button' aria-pressed='"+(starred[r.a]?"true":"false")+
+          "' aria-label='Save "+esc(r.a)+"'>"+(starred[r.a]?"★":"☆")+"</button>"+
+          "<a class='nm' href='"+esc(r.u||"#")+"' target='_blank' rel='noopener'>"+esc(r.a)+"</a>"+
+          (r.lb?"<div class='lab'><span class='dot "+esc(r.lbk||"")+"'></span>"+esc(r.lb)+"</div>":"")+"</td>"+
+        "<td class='num'>"+(r.l==null?"<span class='dash'>&ndash;</span>":
+          "<span class='v'>"+K(r.l)+"</span>"+spark(r.ls)+growth(r.ls)+
+          (r.jp?"<span class='jump'>&#9650; Jump</span>":""))+"</td>"+
+        "<td class='num'>"+(r.ig==null?"<span class='dash'>&ndash;</span>":
+          "<a href='"+esc(r.igu||"#")+"' target='_blank' rel='noopener'><span class='v'>"+K(r.ig)+"</span></a>"+
+          spark(r.igs)+growth(r.igs))+"</td>"+
+        "<td>"+press+"</td><td class='rostr'>"+rostr+"</td><td>"+pls+"</td>";
+      tr.querySelector(".star").addEventListener("click", function(){ starred[r.a]=!starred[r.a]; drawAR(); });
       arBody.appendChild(tr);
     });
-    var mine = Object.keys(starred).filter(function (k) { return starred[k]; }).length;
-    arFoot.innerHTML = "<span>" + rows.length + " of " + AR.length + " shown</span>" +
-      "<span>945 tracked on the live site</span>" +
-      "<span><b>" + mine + " on my list</b></span>";
+    arFoot.innerHTML="<span>"+rows.length+" of "+all.length+" shown</span>"+
+      "<span>945 tracked on the live site</span>"+
+      "<span><b>"+Object.keys(starred).filter(function(k){return starred[k];}).length+" on my list</b></span>";
   }
 
-  /* ---------- shows ---------- */
-  var shView = "up", shCity = "New York", shNoSup = false, shQ = "";
-  var shTabs = document.getElementById("sh-tabs");
-  var shCities = document.getElementById("sh-cities");
-  var shList = document.getElementById("sh-list");
-  var shFoot = document.getElementById("sh-foot");
-  var CITY_TOTALS = { "New York": 556, "Chicago": 280, "Los Angeles": 480 };
-  var DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  var MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-  [["up", "Upcoming shows"], ["ann", "Just announced"]].forEach(function (t) {
-    var b = document.createElement("button");
-    b.type = "button"; b.textContent = t[1]; b.dataset.v = t[0];
-    b.setAttribute("aria-pressed", String(t[0] === shView));
-    b.addEventListener("click", function () { shView = t[0]; drawShows(); });
+  var shView="up", shCity="New York", shNoSup=false, shQ="";
+  var shTabs=document.getElementById("sh-tabs"), shCities=document.getElementById("sh-cities");
+  var shList=document.getElementById("sh-list"), shFoot=document.getElementById("sh-foot");
+  var CITY={ "New York":556, "Chicago":280, "Los Angeles":480 };
+  var DAYS=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  var MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  [["up","Tomorrow"],["ann","Just announced"]].forEach(function (t) {
+    var b=document.createElement("button");
+    b.type="button"; b.textContent=t[1]; b.dataset.v=t[0];
+    b.setAttribute("aria-pressed", String(t[0]===shView));
+    b.addEventListener("click", function(){ shView=t[0]; drawShows(); });
     shTabs.appendChild(b);
   });
-  Object.keys(CITY_TOTALS).forEach(function (c) {
-    var b = document.createElement("button");
-    b.type = "button"; b.dataset.c = c;
-    b.innerHTML = esc(c) + " <span class='n'>" + CITY_TOTALS[c] + "</span>";
-    b.setAttribute("aria-pressed", String(c === shCity));
-    b.addEventListener("click", function () { shCity = c; drawShows(); });
+  Object.keys(CITY).forEach(function (c) {
+    var b=document.createElement("button");
+    b.type="button"; b.dataset.c=c;
+    b.innerHTML=esc(c)+" <span class='n'>"+CITY[c]+"</span>";
+    b.setAttribute("aria-pressed", String(c===shCity));
+    b.addEventListener("click", function(){ shCity=c; drawShows(); });
     shCities.appendChild(b);
   });
-  document.getElementById("sh-nosup").addEventListener("click", function () {
-    shNoSup = !shNoSup; this.setAttribute("aria-pressed", String(shNoSup)); drawShows();
+  document.getElementById("sh-nosup").addEventListener("click", function(){
+    shNoSup=!shNoSup; this.setAttribute("aria-pressed",String(shNoSup)); drawShows();
   });
-  document.getElementById("sh-q").addEventListener("input", function (e) { shQ = e.target.value.toLowerCase(); drawShows(); });
-
-  function fmtDay(iso) {
-    var p = iso.split("-"), d = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]));
-    return { lbl: DAYS[d.getUTCDay()] + ", " + MON[d.getUTCMonth()] + " " + d.getUTCDate(),
-             short: DAYS[d.getUTCDay()].slice(0, 3).toUpperCase() + " " + MON[d.getUTCMonth()].toUpperCase() + " " + d.getUTCDate() };
+  document.getElementById("sh-q").addEventListener("input", function(e){ shQ=e.target.value.toLowerCase(); drawShows(); });
+  function fmtDay(iso){
+    var p=iso.split("-"), d=new Date(Date.UTC(+p[0],+p[1]-1,+p[2]));
+    return { lbl: DAYS[d.getUTCDay()]+", "+MON[d.getUTCMonth()]+" "+d.getUTCDate(),
+             short: DAYS[d.getUTCDay()].slice(0,3).toUpperCase()+" "+MON[d.getUTCMonth()].toUpperCase()+" "+d.getUTCDate() };
   }
-
   function drawShows() {
-    Array.prototype.forEach.call(shTabs.children, function (b) { b.setAttribute("aria-pressed", String(b.dataset.v === shView)); });
-    Array.prototype.forEach.call(shCities.children, function (b) { b.setAttribute("aria-pressed", String(b.dataset.c === shCity)); });
-    var src = shView === "up" ? UP : ANN;
-    var rows = src.filter(function (s) {
+    Array.prototype.forEach.call(shTabs.children, function(b){ b.setAttribute("aria-pressed", String(b.dataset.v===shView)); });
+    Array.prototype.forEach.call(shCities.children, function(b){ b.setAttribute("aria-pressed", String(b.dataset.c===shCity)); });
+    var src = shView==="up" ? UP : ANN;
+    var all = src.filter(function (s) {
       if (s.c !== shCity) return false;
       if (shNoSup && s.sup && s.sup.length) return false;
-      if (shQ && (s.h + " " + s.v).toLowerCase().indexOf(shQ) < 0) return false;
+      if (shQ && (s.h+" "+s.v).toLowerCase().indexOf(shQ) < 0) return false;
       return true;
-    }).sort(function (a, b) { return a.d < b.d ? -1 : a.d > b.d ? 1 : (a.t || "").localeCompare(b.t || ""); });
-
-    document.getElementById("sh-view").textContent =
-      shView === "up" ? "Next month" : "Just announced";
-    document.getElementById("sh-note").textContent = shView === "up"
-      ? ""
-      : "Support is rarely listed the day a show is announced. These are the open slots.";
-
-    shList.innerHTML = "";
-    if (!rows.length) {
-      shList.innerHTML = "<p style='padding:12px;font-size:11px;color:var(--muted)'>Nothing matches that filter.</p>";
-    }
-    var lastDay = null, tbody = null;
+    }).sort(function(a,b){ return a.d<b.d?-1:a.d>b.d?1:(a.t||"").localeCompare(b.t||""); });
+    var rows = all.slice(0, ROWS);
+    document.getElementById("sh-view").textContent = shView==="up" ? "Tomorrow" : "Just announced";
+    shList.innerHTML="";
+    if (!rows.length) shList.innerHTML="<p style='padding:12px;font-size:11px;color:var(--muted)'>Nothing matches that filter.</p>";
+    var lastDay=null, tbody=null;
     rows.forEach(function (s) {
       if (s.d !== lastDay) {
-        lastDay = s.d;
-        var same = rows.filter(function (x) { return x.d === s.d; }).length;
-        var head = document.createElement("div");
-        head.className = "daygroup";
-        head.innerHTML = "<span style='font-family:var(--serif);font-size:15px'>" + fmtDay(s.d).lbl +
-          "</span><span>" + same + " show" + (same === 1 ? "" : "s") + "</span>";
+        lastDay=s.d;
+        var head=document.createElement("div");
+        head.className="daygroup";
+        head.innerHTML="<span style='font-family:var(--serif);font-size:14px'>"+fmtDay(s.d).lbl+
+          "</span><span>"+all.filter(function(x){return x.d===s.d;}).length+" in "+esc(s.c)+"</span>";
         shList.appendChild(head);
-        var tbl = document.createElement("table");
-        tbl.innerHTML = "<tbody></tbody>";
-        var wrapr = document.createElement("div");
-        wrapr.className = "scroll";
-        wrapr.appendChild(tbl);
-        shList.appendChild(wrapr);
-        tbody = tbl.querySelector("tbody");
+        var tbl=document.createElement("table"); tbl.innerHTML="<tbody></tbody>";
+        var w=document.createElement("div"); w.className="scroll"; w.appendChild(tbl);
+        shList.appendChild(w); tbody=tbl.querySelector("tbody");
       }
-      var open = !s.sup || !s.sup.length;
-      var tr = document.createElement("tr");
-      if (open) tr.className = "open";
-      tr.innerHTML =
-        "<td class='sh-date'>" + fmtDay(s.d).short + "</td>" +
-        "<td class='sh-act'>" + esc(s.h) + "</td>" +
-        "<td>" + (open ? "<span class='nosup'>*No support added</span>" :
-          "<span class='acts'>" + esc(s.sup.join("  ")) + "</span>") + "</td>" +
-        "<td><a class='venue' href='" + esc(s.u || "#") + "' target='_blank' rel='noopener'>" + esc(s.v) + "</a></td>" +
-        "<td class='sh-date'>" + esc(s.t || "") + (s.age ? " &middot; " + esc(s.age) : "") + "</td>";
+      var open=!s.sup||!s.sup.length;
+      var tr=document.createElement("tr");
+      if (open) tr.className="open";
+      tr.innerHTML="<td class='sh-date'>"+fmtDay(s.d).short+"</td><td class='sh-act'>"+esc(s.h)+"</td>"+
+        "<td>"+(open?"<span class='nosup'>*No support added</span>":"<span class='acts'>"+esc(s.sup.join("  "))+"</span>")+"</td>"+
+        "<td><a class='venue' href='"+esc(s.u||"#")+"' target='_blank' rel='noopener'>"+esc(s.v)+"</a></td>"+
+        "<td class='sh-date'>"+esc(s.t||"")+(s.age?" &middot; "+esc(s.age):"")+"</td>";
       tbody.appendChild(tr);
     });
-    var open = rows.filter(function (s) { return !s.sup || !s.sup.length; }).length;
-    shFoot.innerHTML = "<span>" + rows.length + " shown</span>" +
-      "<span>" + CITY_TOTALS[shCity] + " in " + esc(shCity) + " on the live site</span>" +
-      "<span><b>" + open + " with no support added</b></span>";
+    shFoot.innerHTML="<span>"+rows.length+" of "+all.length+" shown</span>"+
+      "<span>"+CITY[shCity]+" in "+esc(shCity)+" on the live site</span>"+
+      "<span><b>"+all.filter(function(s){return !s.sup||!s.sup.length;}).length+" with no support added</b></span>";
   }
 
-  /* ---------- itinerary ---------- */
-  var INTAKE = [
-    ["Artist", "Dillom", 14], ["Starting capacity", "250", 6],
-    ["Target venue", "Brooklyn Paramount (2,700)", 22],
-    ["Planning window", "Jan 2027 to Jan 2030", 18],
-    ["Festival targets", "Lollapalooza, ACL", 16],
-    ["Constraints", "17 locked dates, Thu to Sat preferred, no Mondays", 34]
-  ];
-  var itForm = document.getElementById("it-form");
-  INTAKE.forEach(function (f, i) {
-    var d = document.createElement("div");
-    d.style.cssText = "display:flex;flex-direction:column;gap:3px;min-width:0";
-    d.innerHTML = "<label class='tiny' for='it" + i + "'>" + esc(f[0]) + "</label>" +
-      "<input id='it" + i + "' type='text' value='" + esc(f[1]) + "' size='" + f[2] +
+  var INTAKE=[["Artist","Dillom",12],["Starting capacity","250",5],["Target venue","Brooklyn Paramount (2,700)",20],
+              ["Planning window","Jan 2027 to Jan 2030",16],["Constraints","17 locked dates, Thu to Sat, no Mondays",28]];
+  var itForm=document.getElementById("it-form");
+  INTAKE.forEach(function (f,i) {
+    var d=document.createElement("div");
+    d.style.cssText="display:flex;flex-direction:column;gap:3px;min-width:0";
+    d.innerHTML="<label class='tiny' for='it"+i+"'>"+esc(f[0])+"</label><input id='it"+i+
+      "' type='text' value='"+esc(f[1])+"' size='"+f[2]+
       "' style=\"font-family:var(--sans);font-size:11px;border:1px solid var(--grey4);padding:5px 7px;min-width:0\">";
     itForm.appendChild(d);
   });
-  var itGo = document.createElement("button");
-  itGo.type = "button"; itGo.textContent = "Build itinerary";
-  itGo.style.cssText = "background:var(--ink);color:#fff;border-color:var(--ink);align-self:flex-end";
+  var itGo=document.createElement("button");
+  itGo.type="button"; itGo.textContent="Build itinerary";
+  itGo.style.cssText="background:var(--ink);color:#fff;border-color:var(--ink);align-self:flex-end";
   itForm.appendChild(itGo);
-
-  var LEGS = [
-    ["01", "Mar 2027", "Northeast, 6 markets", "Club", 250],
-    ["02", "Jun 2027", "Midwest and South, 9 markets", "Club", 400],
-    ["03", "Oct 2027", "West Coast, 7 markets", "Ballroom", 600],
-    ["04", "Mar 2028", "National, 12 markets", "Ballroom", 900],
-    ["05", "Aug 2028", "Festivals plus 5 markets", "Festival", 0],
-    ["06", "Feb 2029", "National, 14 markets", "Theatre", 1400],
-    ["07", "Sep 2029", "National, 11 markets", "Theatre", 2000],
-    ["08", "Jan 2030", "Brooklyn finale", "Target venue", 2700]
-  ];
+  var LEGS=[["01","Mar 2027","Northeast, 6 markets","Club",250],["02","Jun 2027","Midwest and South, 9 markets","Club",400],
+            ["03","Oct 2027","West Coast, 7 markets","Ballroom",600],["04","Mar 2028","National, 12 markets","Ballroom",900],
+            ["05","Aug 2028","Festivals plus 5 markets","Festival",0],["06","Feb 2029","National, 14 markets","Theatre",1400],
+            ["07","Sep 2029","National, 11 markets","Theatre",2000],["08","Jan 2030","Brooklyn finale","Target venue",2700]];
   function drawItin() {
-    var target = document.getElementById("it2").value || "Target venue";
-    var b = document.getElementById("it-body");
-    b.innerHTML = "";
-    LEGS.forEach(function (l, i) {
-      var tr = document.createElement("tr");
-      if (i === LEGS.length - 1) tr.className = "open";
-      tr.innerHTML = "<td class='sh-date'>" + l[0] + "</td><td>" + l[1] + "</td><td>" + esc(l[2]) +
-        "</td><td>" + (i === LEGS.length - 1 ? esc(target) : l[3]) + "</td><td class='num'>" +
-        (l[4] ? l[4].toLocaleString("en-US") : "<span class='dash'>&ndash;</span>") + "</td>";
+    var target=document.getElementById("it2").value || "Target venue";
+    var b=document.getElementById("it-body"); b.innerHTML="";
+    LEGS.forEach(function (l,i) {
+      var tr=document.createElement("tr");
+      if (i===LEGS.length-1) tr.className="open";
+      tr.innerHTML="<td class='sh-date'>"+l[0]+"</td><td>"+l[1]+"</td><td>"+esc(l[2])+"</td><td>"+
+        (i===LEGS.length-1?esc(target):l[3])+"</td><td class='num'>"+
+        (l[4]?l[4].toLocaleString("en-US"):"<span class='dash'>&ndash;</span>")+"</td>";
       b.appendChild(tr);
     });
-    document.getElementById("it-foot").innerHTML =
-      "<span>" + esc(document.getElementById("it0").value) + "</span>" +
-      "<span>" + esc(document.getElementById("it3").value) + "</span>" +
+    document.getElementById("it-foot").innerHTML=
+      "<span>"+esc(document.getElementById("it0").value)+"</span>"+
+      "<span>"+esc(document.getElementById("it3").value)+"</span>"+
       "<span><b>310 shows, 47 markets</b></span>";
   }
   itGo.addEventListener("click", drawItin);
 
-  /* ---------- resale ---------- */
-  var PRICES = [
-    ["Show 1 · Brooklyn", 45, 38, 41], ["Show 2 · Chicago", 60, 72, 68],
-    ["Show 3 · Los Angeles", 38, 34, 30], ["Show 4 · Atlanta", 52, 55, 49],
-    ["Show 5 · Seattle", 29, 31, 33], ["Show 6 · Austin", 75, 61, 66]
-  ];
-  var fees = false;
-  var rsBtn = document.getElementById("rs-fees");
+  var PRICES=[["Show 1 · Brooklyn",45,38,41],["Show 2 · Chicago",60,72,68],["Show 3 · Los Angeles",38,34,30],["Show 4 · Austin",75,61,66]];
+  var fees=false, rsBtn=document.getElementById("rs-fees");
   function drawResale() {
-    var b = document.getElementById("rs-body");
-    b.innerHTML = ""; var n = 0;
+    var b=document.getElementById("rs-body"); b.innerHTML=""; var n=0;
     PRICES.forEach(function (p) {
-      var res = fees ? p[2] * 1.18 : p[2], sg = fees ? p[3] * 1.18 : p[3];
-      var low = Math.min(res, sg), hit = low < p[1];
+      var res=fees?p[2]*1.18:p[2], sg=fees?p[3]*1.18:p[3], low=Math.min(res,sg), hit=low<p[1];
       if (hit) n++;
-      var tr = document.createElement("tr");
-      if (hit) tr.className = "open";
-      tr.innerHTML = "<td>" + p[0] + "</td><td class='num'>$" + p[1].toFixed(0) +
-        "</td><td class='num'>$" + res.toFixed(0) + "</td><td class='num'>$" + sg.toFixed(0) +
-        "</td><td class='num'>" + (hit ? "<span class='up'>$" + low.toFixed(0) + "</span>" :
-          "<span class='dash'>$" + low.toFixed(0) + "</span>") + "</td>";
+      var tr=document.createElement("tr");
+      if (hit) tr.className="open";
+      tr.innerHTML="<td>"+p[0]+"</td><td class='num'>$"+p[1].toFixed(0)+"</td><td class='num'>$"+res.toFixed(0)+
+        "</td><td class='num'>$"+sg.toFixed(0)+"</td><td class='num'>"+
+        (hit?"<span class='up'>$"+low.toFixed(0)+"</span>":"<span class='dash'>$"+low.toFixed(0)+"</span>")+"</td>";
       b.appendChild(tr);
     });
-    document.getElementById("rs-foot").innerHTML = "<span>" + (fees ? "After fees" : "Before fees") +
-      "</span><span><b>" + n + " cheaper on resale</b></span>";
+    document.getElementById("rs-foot").innerHTML="<span>"+(fees?"After fees":"Before fees")+
+      "</span><span><b>"+n+" cheaper on resale</b></span>";
   }
   rsBtn.addEventListener("click", function () {
-    fees = !fees; rsBtn.setAttribute("aria-pressed", String(fees));
+    fees=!fees; rsBtn.setAttribute("aria-pressed",String(fees));
     rsBtn.textContent = fees ? "Fees on (+18%)" : "Add fees (+18%)";
     drawResale();
   });
