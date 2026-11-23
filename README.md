@@ -17,5 +17,3 @@ the itinerary builder, the AXS resale scan and the label map.
 
 Not published yet. To serve it from GitHub Pages, push to a repo and point Pages at `main` / root;
 Pages serves `index.html` from the root. Ask Jonah before creating the remote or pushing.
-
-A claude.ai artifact copy of this page also exists (private): https://claude.ai/artifact/JgfgRUBCmhRLyh6bkySH8p
