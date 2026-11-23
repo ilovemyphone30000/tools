@@ -46,34 +46,15 @@
     display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
     gap: 8px 24px; padding-block: 26px 0;
   }
-  .mast .mark { font-family: var(--sans); font-weight: 700; font-size: 15px; letter-spacing: -0.01em; }
+  .mast .mark { margin: 0; font-family: var(--sans); font-weight: 700; font-size: 18px; line-height: 1.25; letter-spacing: -0.01em; }
   .mast p { margin: 0; font-size: 14px; color: var(--muted); max-width: 52ch; }
   .mast nav { display: flex; flex-wrap: wrap; gap: 4px 14px; }
   .mast nav a { font-family: var(--sans); font-size: 13px; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--grey4); }
   .mast nav a:hover { color: var(--green); border-bottom-color: var(--green); }
 
   /* the lead: the signing */
-  .lead { padding-block: 34px 34px; border-bottom: 1px solid var(--grey1); }
-  .intro { margin: 0 0 22px; max-width: 62ch; font-size: 17px; line-height: 1.5; color: var(--muted); }
-  .story { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 24px 56px; align-items: end; }
-  .story .lead-list, .story ol { margin-top: 0 !important; grid-template-columns: 1fr !important; max-width: none; }
-  @media (max-width: 1000px) { .story { grid-template-columns: 1fr; } .story ol { margin-top: 6px !important; } }
-  .lead h1 {
-    margin: 0; font-family: var(--sans); font-weight: 650; text-wrap: balance;
-    font-size: clamp(30px, 4.4vw, 54px); line-height: 1.06; letter-spacing: -0.03em;
-    max-width: 22ch;
-  }
-  .lead h1 em { font-style: normal; color: var(--green); }
-  .lead ol {
-    margin: 22px 0 0; padding: 0; list-style: none;
-    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 30px;
-    max-width: 62rem;
-  }
-  .lead li { font-family: var(--sans); font-size: 13px; line-height: 1.45; border-top: 1px solid var(--grey1); padding-top: 10px; }
-  .lead li b { display: block; font-family: var(--mono); font-weight: 700; font-size: 15px; margin-bottom: 4px; }
-  .lead .when { display: block; color: var(--muted); font-size: 11px; margin-top: 3px; }
-  .onlyone { margin: 18px 0 0; font-size: 13px; color: var(--muted); font-family: var(--sans); }
-  @media (max-width: 760px) { .lead ol { grid-template-columns: 1fr; } }
+  .lead { padding-block: 28px; border-bottom: 1px solid var(--grey1); }
+  .onlyone { margin: 0; font-size: 18px; line-height: 1.5; color: var(--ink); font-family: var(--sans); max-width: 62ch; }
 
   /* the four numbers that matter */
   .nums {
@@ -233,7 +214,7 @@
 <div class="wrap">
 
   <header class="mast">
-    <span class="mark">Jonah Bierman Intern Project: AI A&amp;R + Admin Systems</span>
+    <h1 class="mark">Jonah Bierman Intern Project: AI A&amp;R + Admin Systems</h1>
     <p>Five tools, built and run in-house.</p>
     <nav>
       <a href="https://ilovemyphone30000.github.io/instinct/">A&amp;R Instinct &#8599;</a>
@@ -244,20 +225,7 @@
 
   <main id="main" tabindex="-1">
   <section class="lead">
-    <p class="intro">Tools I built at a booking agency to find artists before they have an agent, and shows before they have support.</p>
-    <div class="story">
-    <h1>Billboard Style, caught on their first single and signed.
-      <em>Fresh Finds got there 100 days later.</em></h1>
-    <ol>
-      <li><b>Aug 10</b>The scan finds them on their first single, &ldquo;Billboard Style&rdquo;
-        <span class="when">81,057 monthly listeners &middot; Superplaylist #4</span></li>
-      <li><b>Signed</b>To Greg Horbal, off that find
-</li>
-      <li><b>Nov 18</b>Spotify's Fresh Finds adds them, 100 days after the scan did
-        <span class="when">100,519 monthly listeners by then, up 24%</span></li>
-    </ol>
-    </div>
-    <p class="onlyone">One signing so far. The rest of this page is what the tools are holding right now.</p>
+    <p class="onlyone">Billboard Style was flagged by A&amp;R Instinct on Aug 10, then signed to Greg Horbal. The rest of this page is what the tools are holding right now.</p>
   </section>
 
   <section class="nums" aria-label="What the tools are holding">
