@@ -4,22 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AI tools I've built</title>
-<meta name="description" content="Five agents built for A&amp;R, show listings, tour routing, resale pricing and label ownership, with real data and working demos.">
+<meta name="description" content="Five tools built for A&amp;R, show listings, tour routing, resale pricing and label ownership, each shown working on real data.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Courier+Prime:wght@400;700&family=Montserrat:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Courier+Prime:wght@400;700&display=swap">
 <style>
-  /* OJAS layout (mono prose, fat condensed name, heavy rules) on THE·TEAM's palette.
-     Green is the signifier: the headline number, the kept rows, no support added. */
+  /* Page: OJAS layout on THE·TEAM's palette.
+     Demos: built to match the real tools, which use the same tokens. */
   :root {
     --bg: #fffdf8; --ink: #100906;
     --grey7: #97999b; --grey4: #bbbcbc; --grey1: #d9d9d6; --muted: #6f7173;
     --green: #2e7040; --tint: #e2ece4;
+    --yellow: #fff4a3; --pink: #ffd6ea; --open: #bff0c9; --red: #b00020;
     --mono: "Courier Prime", ui-monospace, "SF Mono", Menlo, monospace;
-    --sans: "Gotham", "Montserrat", "Helvetica Neue", Arial, sans-serif;
-    --serif: "Times New Roman", Times, serif;
+    --sans: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    --serif: "Times New Roman", Tinos, Times, serif;
     --display: "Anton", "Oswald", Impact, sans-serif;
-    --tracking: -0.02em;
     color-scheme: light;
   }
   * { box-sizing: border-box; }
@@ -30,139 +30,154 @@
     -webkit-text-size-adjust: 100%;
   }
   .wrap {
-    max-width: 72rem; margin: 0 auto;
+    max-width: 76rem; margin: 0 auto;
     padding-left: max(20px, env(safe-area-inset-left, 0px));
     padding-right: max(20px, env(safe-area-inset-right, 0px));
   }
 
-  /* hero */
   .hero {
     display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
     gap: 28px 48px; align-items: end; padding-block: 52px 36px;
   }
   .hero p { margin: 0; max-width: 46ch; }
-  .hero em {
-    font-family: var(--serif); font-style: italic; font-size: 1.14em;
-    color: var(--green); letter-spacing: var(--tracking);
-  }
+  .hero em { font-family: var(--serif); font-style: italic; font-size: 1.14em; color: var(--green); letter-spacing: -0.02em; }
   .right { justify-self: end; text-align: right; }
   .toplinks { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; margin-bottom: 16px; }
-  .toplinks a {
-    font-family: var(--sans); font-size: 16px; letter-spacing: var(--tracking);
-    color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--grey4);
-  }
+  .toplinks a { font-family: var(--sans); font-size: 16px; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--grey4); }
   .toplinks a:hover { color: var(--green); border-bottom-color: var(--green); }
   .hero .wordmark {
-    max-width: none; font-family: var(--display); font-weight: 400;
-    font-size: clamp(56px, 12vw, 128px); line-height: 0.82;
-    letter-spacing: -0.015em; text-transform: uppercase;
+    max-width: none; font-family: var(--display); font-size: clamp(56px, 12vw, 128px);
+    line-height: 0.82; letter-spacing: -0.015em; text-transform: uppercase;
   }
   .rule-heavy { height: 4px; background: var(--ink); border: 0; margin: 0; }
 
-  /* sections */
   .tool { border-bottom: 1px solid var(--grey1); padding-block: 36px 40px; }
   .tool:last-of-type { border-bottom: 0; }
-  .tool-head {
-    display: flex; flex-wrap: wrap; align-items: baseline;
-    justify-content: space-between; gap: 6px 24px;
-  }
+  .tool-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 24px; }
   .tool-head h2 { font-family: var(--mono); font-weight: 700; font-size: 20px; margin: 0; }
-  .meta {
-    font-family: var(--sans); font-weight: 500; font-size: 10px;
-    letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
-  }
-  .one { margin: 10px 0 0; max-width: 78ch; font-size: 15px; }
-  .one b { font-weight: 400; color: var(--green); }
+  .meta { font-family: var(--sans); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .one { margin: 10px 0 0; max-width: 76ch; font-size: 15px; }
+  .one a { color: var(--green); }
 
-  /* stat row */
-  .stats {
-    display: flex; flex-wrap: wrap; gap: 20px 44px;
-    margin: 22px 0 0; padding-top: 18px; border-top: 2px solid var(--ink);
-  }
-  .stat { min-width: 0; }
-  .stat b {
-    display: block; font-family: var(--display); font-weight: 400;
-    font-size: clamp(40px, 5.2vw, 62px); line-height: 0.82;
-    letter-spacing: -0.02em; color: var(--green);
-  }
-  .stat span {
-    display: block; margin-top: 7px; max-width: 26ch;
-    font-family: var(--sans); font-size: 11px; line-height: 1.35;
-    letter-spacing: var(--tracking); color: var(--muted);
-  }
-  .said { font-family: var(--serif); font-style: italic; font-size: 1.1em; letter-spacing: var(--tracking); }
+  .stats { display: flex; flex-wrap: wrap; gap: 18px 44px; margin: 22px 0 0; padding-top: 18px; border-top: 2px solid var(--ink); }
+  .stat b { display: block; font-family: var(--display); font-size: clamp(38px, 5vw, 58px); line-height: 0.82; letter-spacing: -0.02em; color: var(--green); }
+  .stat span { display: block; margin-top: 7px; max-width: 26ch; font-family: var(--sans); font-size: 11px; line-height: 1.35; color: var(--muted); }
+  .said { font-family: var(--serif); font-style: italic; font-size: 1.1em; }
 
-  /* demo */
-  .demo { border: 1px solid var(--grey4); background: #fff; margin-top: 24px; }
-  .demo-bar {
-    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-    gap: 6px 16px; padding: 9px 12px; border-bottom: 1px solid var(--grey1); background: var(--bg);
+  /* ---------- the embedded tool screens ---------- */
+  .screen {
+    margin-top: 24px; border: 1px solid var(--grey4); background: #fff;
+    font-family: var(--sans); color: var(--ink);
   }
-  .demo-bar .meta { color: var(--ink); }
-  .note { font-family: var(--sans); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey7); }
-  .controls {
-    display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 12px;
-    border-bottom: 1px solid var(--grey1); align-items: flex-end;
+  .screen-label {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px;
+    padding: 8px 12px; background: var(--bg); border-bottom: 1px solid var(--grey1);
   }
-  .field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-  .field label {
-    font-family: var(--sans); font-size: 10px; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--muted);
+  .screen-label .meta { color: var(--ink); }
+  .bar {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px;
+    padding: 8px 12px; border-bottom: 1px solid var(--grey1);
   }
-  .field input, .field select {
-    font-family: var(--mono); font-size: 14px; color: var(--ink); background: #fff;
-    border: 1px solid var(--grey4); border-radius: 0; padding: 6px 8px; width: 100%; min-width: 0;
+  .bar.tight { padding: 6px 12px; }
+  .brand { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; }
+  .spacer { flex: 1 1 auto; }
+  .tiny { font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+  .screen button {
+    font-family: var(--sans); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink); background: #fff; border: 1px solid var(--grey4);
+    border-radius: 0; padding: 5px 9px; cursor: pointer; line-height: 1.2;
   }
-  .field.grow { flex: 1 1 12rem; }
-  .field.half { flex: 1 1 16rem; }
+  .screen button:hover { border-color: var(--ink); }
+  .screen button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .screen button.ghost[aria-pressed="true"] { background: #fff; color: var(--green); border-color: var(--green); }
+  .screen button .n { color: var(--grey7); margin-left: 5px; }
+  .screen button[aria-pressed="true"] .n { color: #fff; opacity: .7; }
+  .screen input[type="search"] {
+    font-family: var(--sans); font-size: 11px; color: var(--ink);
+    border: 1px solid var(--grey4); border-radius: 0; padding: 5px 8px; min-width: 0; flex: 1 1 14rem;
+  }
   :focus-visible { outline: 2px solid var(--green); outline-offset: 1px; }
 
-  button {
-    font-family: var(--sans); font-weight: 500; font-size: 11px; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--ink); background: #fff;
-    border: 1px solid var(--grey4); border-radius: 0; padding: 8px 12px; cursor: pointer;
-  }
-  button:hover { border-color: var(--ink); }
-  button.go { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-  button.go:hover { background: var(--green); border-color: var(--green); }
-  button[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: #fff; }
-
-  .pad { padding: 12px; }
   .scroll { overflow-x: auto; }
-  table { border-collapse: collapse; width: 100%; font-size: 14px; }
-  th {
-    font-family: var(--sans); font-weight: 500; font-size: 10px; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--muted); text-align: left;
-    padding: 0 12px 6px 0; border-bottom: 1px solid var(--grey1); white-space: nowrap;
+  .screen table { border-collapse: collapse; width: 100%; font-size: 11.5px; }
+  .screen th {
+    text-align: left; font-weight: 400; font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted);
+    padding: 7px 14px 6px 0; border-bottom: 1px solid var(--grey1); white-space: nowrap;
   }
-  td {
-    padding: 6px 12px 6px 0; border-bottom: 1px solid #f0efe9;
-    white-space: nowrap; font-variant-numeric: tabular-nums;
+  .screen td { padding: 8px 14px 8px 0; border-bottom: 1px solid #f1f0ec; vertical-align: top; }
+  .screen td:last-child, .screen th:last-child { padding-right: 0; }
+  .screen a { color: inherit; text-decoration: none; }
+  .screen a:hover { text-decoration: underline; }
+
+  .star { border: 0 !important; background: none !important; padding: 0 6px 0 0 !important; font-size: 12px !important; color: var(--grey4) !important; cursor: pointer; }
+  .star[aria-pressed="true"] { color: var(--ink) !important; }
+  .who { white-space: nowrap; }
+  .who .nm { font-size: 12.5px; letter-spacing: 0.03em; text-transform: uppercase; }
+  .rn { font-size: 8.5px; color: var(--green); border: 1px solid var(--green); padding: 0 3px; margin-left: 5px; vertical-align: 1px; }
+  .lab { font-size: 9.5px; color: var(--muted); margin-top: 3px; display: flex; align-items: center; gap: 4px; }
+  .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--grey4); display: inline-block; }
+  .dot.I { background: #3b7ed2; } .dot.M { background: var(--red); } .dot.S { background: var(--grey7); }
+  .num { white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .num .v { display: inline-block; min-width: 2.6rem; }
+  .spark { vertical-align: middle; margin: 0 5px; }
+  .up { color: var(--green); } .down { color: var(--red); } .flat { color: var(--grey7); }
+  .chip {
+    display: inline-block; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 2px 5px; margin: 0 3px 3px 0; white-space: nowrap;
   }
-  td.num, th.num { text-align: right; padding-right: 0; }
-  td.wrap { white-space: normal; min-width: 12rem; }
-  tr.keep td { background: var(--tint); }
-  tr.keep td:first-child { box-shadow: inset 3px 0 0 var(--green); padding-left: 9px; }
-  .green { color: var(--green); }
-  .off { color: var(--grey7); }
-  .mark {
-    font-family: var(--sans); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--green); border: 1px solid var(--green); padding: 1px 5px; white-space: nowrap;
+  .chip.pl { background: var(--yellow); }
+  .chip.pr { background: var(--pink); }
+  .chip .dt { opacity: .55; margin-left: 4px; }
+  .rostr .ag { font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .rostr .agt { font-size: 9.5px; color: var(--muted); margin-top: 2px; }
+  .dash { color: var(--grey4); }
+  .screen-foot {
+    display: flex; flex-wrap: wrap; gap: 4px 20px; padding: 8px 12px;
+    border-top: 1px solid var(--grey1); font-size: 10px; color: var(--muted);
   }
-  .tally {
-    display: flex; flex-wrap: wrap; gap: 6px 22px; padding: 10px 12px;
-    border-top: 1px solid var(--grey1); font-family: var(--sans); font-size: 12px;
-    letter-spacing: var(--tracking); color: var(--muted);
+  .screen-foot b { font-weight: 400; color: var(--green); }
+
+  /* shows screen */
+  .tabs { display: flex; gap: 22px; padding: 10px 12px 0; }
+  .tabs button {
+    border: 0 !important; background: none !important; padding: 0 0 7px !important;
+    font-size: 10.5px !important; letter-spacing: 0.1em; color: var(--muted) !important;
+    border-bottom: 2px solid transparent !important;
   }
-  .tally b { font-weight: 500; color: var(--green); }
-  .outlist { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; font-size: 14px; }
-  .outlist li { padding-left: 14px; position: relative; }
-  .outlist li::before { content: "\2014"; position: absolute; left: 0; color: var(--green); }
+  .tabs button[aria-pressed="true"] { color: var(--ink) !important; border-bottom-color: var(--ink) !important; }
+  .cities { display: flex; flex-wrap: wrap; gap: 18px; padding: 14px 12px 0; align-items: baseline; }
+  .cities button {
+    border: 0 !important; background: none !important; padding: 0 0 4px !important;
+    font-family: var(--serif) !important; font-size: 19px !important; text-transform: none !important;
+    letter-spacing: -0.01em; border-bottom: 1px solid transparent !important;
+  }
+  .cities button[aria-pressed="true"] { color: var(--ink) !important; border-bottom-color: var(--ink) !important; }
+  .cities button .n { font-size: 9px; }
+  .viewline {
+    font-family: var(--serif); font-style: italic; font-size: 30px; color: var(--green);
+    letter-spacing: -0.02em; padding: 10px 12px 12px; margin: 0;
+  }
+  .daygroup {
+    padding: 14px 12px 4px; font-family: var(--serif); font-size: 15px;
+    display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+  }
+  .daygroup span { font-family: var(--sans); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .sh-date { font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+  .sh-act { font-size: 12.5px; }
+  .acts { font-size: 11px; color: var(--grey7); }
+  .venue { color: var(--green) !important; font-size: 11.5px; }
+  .nosup {
+    font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--green); background: var(--tint); border: 1px solid var(--green);
+    padding: 1px 5px; white-space: nowrap;
+  }
+  tr.open td { background: #f7fbf8; }
 
   footer { padding-block: 28px 56px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--grey1); margin-top: 8px; }
-  footer p { margin: 0 0 6px; max-width: 76ch; }
+  footer p { margin: 0 0 6px; max-width: 78ch; }
   footer a { color: var(--ink); }
-  footer a:hover { color: var(--green); }
 
   @media (max-width: 860px) {
     .hero { grid-template-columns: 1fr; align-items: start; padding-block: 32px 24px; }
@@ -176,12 +191,13 @@
 
   <header class="hero">
     <div>
-      <p>Five agents I built and run for music work. They read what a person would read, write what
+      <p>Five tools I built and run for music work. They read what a person would read, write what
         they find into a sheet or a page, and <em>do the boring part</em> on a schedule.</p>
     </div>
     <div class="right">
       <nav class="toplinks">
         <a href="https://ilovemyphone30000.github.io/instinct/">A&amp;R Instinct &#8599;</a>
+        <a href="https://ilovemyphone30000.github.io/nyc-shows/">Shows &#8599;</a>
         <a href="https://ilovemyphone30000.github.io/labelmap/">Label map &#8599;</a>
         <a href="https://github.com/ilovemyphone30000/tools">Source &#8599;</a>
       </nav>
@@ -194,36 +210,46 @@
   <!-- 1 -->
   <section class="tool">
     <div class="tool-head">
-      <h2>A&amp;R Superplaylist</h2>
-      <span class="meta">Daily &middot; 45 playlists in, 1 out</span>
+      <h2>A&amp;R Instinct</h2>
+      <span class="meta">Daily &middot; Aggregate A&amp;R tool</span>
     </div>
-    <p class="one">Keeps a song if two or more of my lists added it that week, the artist is under 100k
-      monthly listeners, and nobody found it before. Then it pulls the artist's agent and tracks the
-      numbers week over week.</p>
+    <p class="one">An aggregate A&amp;R tool. It surfaces artists early and keeps the case for each one
+      in a single row: where the listener and follower curves are going, who has written about them,
+      who represents them, and what they sit on.
+      <a href="https://ilovemyphone30000.github.io/instinct/">Open the live site &#8599;</a></p>
 
     <div class="stats">
       <div class="stat"><b>22</b><span>median days ahead of Spotify's Fresh Finds</span></div>
       <div class="stat"><b>33%</b><span>of early finds later made Fresh Finds (15 of 46)</span></div>
-      <div class="stat"><b>45&rarr;1</b><span>32 curator and 13 editorial playlists, one playlist out</span></div>
+      <div class="stat"><b>945</b><span>artists tracked and kept current</span></div>
     </div>
-    <p class="one" style="margin-top:18px">Billboard Style came out of this scan and was
+    <p class="one" style="margin-top:18px">Billboard Style came out of this one and was
       <span class="said">signed by Greg Horbal</span> after.</p>
 
-    <div class="demo" id="ar">
-      <div class="demo-bar">
-        <span class="meta">Real finds &middot; week of Nov 2, 2026</span>
-        <span class="note">Live data from the scan</span>
+    <div class="screen" id="ar">
+      <div class="screen-label">
+        <span class="meta">Real rows from the live site</span>
+        <span class="tiny">Every link goes to the real page</span>
       </div>
-      <div class="controls" id="ar-lists"></div>
+      <div class="bar tight">
+        <span class="brand">A&amp;R INSTINCT</span>
+        <span class="spacer"></span>
+        <span class="tiny">Updated Nov 19</span>
+      </div>
+      <div class="bar" id="ar-filters"></div>
+      <div class="bar tight">
+        <input type="search" id="ar-q" placeholder="Search artist, song, outlet, playlist, agency">
+      </div>
       <div class="scroll">
         <table>
           <thead><tr>
-            <th>Artist</th><th>Song</th><th class="num">Monthly</th><th>On</th><th>Agency</th><th>Agent</th>
+            <th>Artist</th><th>Monthly listeners</th><th>Instagram</th>
+            <th>Press</th><th>Rostr</th><th>Playlists</th>
           </tr></thead>
           <tbody id="ar-body"></tbody>
         </table>
       </div>
-      <div class="tally" id="ar-tally"></div>
+      <div class="screen-foot" id="ar-foot"></div>
     </div>
   </section>
 
@@ -233,9 +259,9 @@
       <h2>Show calendar</h2>
       <span class="meta">Daily &middot; NYC / CHI / LA</span>
     </div>
-    <p class="one">Two weeks of listings and every new announcement, from Oh My Rockness, 19 venue
-      calendars and the Ticketmaster Discovery API. A headliner with nothing underneath is an open
-      support slot, so those get marked.</p>
+    <p class="one">Every show in three cities for the next month, and separately every show announced
+      since the last check. A headliner with nothing underneath is an open support slot, so those are
+      marked. <a href="https://ilovemyphone30000.github.io/nyc-shows/">Open the live site &#8599;</a></p>
 
     <div class="stats">
       <div class="stat"><b>1,283</b><span>shows in the next two weeks</span></div>
@@ -243,21 +269,21 @@
       <div class="stat"><b>5,228</b><span>announcements logged since September</span></div>
     </div>
 
-    <div class="demo" id="sh">
-      <div class="demo-bar">
-        <span class="meta">Real listings &middot; week of Nov 16, 2026</span>
-        <span class="note">Client rows withheld</span>
+    <div class="screen" id="sh">
+      <div class="screen-label">
+        <span class="meta">Real listings from the live site</span>
+        <span class="tiny">Client rows withheld</span>
       </div>
-      <div class="controls" id="sh-filters"></div>
-      <div class="scroll">
-        <table>
-          <thead><tr>
-            <th>Date</th><th>City</th><th>Headliner</th><th>Venue</th><th>Support</th>
-          </tr></thead>
-          <tbody id="sh-body"></tbody>
-        </table>
+      <div class="tabs" id="sh-tabs"></div>
+      <div class="cities" id="sh-cities"></div>
+      <p class="viewline" id="sh-view"></p>
+      <p class="tiny" id="sh-note" style="padding:0 12px 10px;margin:-6px 0 0;text-transform:none;letter-spacing:0;font-size:10.5px;max-width:70ch"></p>
+      <div class="bar tight">
+        <button id="sh-nosup" class="ghost" type="button" aria-pressed="false">No support only</button>
+        <input type="search" id="sh-q" placeholder="Search artist or venue">
       </div>
-      <div class="tally" id="sh-tally"></div>
+      <div id="sh-list"></div>
+      <div class="screen-foot" id="sh-foot"></div>
     </div>
   </section>
 
@@ -277,55 +303,19 @@
       <div class="stat"><b>250&rarr;2,700</b><span>first room to target room</span></div>
     </div>
 
-    <div class="demo" id="it">
-      <div class="demo-bar">
+    <div class="screen" id="it">
+      <div class="screen-label">
         <span class="meta">New tour plan &middot; intake form</span>
-        <span class="note">Illustrative</span>
+        <span class="tiny">Illustrative</span>
       </div>
-      <div class="controls">
-        <div class="field half">
-          <label for="it-artist">Artist</label>
-          <input id="it-artist" type="text" value="Dillom" maxlength="40">
-        </div>
-        <div class="field">
-          <label for="it-cap">Starting capacity</label>
-          <input id="it-cap" type="text" value="250" maxlength="6">
-        </div>
-        <div class="field half">
-          <label for="it-target">Target venue</label>
-          <input id="it-target" type="text" value="Brooklyn Paramount (2,700)" maxlength="40">
-        </div>
-        <div class="field half">
-          <label for="it-window">Planning window</label>
-          <input id="it-window" type="text" value="Jan 2027 to Jan 2030" maxlength="40">
-        </div>
-        <div class="field half">
-          <label for="it-fest">Festival targets</label>
-          <input id="it-fest" type="text" value="Lollapalooza, ACL" maxlength="40">
-        </div>
-        <div class="field grow">
-          <label for="it-rules">Constraints</label>
-          <input id="it-rules" type="text" value="17 locked dates, Thu to Sat preferred, no Mondays" maxlength="80">
-        </div>
-        <button class="go" id="it-go" type="button">Build itinerary</button>
-      </div>
-      <div class="pad">
-        <ul class="outlist">
-          <li>Venues picked from similar artists' past tours</li>
-          <li>Writing, recording and press weeks built in</li>
-          <li>Rule breaks flagged</li>
-          <li>Exports to a live Google Sheet</li>
-        </ul>
-      </div>
-      <div class="scroll" style="border-top:1px solid var(--grey1)">
+      <div class="bar" id="it-form"></div>
+      <div class="scroll">
         <table>
-          <thead><tr>
-            <th>Leg</th><th>When</th><th>Markets</th><th>Room</th><th class="num">Cap</th>
-          </tr></thead>
+          <thead><tr><th>Leg</th><th>When</th><th>Markets</th><th>Room</th><th>Cap</th></tr></thead>
           <tbody id="it-body"></tbody>
         </table>
       </div>
-      <div class="tally" id="it-tally"></div>
+      <div class="screen-foot" id="it-foot"></div>
     </div>
   </section>
 
@@ -339,24 +329,21 @@
       adds SeatGeek, and colors the rows where getting in costs less than face value. It reads prices
       only: it never signs in, holds or buys.</p>
 
-    <div class="demo" id="rs">
-      <div class="demo-bar">
+    <div class="screen" id="rs">
+      <div class="screen-label">
         <span class="meta">The flag test</span>
-        <span class="note">Example prices</span>
+        <span class="tiny">Example prices</span>
       </div>
-      <div class="controls">
+      <div class="bar tight">
         <button id="rs-fees" type="button" aria-pressed="false">Add fees (+18%)</button>
       </div>
       <div class="scroll">
         <table>
-          <thead><tr>
-            <th>Show</th><th class="num">Standard</th><th class="num">Official resale</th>
-            <th class="num">SeatGeek</th><th class="num">Cheapest</th>
-          </tr></thead>
+          <thead><tr><th>Show</th><th>Standard</th><th>Official resale</th><th>SeatGeek</th><th>Cheapest</th></tr></thead>
           <tbody id="rs-body"></tbody>
         </table>
       </div>
-      <div class="tally" id="rs-tally"></div>
+      <div class="screen-foot" id="rs-foot"></div>
     </div>
   </section>
 
@@ -368,221 +355,304 @@
     </div>
     <p class="one">Who owns whom across the majors, on one page, with the logos inlined so it works
       offline. The PDF poster is generated by parsing the HTML, so the two can't drift.
-      <a href="https://ilovemyphone30000.github.io/labelmap/" style="color:var(--green)">Open it &#8599;</a></p>
+      <a href="https://ilovemyphone30000.github.io/labelmap/">Open it &#8599;</a></p>
   </section>
 
   <footer>
-    <p>Numbers from my own run records as of November 2026. A&amp;R rows are real finds from the week of
-      November 2; listings are real shows from the week of November 16, with client rows left out.
-      Resale prices are examples.</p>
+    <p>Rows shown here are real and come from the live tools, as of November 2026. Client rows are left
+      out of the listings. Resale prices are examples.</p>
     <p>The A&amp;R and show pages are password-protected.
       Source: <a href="https://github.com/ilovemyphone30000/tools">github.com/ilovemyphone30000/tools</a></p>
   </footer>
 </div>
 
 <script>
+var AR = [{"a": "Armlock","song": "Lifer","u": "https://open.spotify.com/track/6pKOiHEMUgqNKl4qqspjJF","l": 36144,"ls": [40535,38138,33482,36144,43084],"ig": 9505,"igu": "https://www.instagram.com/armlock444/","igs": [9549,9461,9503,9505,9549,9738],"pr": [{"t": "Stereogum","u": "https://stereogum.com/2517170/armlock-announce-new-album-amazing-hear-lifer/music","d": "2026-11-10"},{"t": "The Line of Best Fit","u": "https://www.thelineofbestfit.com/news/australian-emo-indie-duo-armlock-detail-new-album-amazing","d": "2026-11-10"}],"pl": [{"t": "All New Indie","u": "https://open.spotify.com/playlist/37i9dQZF1DXdbXrPNafg9d"},{"t": "#NowWatching","u": "https://open.spotify.com/playlist/0EVzFau2kULH9e5dwK2OSI"},{"t": "new music discovery","u": "https://open.spotify.com/playlist/5359l8Co8qztllR0Mxk4Zv"}],"ag": "Primary Talent","agt": "Matt Pickering-Copley","lb": "Run For Cover Records","lbk": "I","rn": null,"date": "2026-11-16"},{"a": "Zsela","song": "Real Romantic","u": "https://open.spotify.com/track/1AGPMjKvvfkCl7Ins9088G","l": 25662,"ls": [18835,19604,19760,25662,29289],"ig": 61000,"igu": "https://www.instagram.com/zsela_/","igs": [61000,61000,61000,61000,61000,61000],"pr": [{"t": "Stereogum","u": "https://stereogum.com/2517932/zsela-announces-new-album-the-party-hear-real-romantic/music","d": "2026-11-13"}],"pl": [{"t": "All New Indie","u": "https://open.spotify.com/playlist/37i9dQZF1DXdbXrPNafg9d"},{"t": "#NowWatching","u": "https://open.spotify.com/playlist/0EVzFau2kULH9e5dwK2OSI"},{"t": "Compact Cassette","u": "https://open.spotify.com/playlist/6c6Ra1iI1JjhADV2gnT7p6"}],"ag": "ROAM","agt": "Josh Ledger","lb": "Mexican Summer","lbk": "I","rn": null,"date": "2026-11-16"},{"a": "Knifeplay","song": "Toil (Reprise)","u": "https://open.spotify.com/track/7DVgAClud6TSY6Yl2bZSjY","l": 67276,"ls": [77515,77218,73506,67276,67567],"ig": 13000,"igu": "https://www.instagram.com/knifeplay_music/","igs": [13000,13000,13000,13000,13000,13000],"pr": [{"t": "Stereogum","u": "https://stereogum.com/2517097/knifeplay-toil-reprise/music","d": "2026-11-09"},{"t": "Our Culture Mag","u": "https://ourculturemag.com/knifeplay-release-new-song-toil-reprise/","d": "2026-11-09"}],"pl": [{"t": "All New Indie","u": "https://open.spotify.com/playlist/37i9dQZF1DXdbXrPNafg9d"},{"t": "Fresh Finds Rock","u": "https://open.spotify.com/playlist/37i9dQZF1DX78toxP7mOaJ"}],"ag": "Ground Control Touring","agt": "Andrew Stocker","lb": "Topshelf Records / Born Losers Records","lbk": "I","rn": null,"date": "2026-11-16"},{"a": "Wyatt","song": "Hole In My Heart","u": "https://open.spotify.com/track/2bHjNfdVnjQVlL6Utnz2z8","l": 15569,"ls": [9758,10431,13901,15569,15569],"ig": 5871,"igu": "https://www.instagram.com/wyatt__band/","igs": [5812,4892,5159,5159,5812,5871,5871],"pr": [{"t": "Clash","u": "https://www.clashmusic.com/?p=465923","d": "2026-11-17"}],"pl": [{"t": "The So Young List","u": "https://open.spotify.com/playlist/2821abPmuo1yNb0By2hRE8"},{"t": "Fresh Finds UK & IE","u": "https://open.spotify.com/playlist/37i9dQZF1DX7AqyNZFu97s"}],"ag": null,"agt": null,"lb": "Sadboy Records","lbk": "I","rn": null,"date": "2026-11-18"},{"a": "Sex Week","song": "Ears as an Organ of Touch","u": "https://open.spotify.com/track/7sRuWHzuVQYy8HYuGWJU3F","l": 46465,"ls": [61297,53065,44878,46465,50996],"ig": 7952,"igu": "https://www.instagram.com/sexweeek/","igs": [8098,7873,7952,7952,8098,8147],"pr": [],"pl": [{"t": "The So Young List","u": "https://open.spotify.com/playlist/2821abPmuo1yNb0By2hRE8"},{"t": "All New Indie","u": "https://open.spotify.com/playlist/37i9dQZF1DXdbXrPNafg9d"},{"t": "#NowWatching","u": "https://open.spotify.com/playlist/0EVzFau2kULH9e5dwK2OSI"}],"ag": "Ground Control Touring","agt": "Andrew Ellis","lb": "Grand Jury Music","lbk": "I","rn": null,"date": "2026-11-16"},{"a": "Esme Emerson","song": "Baby, Goodbye","u": "https://open.spotify.com/track/6aHG847VruRlxaMThrEqMi","l": 53887,"ls": [43915,43915,42841,42239,42351,42488,53887,63845],"ig": 23000,"igu": "https://www.instagram.com/esmeemersonband/","igs": [22000,22000,23000,23000,23000,23000,23000,23000],"pr": [],"pl": [{"t": "#NowWatching","u": "https://open.spotify.com/playlist/0EVzFau2kULH9e5dwK2OSI"},{"t": "NME's New Bangers","u": "https://open.spotify.com/playlist/0xXZWtbJsvFn2AnJUI0Y0z"}],"ag": "CAA","agt": "Nikos Kazoleas","lb": "Communion Records","lbk": "I","rn": null,"date": "2026-11-16"},{"a": "Black Belt Eagle Scout","song": "Fantasy","u": "https://open.spotify.com/track/4c8XvOCEfmjUXPrVcNvWHP","l": 27759,"ls": [27759,32315],"ig": 30000,"igu": "https://www.instagram.com/blackbelteaglescout/","igs": [30000,30000],"pr": [{"t": "Stereogum","u": "https://stereogum.com/2517083/black-belt-eagle-scout-fantasy/music","d": "2026-11-09"},{"t": "Our Culture","u": "https://ourculturemag.com/black-belt-eagle-scout-returns-with-new-song-fantasy/","d": "2026-11-09"}],"pl": [{"t": "GRRRL Music: New Music Friday","u": "https://open.spotify.com/playlist/08sWbwaA7wRu8oZNBHEpir"},{"t": "New This Week (KEXP)","u": "https://open.spotify.com/playlist/60VayqPuLXaftoj2Wrqpti"},{"t": "Compact Cassette","u": "https://open.spotify.com/playlist/6c6Ra1iI1JjhADV2gnT7p6"}],"ag": null,"agt": null,"lb": null,"lbk": null,"rn": null,"date": "2026-11-16"},{"a": "Brimheim","song": "Somebody Else","u": "https://open.spotify.com/track/42TZ8v1FCmjONt811taDFA","l": 26885,"ls": [26885,31611],"ig": 8986,"igu": "https://www.instagram.com/brimheim/","igs": [8986,9001],"pr": [{"t": "The Line of Best Fit","u": "https://www.thelineofbestfit.com/news/danish-artist-brimheim-announces-third-album-fables","d": "2026-11-11"}],"pl": [{"t": "new music discovery","u": "https://open.spotify.com/playlist/5359l8Co8qztllR0Mxk4Zv"},{"t": "New This Week (KEXP)","u": "https://open.spotify.com/playlist/60VayqPuLXaftoj2Wrqpti"},{"t": "Compact Cassette","u": "https://open.spotify.com/playlist/6c6Ra1iI1JjhADV2gnT7p6"}],"ag": null,"agt": null,"lb": null,"lbk": null,"rn": null,"date": "2026-11-16"},{"a": "Palehound","song": "Natural Disasters","u": "https://open.spotify.com/track/0w2oeFlzYXNDlcHwxGT8iH","l": 87400,"ls": [87400,92588],"ig": 26000,"igu": "https://www.instagram.com/palehound/","igs": [26000,26000],"pr": [{"t": "Stereogum","u": "https://stereogum.com/2517136/palehound-announces-new-album-you-sing-like-youre-joking-hear-natural-disasters/music","d": "2026-11-10"},{"t": "Clash","u": "https://www.clashmusic.com/?p=465526","d": "2026-11-11"}],"pl": [{"t": "Creme de la CREEM: New Music Friday","u": "https://open.spotify.com/playlist/1UnK4XFAiPQQ4fhcut52CE"},{"t": "New This Week (KEXP)","u": "https://open.spotify.com/playlist/60VayqPuLXaftoj2Wrqpti"},{"t": "Compact Cassette","u": "https://open.spotify.com/playlist/6c6Ra1iI1JjhADV2gnT7p6"}],"ag": null,"agt": null,"lb": null,"lbk": null,"rn": null,"date": "2026-11-16"},{"a": "FEET","song": "Slowly","u": "https://open.spotify.com/track/1W9kOHPy2gwKfVUTjlDmK7","l": 31728,"ls": [31728,34058],"ig": 23000,"igu": "https://www.instagram.com/feetband/","igs": [23000,23000],"pr": [{"t": "Stereogum","u": "https://stereogum.com/2517245/feet-announce-album-gung-ho-hear-slowly/music","d": "2026-11-10"},{"t": "The Line of Best Fit","u": "https://www.thelineofbestfit.com/news/feet-announce-third-album-gung-ho","d": "2026-11-10"}],"pl": [{"t": "NME's New Bangers","u": "https://open.spotify.com/playlist/0xXZWtbJsvFn2AnJUI0Y0z"},{"t": "Counter Culture","u": "https://open.spotify.com/playlist/7zNMKf2Q4MG0l8dyJ7i8l0"}],"ag": null,"agt": null,"lb": null,"lbk": null,"rn": null,"date": "2026-11-16"},{"a": "Mouth Culture","song": "Fool","u": "https://open.spotify.com/track/43QcY6QM8NxPERJA1uzaKk","l": 50050,"ls": [50050,50050],"ig": 19000,"igu": "https://www.instagram.com/mouthculture/","igs": [19000,19000],"pr": [{"t": "DOD Magazine","u": "https://www.dodmagazine.es/mouth-culture-nuevo-disco-the-wire/","d": "2026-11-11"}],"pl": [{"t": "Fresh Finds Rock","u": "https://open.spotify.com/playlist/37i9dQZF1DX78toxP7mOaJ"},{"t": "Fresh Finds","u": "https://open.spotify.com/playlist/37i9dQZF1DWWjGdmeTyeJ6"},{"t": "NME's New Bangers","u": "https://open.spotify.com/playlist/0xXZWtbJsvFn2AnJUI0Y0z"}],"ag": null,"agt": null,"lb": null,"lbk": null,"rn": null,"date": "2026-11-18"},{"a": "aLex vs aLex","song": "bark bark bark","u": "https://open.spotify.com/track/6Ik4yw27YQfVhhTt1tOtmV","l": 79173,"ls": [76004,76004,71673,65238,79173,93290],"ig": 12000,"igu": "https://www.instagram.com/sofiainsua/","igs": [12000,12000,12000,12000,12000,12000],"pr": [],"pl": [{"t": "All New Indie","u": "https://open.spotify.com/playlist/37i9dQZF1DXdbXrPNafg9d"},{"t": "Lorem","u": "https://open.spotify.com/playlist/37i9dQZF1DXdwmD5Q7Gxah"},{"t": "Compact Cassette","u": "https://open.spotify.com/playlist/6c6Ra1iI1JjhADV2gnT7p6"}],"ag": null,"agt": null,"lb": "Self-released","lbk": "S","rn": null,"date": "2026-11-16"}];
+var UP = [{"c": "New York", "d": "2026-11-16", "t": "18:00", "h": "HOHYUN", "sup": ["Sarah Kang"], "v": "Mercury Lounge", "u": "https://www.ticketmaster.com/hohyun-new-york-new-york-11-16-2026/event/0000650EE06F4152", "age": null}, {"c": "New York", "d": "2026-11-16", "t": "18:00", "h": "The Spill Canvas", "sup": ["Emo Orchestra", "Greywind"], "v": "The Brooklyn Monarch", "u": "https://kydlabs.com/e/EVcac31f42-a069-4440-ba20-e2d98bccc3a1", "age": "16+"}, {"c": "New York", "d": "2026-11-16", "t": "18:30", "h": "Qendressa", "sup": [], "v": "Baby's All Right", "u": "https://dice.fm/event/mxn58r-qendressa-16th-nov-babys-all-right-new-york-tickets", "age": "18+"}, {"c": "New York", "d": "2026-11-16", "t": "19:00", "h": "Stella Lefty", "sup": ["Grace Enger"], "v": "Bowery Ballroom", "u": "https://www.ticketmaster.com/stella-lefty-new-york-new-york-11-16-2026/event/000064AECC0B67EF", "age": "16+"}, {"c": "New York", "d": "2026-11-16", "t": "19:00", "h": "Angine de Poitrine", "sup": ["zouz"], "v": "Brooklyn Steel", "u": "https://www.axs.com/events/1448766/angine-de-poitrine-tickets", "age": "16+"}, {"c": "New York", "d": "2026-11-16", "t": "19:00", "h": "sahn", "sup": ["Lana Lou"], "v": "Elsewhere", "u": "https://www.eventbrite.com/e/sahn-tickets-2002953848880", "age": "16+"}, {"c": "Chicago", "d": "2026-11-16", "t": "18:00", "h": "Discontent", "sup": ["Ethic Another Enemy", "Viscera Crown", "Suffering"], "v": "Cobra Lounge", "u": "https://dice.fm/event/53kpbk-discontent-ethic-another-enemy-viscera-crown-suffering-absent-soul-kartika-55-16th-nov-cobra-lounge-chicago-tickets", "age": null}, {"c": "Chicago", "d": "2026-11-16", "t": "19:00", "h": "Sap", "sup": ["Sludge Mother", "Awannabe"], "v": "Beat Kitchen", "u": "https://wl.seetickets.us/event/saps-erasure-tour/702943", "age": null}, {"c": "Chicago", "d": "2026-11-16", "t": "19:00", "h": "Gene", "sup": ["Weston Loney"], "v": "Bottom Lounge", "u": "https://www.ticketweb.com/event/gene-bottom-lounge-tickets/14901513", "age": null}, {"c": "Chicago", "d": "2026-11-16", "t": "19:00", "h": "Lighthearted", "sup": ["Kate Stephenson", "Growing Boys"], "v": "Schubas", "u": "https://lh-st.com/shows/11-16-2026-lighthearted-kate-stephenson/", "age": null}, {"c": "Chicago", "d": "2026-11-16", "t": "19:00", "h": "Hank Garrett", "sup": [], "v": "Subterranean", "u": "https://wl.seetickets.us/event/hank-garrett/708108", "age": null}, {"c": "Chicago", "d": "2026-11-16", "t": "19:30", "h": "Laura Anglade", "sup": [], "v": "SPACE", "u": "https://www.ticketweb.com/event/laura-anglade-space-tickets/14290524", "age": null}, {"c": "Los Angeles", "d": "2026-11-16", "t": "18:00", "h": "John Mulaney", "sup": ["Sam and the Pinknotes"], "v": "Largo", "u": "https://wl.seetickets.us/event/john-mulaney-with-sam-and-the-pinknotes/710778", "age": "All Ages"}, {"c": "Los Angeles", "d": "2026-11-16", "t": "19:00", "h": "Dress Kit", "sup": ["Alex Carr"], "v": "Oblivion", "u": "https://dice.fm/event/mxw8rk-dress-kit-alex-carr-dj-evil-dj-16th-nov-oblivion-los-angeles-tickets", "age": "All Ages"}, {"c": "Los Angeles", "d": "2026-11-16", "t": "19:00", "h": "Josh Homme", "sup": ["The Kills", "St. Vincent", "Beck"], "v": "The Wiltern", "u": "https://www.ticketmaster.com/event/09006545F671117F", "age": "All Ages"}, {"c": "Los Angeles", "d": "2026-11-16", "t": "19:00", "h": "CHVRCHES", "sup": [], "v": "Troubadour", "u": "https://www.axs.com/events/1644956/chvrches-tickets", "age": "All Ages"}, {"c": "Los Angeles", "d": "2026-11-16", "t": "19:30", "h": "Colin Meloy (of The Decemberists)", "sup": [], "v": "The Grammy Museum", "u": "https://grammymuseum.org/event/celebrating-the-music-of-wildwood-with-the-decemberists-colin-meloy/", "age": "All Ages"}, {"c": "Los Angeles", "d": "2026-11-16", "t": "20:00", "h": "Gary Numan", "sup": ["Tremours"], "v": "Fonda Theatre", "u": "https://www.axs.com/events/1423297/gary-numan-tickets", "age": "All Ages"}];
+var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street", "sup": [], "v": "Racket", "u": "https://www.axs.com/events/1700559/76th-street-tickets", "age": "16+"}, {"c": "New York", "d": "2027-03-05", "t": "18:00", "h": "Johnnie Guilbert", "sup": [], "v": "Racket", "u": "https://www.axs.com/events/1704372/johnnie-guilbert-tickets", "age": "16+"}, {"c": "New York", "d": "2027-06-01", "t": "19:00", "h": "Xana", "sup": [], "v": "Gramercy Theatre", "u": "https://www.ticketmaster.com/xana-where-else-would-i-go-new-york-new-york-06-01-2027/event/0000656DC6F41271", "age": "16+"}, {"c": "New York", "d": "2026-12-30", "t": "22:30", "h": "Dylan Brady", "sup": [], "v": "Elsewhere", "u": "https://www.eventbrite.com/e/dylan-brady-nick-leon-tickets-2004655022135", "age": "21+"}, {"c": "New York", "d": "2026-12-12", "t": "19:00", "h": "Carter Vail", "sup": [], "v": "Night Club 101", "u": "https://www.ticketweb.com/event/carter-vails-secret-show-night-club-101-tickets/14412484", "age": "21+"}, {"c": "New York", "d": "2026-12-10", "t": "22:00", "h": "Chloe Scarlett", "sup": [], "v": "Night Club 101", "u": "https://www.ticketweb.com/event/chloe-scarlett-quib-grey-li-night-club-101-tickets/14416634", "age": "21+"}, {"c": "Chicago", "d": "2027-04-30", "t": "19:00", "h": "Tori Kelly", "sup": [], "v": "House of Blues Chicago", "u": "https://www.ticketmaster.com/tori-kelly-god-must-really-love-chicago-illinois-04-30-2027/event/0400656BD83EDCE9", "age": null}, {"c": "Chicago", "d": "2027-02-17", "t": "19:00", "h": "Adult DVD", "sup": [], "v": "Beat Kitchen", "u": "https://www.eventim.us/event/adult-dvd/710863", "age": null}, {"c": "Chicago", "d": "2027-05-28", "t": "19:00", "h": "Megadeth", "sup": [], "v": "Credit Union 1 Amphitheatre", "u": "https://www.ticketmaster.com/megadeth-vaccination-of-the-nations-tour-tinley-park-illinois-05-28-2027/event/04006569E91D8A6B", "age": null}, {"c": "Chicago", "d": "2026-12-02", "t": "20:00", "h": "Ryan Schreiber", "sup": [], "v": "Three Top Lounge", "u": "https://www.ticketweb.com/event/weird-era-how-pitchfork-changed-three-top-lounge-tickets/14445374", "age": "21+"}, {"c": "Chicago", "d": "2027-03-28", "t": "20:00", "h": "Noga Erez", "sup": [], "v": "The Salt Shed", "u": "https://www.ticketmaster.com/noga-erez-duck-season-tour-2027-chicago-illinois-03-28-2027/event/0400656AF2BBD903", "age": null}, {"c": "Chicago", "d": "2027-02-17", "t": "21:00", "h": "Bonny Doon", "sup": [], "v": "Empty Bottle", "u": "https://www.ticketweb.com/event/bonny-doon-empty-bottle-tickets/14438194", "age": null}, {"c": "Los Angeles", "d": "2027-01-09", "t": "20:00", "h": "Herman Dune", "sup": [], "v": "Gold-Diggers", "u": "https://gold-diggers.com/", "age": "21+"}, {"c": "Los Angeles", "d": "2026-12-13", "t": "17:00", "h": "Crush 40", "sup": [], "v": "The Regent Theater", "u": "https://www.eventticketscenter.com/crush-40-los-angeles-12-13-2026/8253999/t", "age": null}, {"c": "Los Angeles", "d": "2026-11-28", "t": "19:00", "h": "Moon Darling", "sup": [], "v": "Gold-Diggers", "u": "https://dice.fm/event/qnxylp-moon-darling-28th-nov-gold-diggers-los-angeles-tickets", "age": "21+"}, {"c": "Los Angeles", "d": "2027-01-02", "t": "19:00", "h": "Netherfriends", "sup": [], "v": "The Mint", "u": "https://dice.fm/event/bvl5gm-netherfriends-2nd-jan-the-mint-los-angeles-tickets", "age": "21+"}, {"c": "Los Angeles", "d": "2026-12-28", "t": "20:00", "h": "The Heaven", "sup": [], "v": "Zebulon", "u": "https://dice.fm/event/pgo2rk-the-heaven-decay-little-truck-28th-dec-zebulon-los-angeles-tickets", "age": "21+"}, {"c": "Los Angeles", "d": "2026-11-30", "t": "19:00", "h": "Frolicking", "sup": [], "v": "Oblivion", "u": "https://dice.fm/event/8v3nwv-frolicking-total-drag-drift-supergloom-30th-nov-oblivion-los-angeles-tickets", "age": "All Ages"}];
 (function () {
   "use strict";
-  var LISTS = ["Compact Cassette", "#NowWatching", "new music discovery", "NME's New Bangers"];
-  var FOUND = [
-    {a:"Clara Kimera, heartcoregirl", s:"clay", l:59248, p:["#NowWatching","Compact Cassette"], ag:"Primary Talent", agt:"Laetitia Descouens"},
-    {a:"pen pin", s:"Vampire", l:1218, p:["#NowWatching","Compact Cassette"], ag:null, agt:null},
-    {a:"Or Best Offer", s:"Fast Strong Horse", l:521, p:["new music discovery","Compact Cassette"], ag:null, agt:null},
-    {a:"BÆNCH", s:"Teeth", l:11038, p:["new music discovery","NME's New Bangers"], ag:"X-ray Touring", agt:null},
-    {a:"Isabelle Mettle", s:"STAINED GLASS", l:7263, p:["#NowWatching"], ag:null, agt:null},
-    {a:"favourite daughter", s:"sick joke", l:18227, p:["#NowWatching"], ag:"One Fiinix Live", agt:"Rob McGee"},
-    {a:"Maya J'an", s:"Put It In A Song", l:55936, p:["NME's New Bangers"], ag:null, agt:null},
-    {a:"Body Horror", s:"At The Nepo . . .", l:2111, p:["#NowWatching"], ag:null, agt:null},
-    {a:"100%WET", s:"Indigo", l:4113, p:["#NowWatching"], ag:"Luger", agt:"Sarah Sølvsteen"},
-    {a:"Big Red", s:"Man Bites Dog", l:12239, p:["new music discovery"], ag:"ROAM", agt:"Sam Lister"}
+  var esc = function (s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); };
+  var K = function (n) {
+    if (n == null) return null;
+    if (n >= 1000000) return (n / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+    if (n >= 10000) return Math.round(n / 1000) + "K";
+    if (n >= 1000) return (n / 1000).toFixed(1) + "K";
+    return String(n);
+  };
+  function spark(series) {
+    if (!series || series.length < 2) return "";
+    var w = 42, h = 13, lo = Math.min.apply(null, series), hi = Math.max.apply(null, series);
+    var rng = (hi - lo) || 1;
+    var pts = series.map(function (v, i) {
+      return (i / (series.length - 1) * w).toFixed(1) + "," + (h - (v - lo) / rng * (h - 3) - 1.5).toFixed(1);
+    }).join(" ");
+    var last = pts.split(" ").pop().split(",");
+    return "<svg class='spark' width='" + w + "' height='" + h + "' viewBox='0 0 " + w + " " + h +
+      "' aria-hidden='true'><polyline points='" + pts + "' fill='none' stroke='#100906' stroke-width='1'/>" +
+      "<circle cx='" + last[0] + "' cy='" + last[1] + "' r='1.7' fill='#2e7040'/></svg>";
+  }
+  function growth(series) {
+    if (!series || series.length < 2) return "<span class='flat'>&#9679; 0%</span>";
+    var a = series[0], b = series[series.length - 1];
+    if (!a) return "<span class='flat'>&#9679; 0%</span>";
+    var p = Math.round((b - a) / a * 100);
+    if (p > 0) return "<span class='up'>&#9650;" + p + "%</span>";
+    if (p < 0) return "<span class='down'>&#9660;" + Math.abs(p) + "%</span>";
+    return "<span class='flat'>&#9679; 0%</span>";
+  }
+
+  /* ---------- A&R ---------- */
+  var arFilter = "all", arQ = "", starred = {};
+  var FILTERS = [
+    { k: "all", label: "All", f: function () { return true; } },
+    { k: "press", label: "Has press", f: function (r) { return r.pr && r.pr.length; } },
+    { k: "up", label: "Listeners up", f: function (r) { return r.ls && r.ls.length > 1 && r.ls[r.ls.length - 1] > r.ls[0]; } },
+    { k: "rostr", label: "Has agent", f: function (r) { return !!r.ag; } },
+    { k: "mine", label: "My list", f: function (r) { return !!starred[r.a]; } }
   ];
-  var on = {};
-  LISTS.forEach(function (n) { on[n] = true; });
-
-  var arLists = document.getElementById("ar-lists");
+  var arFilters = document.getElementById("ar-filters");
   var arBody = document.getElementById("ar-body");
-  var arTally = document.getElementById("ar-tally");
+  var arFoot = document.getElementById("ar-foot");
 
-  LISTS.forEach(function (n) {
+  FILTERS.forEach(function (f) {
     var b = document.createElement("button");
-    b.type = "button"; b.textContent = n;
-    b.setAttribute("aria-pressed", "true");
-    b.addEventListener("click", function () {
-      on[n] = !on[n];
-      b.setAttribute("aria-pressed", String(on[n]));
-      drawAR();
-    });
-    arLists.appendChild(b);
+    b.type = "button"; b.dataset.k = f.k;
+    b.innerHTML = esc(f.label) + " <span class='n'></span>";
+    b.setAttribute("aria-pressed", String(f.k === arFilter));
+    b.addEventListener("click", function () { arFilter = f.k; drawAR(); });
+    arFilters.appendChild(b);
   });
+  document.getElementById("ar-q").addEventListener("input", function (e) { arQ = e.target.value.toLowerCase(); drawAR(); });
 
-  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+  function arMatch(r) {
+    if (!arQ) return true;
+    var hay = [r.a, r.song, r.ag, r.agt, r.lb].concat(
+      (r.pr || []).map(function (p) { return p.t; }),
+      (r.pl || []).map(function (p) { return p.t; })).join(" ").toLowerCase();
+    return hay.indexOf(arQ) > -1;
+  }
 
   function drawAR() {
+    Array.prototype.forEach.call(arFilters.children, function (b) {
+      var f = FILTERS.filter(function (x) { return x.k === b.dataset.k; })[0];
+      b.setAttribute("aria-pressed", String(b.dataset.k === arFilter));
+      b.querySelector(".n").textContent = AR.filter(f.f).length;
+    });
+    var f = FILTERS.filter(function (x) { return x.k === arFilter; })[0];
+    var rows = AR.filter(f.f).filter(arMatch);
     arBody.innerHTML = "";
-    var kept = 0, shown = 0;
-    FOUND.forEach(function (r) {
-      var hits = r.p.filter(function (n) { return on[n]; });
-      if (!hits.length) return;
-      shown++;
-      var keep = hits.length >= 2;
-      if (keep) kept++;
+    rows.forEach(function (r) {
       var tr = document.createElement("tr");
-      if (keep) tr.className = "keep";
+      var press = (r.pr || []).map(function (p) {
+        return "<a class='chip pr' href='" + esc(p.u) + "' target='_blank' rel='noopener'>" +
+          esc(p.t) + "<span class='dt'>" + esc((p.d || "").slice(5).replace("-", "/")) + "</span></a>";
+      }).join("") || "<span class='dash'>&ndash;</span>";
+      var pls = (r.pl || []).map(function (p) {
+        return "<a class='chip pl' href='" + esc(p.u) + "' target='_blank' rel='noopener'>" + esc(p.t) + "</a>";
+      }).join("") || "<span class='dash'>&ndash;</span>";
+      var rostr = r.ag
+        ? "<div class='ag'>" + esc(r.ag) + "</div>" + (r.agt ? "<div class='agt'>" + esc(r.agt) + "</div>" : "")
+        : "<span class='dash'>&ndash;</span>";
       tr.innerHTML =
-        "<td class='wrap'>" + esc(r.a) + "</td>" +
-        "<td class='wrap'>" + esc(r.s) + "</td>" +
-        "<td class='num'>" + (r.l == null ? "<span class='off'>&mdash;</span>" : r.l.toLocaleString("en-US")) + "</td>" +
-        "<td>" + (keep ? "<span class='mark'>" + hits.length + " lists</span>" : "<span class='off'>1 list</span>") + "</td>" +
-        "<td class='wrap'>" + (r.ag ? esc(r.ag) : "<span class='off'>&mdash;</span>") + "</td>" +
-        "<td class='wrap'>" + (r.agt ? esc(r.agt) : "<span class='off'>&mdash;</span>") + "</td>";
+        "<td class='who'>" +
+          "<button class='star' type='button' aria-pressed='" + (starred[r.a] ? "true" : "false") +
+            "' aria-label='Save " + esc(r.a) + "'>" + (starred[r.a] ? "★" : "☆") + "</button>" +
+          "<a class='nm' href='" + esc(r.u || "#") + "' target='_blank' rel='noopener'>" + esc(r.a) + "</a>" +
+          (r.rn && r.rn > 1 ? "<span class='rn'>&#8635;" + r.rn + "</span>" : "") +
+          (r.lb ? "<div class='lab'><span class='dot " + esc(r.lbk || "") + "'></span>" + esc(r.lb) + "</div>" : "") +
+        "</td>" +
+        "<td class='num'>" + (r.l == null ? "<span class='dash'>&ndash;</span>" :
+          "<span class='v'>" + K(r.l) + "</span>" + spark(r.ls) + growth(r.ls)) + "</td>" +
+        "<td class='num'>" + (r.ig == null ? "<span class='dash'>&ndash;</span>" :
+          "<a href='" + esc(r.igu || "#") + "' target='_blank' rel='noopener'><span class='v'>" + K(r.ig) + "</span></a>" +
+          spark(r.igs) + growth(r.igs)) + "</td>" +
+        "<td>" + press + "</td>" +
+        "<td class='rostr'>" + rostr + "</td>" +
+        "<td>" + pls + "</td>";
+      tr.querySelector(".star").addEventListener("click", function () {
+        starred[r.a] = !starred[r.a]; drawAR();
+      });
       arBody.appendChild(tr);
     });
-    var active = LISTS.filter(function (n) { return on[n]; }).length;
-    arTally.innerHTML = "<span>" + active + " of 4 lists on</span><span>" + shown +
-      " songs seen</span><span><b>" + kept + " kept</b></span>";
+    var mine = Object.keys(starred).filter(function (k) { return starred[k]; }).length;
+    arFoot.innerHTML = "<span>" + rows.length + " of " + AR.length + " shown</span>" +
+      "<span>945 tracked on the live site</span>" +
+      "<span><b>" + mine + " on my list</b></span>";
   }
 
-  /* shows */
-  var SHOWS = [
-    {d:"Nov 16",t:"18:00",c:"NYC",h:"HOHYUN",v:"Mercury Lounge",sup:["Sarah Kang"]},
-    {d:"Nov 16",t:"18:00",c:"NYC",h:"The Spill Canvas",v:"The Brooklyn Monarch",sup:["Emo Orchestra","Greywind"]},
-    {d:"Nov 16",t:"18:00",c:"CHI",h:"Discontent",v:"Cobra Lounge",sup:["Ethic Another Enemy","Viscera Crown"]},
-    {d:"Nov 16",t:"18:30",c:"NYC",h:"Qendressa",v:"Baby's All Right",sup:[]},
-    {d:"Nov 16",t:"19:00",c:"NYC",h:"El Cuarteto de Nos",v:"Warsaw",sup:[]},
-    {d:"Nov 16",t:"19:00",c:"CHI",h:"Hank Garrett",v:"Subterranean",sup:[]},
-    {d:"Nov 16",t:"19:00",c:"CHI",h:"Sap",v:"Beat Kitchen",sup:["Sludge Mother","Awannabe"]},
-    {d:"Nov 16",t:"19:00",c:"LA",h:"CHVRCHES",v:"Troubadour",sup:[]},
-    {d:"Nov 16",t:"19:00",c:"LA",h:"Dress Kit",v:"Oblivion",sup:["Alex Carr"]},
-    {d:"Nov 16",t:"19:30",c:"NYC",h:"John Cameron Mitchell",v:"Beacon Theatre",sup:[]},
-    {d:"Nov 16",t:"19:30",c:"CHI",h:"Laura Anglade",v:"SPACE",sup:[]},
-    {d:"Nov 16",t:"19:30",c:"LA",h:"Colin Meloy (of The Decemberists)",v:"The Grammy Museum",sup:[]},
-    {d:"Nov 16",t:"20:00",c:"NYC",h:"Henry Lau",v:"Terminal 5",sup:[]},
-    {d:"Nov 16",t:"20:00",c:"CHI",h:"Jessie Reyez",v:"Aragon Ballroom",sup:[]},
-    {d:"Nov 16",t:"20:00",c:"LA",h:"Montazona",v:"The Echo",sup:[]},
-    {d:"Nov 16",t:"20:00",c:"LA",h:"Weston Estate",v:"The Roxy",sup:[]},
-    {d:"Nov 17",t:"19:00",c:"CHI",h:"Prateek Kuhad",v:"Park West",sup:[]}
-  ];
-  var city = "ALL", noSupOnly = false;
-  var shFilters = document.getElementById("sh-filters");
-  var shBody = document.getElementById("sh-body");
-  var shTally = document.getElementById("sh-tally");
+  /* ---------- shows ---------- */
+  var shView = "up", shCity = "New York", shNoSup = false, shQ = "";
+  var shTabs = document.getElementById("sh-tabs");
+  var shCities = document.getElementById("sh-cities");
+  var shList = document.getElementById("sh-list");
+  var shFoot = document.getElementById("sh-foot");
+  var CITY_TOTALS = { "New York": 556, "Chicago": 280, "Los Angeles": 480 };
+  var DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  var MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-  ["ALL", "NYC", "CHI", "LA"].forEach(function (c) {
+  [["up", "Upcoming shows"], ["ann", "Just announced"]].forEach(function (t) {
     var b = document.createElement("button");
-    b.type = "button"; b.textContent = c; b.dataset.city = c;
-    b.setAttribute("aria-pressed", String(c === city));
-    b.addEventListener("click", function () {
-      city = c;
-      Array.prototype.forEach.call(shFilters.querySelectorAll("button[data-city]"), function (x) {
-        x.setAttribute("aria-pressed", String(x.dataset.city === city));
-      });
-      drawShows();
-    });
-    shFilters.appendChild(b);
+    b.type = "button"; b.textContent = t[1]; b.dataset.v = t[0];
+    b.setAttribute("aria-pressed", String(t[0] === shView));
+    b.addEventListener("click", function () { shView = t[0]; drawShows(); });
+    shTabs.appendChild(b);
   });
-  var nsBtn = document.createElement("button");
-  nsBtn.type = "button"; nsBtn.textContent = "No support added";
-  nsBtn.setAttribute("aria-pressed", "false");
-  nsBtn.addEventListener("click", function () {
-    noSupOnly = !noSupOnly;
-    nsBtn.setAttribute("aria-pressed", String(noSupOnly));
-    drawShows();
+  Object.keys(CITY_TOTALS).forEach(function (c) {
+    var b = document.createElement("button");
+    b.type = "button"; b.dataset.c = c;
+    b.innerHTML = esc(c) + " <span class='n'>" + CITY_TOTALS[c] + "</span>";
+    b.setAttribute("aria-pressed", String(c === shCity));
+    b.addEventListener("click", function () { shCity = c; drawShows(); });
+    shCities.appendChild(b);
   });
-  shFilters.appendChild(nsBtn);
+  document.getElementById("sh-nosup").addEventListener("click", function () {
+    shNoSup = !shNoSup; this.setAttribute("aria-pressed", String(shNoSup)); drawShows();
+  });
+  document.getElementById("sh-q").addEventListener("input", function (e) { shQ = e.target.value.toLowerCase(); drawShows(); });
+
+  function fmtDay(iso) {
+    var p = iso.split("-"), d = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]));
+    return { lbl: DAYS[d.getUTCDay()] + ", " + MON[d.getUTCMonth()] + " " + d.getUTCDate(),
+             short: DAYS[d.getUTCDay()].slice(0, 3).toUpperCase() + " " + MON[d.getUTCMonth()].toUpperCase() + " " + d.getUTCDate() };
+  }
 
   function drawShows() {
-    var rows = SHOWS.filter(function (s) {
-      return (city === "ALL" || s.c === city) && (!noSupOnly || !s.sup.length);
-    });
-    shBody.innerHTML = "";
+    Array.prototype.forEach.call(shTabs.children, function (b) { b.setAttribute("aria-pressed", String(b.dataset.v === shView)); });
+    Array.prototype.forEach.call(shCities.children, function (b) { b.setAttribute("aria-pressed", String(b.dataset.c === shCity)); });
+    var src = shView === "up" ? UP : ANN;
+    var rows = src.filter(function (s) {
+      if (s.c !== shCity) return false;
+      if (shNoSup && s.sup && s.sup.length) return false;
+      if (shQ && (s.h + " " + s.v).toLowerCase().indexOf(shQ) < 0) return false;
+      return true;
+    }).sort(function (a, b) { return a.d < b.d ? -1 : a.d > b.d ? 1 : (a.t || "").localeCompare(b.t || ""); });
+
+    document.getElementById("sh-view").textContent =
+      shView === "up" ? "Next month" : "Just announced";
+    document.getElementById("sh-note").textContent = shView === "up"
+      ? "Everything on sale in the next month, support included where a bill is set."
+      : "Support is almost never listed the day a show is announced, which is the point: these are the open slots, caught before anyone fills them.";
+
+    shList.innerHTML = "";
+    if (!rows.length) {
+      shList.innerHTML = "<p style='padding:12px;font-size:11px;color:var(--muted)'>Nothing matches that filter.</p>";
+    }
+    var lastDay = null, tbody = null;
     rows.forEach(function (s) {
-      var open = !s.sup.length;
+      if (s.d !== lastDay) {
+        lastDay = s.d;
+        var same = rows.filter(function (x) { return x.d === s.d; }).length;
+        var head = document.createElement("div");
+        head.className = "daygroup";
+        head.innerHTML = "<span style='font-family:var(--serif);font-size:15px'>" + fmtDay(s.d).lbl +
+          "</span><span>" + same + " show" + (same === 1 ? "" : "s") + "</span>";
+        shList.appendChild(head);
+        var tbl = document.createElement("table");
+        tbl.innerHTML = "<tbody></tbody>";
+        var wrapr = document.createElement("div");
+        wrapr.className = "scroll";
+        wrapr.appendChild(tbl);
+        shList.appendChild(wrapr);
+        tbody = tbl.querySelector("tbody");
+      }
+      var open = !s.sup || !s.sup.length;
       var tr = document.createElement("tr");
-      if (open) tr.className = "keep";
+      if (open) tr.className = "open";
       tr.innerHTML =
-        "<td>" + s.d + " &middot; " + s.t + "</td>" +
-        "<td>" + s.c + "</td>" +
-        "<td class='wrap'>" + esc(s.h) + "</td>" +
-        "<td class='wrap'>" + esc(s.v) + "</td>" +
-        "<td class='wrap'>" + (open ? "<span class='mark'>*No support added</span>" :
-          "<span class='off'>" + esc(s.sup.join(", ")) + "</span>") + "</td>";
-      shBody.appendChild(tr);
+        "<td class='sh-date'>" + fmtDay(s.d).short + "</td>" +
+        "<td class='sh-act'>" + esc(s.h) + "</td>" +
+        "<td>" + (open ? "<span class='nosup'>*No support added</span>" :
+          "<span class='acts'>" + esc(s.sup.join("  ")) + "</span>") + "</td>" +
+        "<td><a class='venue' href='" + esc(s.u || "#") + "' target='_blank' rel='noopener'>" + esc(s.v) + "</a></td>" +
+        "<td class='sh-date'>" + esc(s.t || "") + (s.age ? " &middot; " + esc(s.age) : "") + "</td>";
+      tbody.appendChild(tr);
     });
-    var open = rows.filter(function (s) { return !s.sup.length; }).length;
-    shTally.innerHTML = "<span>" + rows.length + " of " + SHOWS.length + " shows</span><span><b>" +
-      open + " with no support added</b></span>";
+    var open = rows.filter(function (s) { return !s.sup || !s.sup.length; }).length;
+    shFoot.innerHTML = "<span>" + rows.length + " shown</span>" +
+      "<span>" + CITY_TOTALS[shCity] + " in " + esc(shCity) + " on the live site</span>" +
+      "<span><b>" + open + " with no support added</b></span>";
   }
 
-  /* itinerary */
+  /* ---------- itinerary ---------- */
+  var INTAKE = [
+    ["Artist", "Dillom", 14], ["Starting capacity", "250", 6],
+    ["Target venue", "Brooklyn Paramount (2,700)", 22],
+    ["Planning window", "Jan 2027 to Jan 2030", 18],
+    ["Festival targets", "Lollapalooza, ACL", 16],
+    ["Constraints", "17 locked dates, Thu to Sat preferred, no Mondays", 34]
+  ];
+  var itForm = document.getElementById("it-form");
+  INTAKE.forEach(function (f, i) {
+    var d = document.createElement("div");
+    d.style.cssText = "display:flex;flex-direction:column;gap:3px;min-width:0";
+    d.innerHTML = "<label class='tiny' for='it" + i + "'>" + esc(f[0]) + "</label>" +
+      "<input id='it" + i + "' type='text' value='" + esc(f[1]) + "' size='" + f[2] +
+      "' style=\"font-family:var(--sans);font-size:11px;border:1px solid var(--grey4);padding:5px 7px;min-width:0\">";
+    itForm.appendChild(d);
+  });
+  var itGo = document.createElement("button");
+  itGo.type = "button"; itGo.textContent = "Build itinerary";
+  itGo.style.cssText = "background:var(--ink);color:#fff;border-color:var(--ink);align-self:flex-end";
+  itForm.appendChild(itGo);
+
   var LEGS = [
-    {leg:"01", when:"Mar 2027", mk:"Northeast, 6 markets", room:"Club", cap:250},
-    {leg:"02", when:"Jun 2027", mk:"Midwest and South, 9 markets", room:"Club", cap:400},
-    {leg:"03", when:"Oct 2027", mk:"West Coast, 7 markets", room:"Ballroom", cap:600},
-    {leg:"04", when:"Mar 2028", mk:"National, 12 markets", room:"Ballroom", cap:900},
-    {leg:"05", when:"Aug 2028", mk:"Festivals plus 5 markets", room:"Festival", cap:0},
-    {leg:"06", when:"Feb 2029", mk:"National, 14 markets", room:"Theatre", cap:1400},
-    {leg:"07", when:"Sep 2029", mk:"National, 11 markets", room:"Theatre", cap:2000},
-    {leg:"08", when:"Jan 2030", mk:"Brooklyn finale", room:"Target venue", cap:2700}
+    ["01", "Mar 2027", "Northeast, 6 markets", "Club", 250],
+    ["02", "Jun 2027", "Midwest and South, 9 markets", "Club", 400],
+    ["03", "Oct 2027", "West Coast, 7 markets", "Ballroom", 600],
+    ["04", "Mar 2028", "National, 12 markets", "Ballroom", 900],
+    ["05", "Aug 2028", "Festivals plus 5 markets", "Festival", 0],
+    ["06", "Feb 2029", "National, 14 markets", "Theatre", 1400],
+    ["07", "Sep 2029", "National, 11 markets", "Theatre", 2000],
+    ["08", "Jan 2030", "Brooklyn finale", "Target venue", 2700]
   ];
   function drawItin() {
-    var target = document.getElementById("it-target").value || "Target venue";
-    var body = document.getElementById("it-body");
-    body.innerHTML = "";
+    var target = document.getElementById("it2").value || "Target venue";
+    var b = document.getElementById("it-body");
+    b.innerHTML = "";
     LEGS.forEach(function (l, i) {
       var tr = document.createElement("tr");
-      if (i === LEGS.length - 1) tr.className = "keep";
-      tr.innerHTML =
-        "<td>" + l.leg + "</td><td>" + l.when + "</td>" +
-        "<td class='wrap'>" + esc(l.mk) + "</td>" +
-        "<td class='wrap'>" + (i === LEGS.length - 1 ? esc(target) : l.room) + "</td>" +
-        "<td class='num'>" + (l.cap ? l.cap.toLocaleString("en-US") : "<span class='off'>&mdash;</span>") + "</td>";
-      body.appendChild(tr);
+      if (i === LEGS.length - 1) tr.className = "open";
+      tr.innerHTML = "<td class='sh-date'>" + l[0] + "</td><td>" + l[1] + "</td><td>" + esc(l[2]) +
+        "</td><td>" + (i === LEGS.length - 1 ? esc(target) : l[3]) + "</td><td class='num'>" +
+        (l[4] ? l[4].toLocaleString("en-US") : "<span class='dash'>&ndash;</span>") + "</td>";
+      b.appendChild(tr);
     });
-    document.getElementById("it-tally").innerHTML =
-      "<span>" + esc(document.getElementById("it-artist").value || "Artist") + "</span>" +
-      "<span>" + esc(document.getElementById("it-window").value) + "</span>" +
-      "<span>" + esc(document.getElementById("it-rules").value) + "</span>" +
+    document.getElementById("it-foot").innerHTML =
+      "<span>" + esc(document.getElementById("it0").value) + "</span>" +
+      "<span>" + esc(document.getElementById("it3").value) + "</span>" +
       "<span><b>310 shows, 47 markets</b></span>";
   }
-  document.getElementById("it-go").addEventListener("click", drawItin);
+  itGo.addEventListener("click", drawItin);
 
-  /* resale */
+  /* ---------- resale ---------- */
   var PRICES = [
-    {show:"Show 1 · Brooklyn", std:45, res:38, sg:41},
-    {show:"Show 2 · Chicago", std:60, res:72, sg:68},
-    {show:"Show 3 · Los Angeles", std:38, res:34, sg:30},
-    {show:"Show 4 · Atlanta", std:52, res:55, sg:49},
-    {show:"Show 5 · Seattle", std:29, res:31, sg:33},
-    {show:"Show 6 · Austin", std:75, res:61, sg:66}
+    ["Show 1 · Brooklyn", 45, 38, 41], ["Show 2 · Chicago", 60, 72, 68],
+    ["Show 3 · Los Angeles", 38, 34, 30], ["Show 4 · Atlanta", 52, 55, 49],
+    ["Show 5 · Seattle", 29, 31, 33], ["Show 6 · Austin", 75, 61, 66]
   ];
   var fees = false;
-  var rsBody = document.getElementById("rs-body");
-  var rsTally = document.getElementById("rs-tally");
   var rsBtn = document.getElementById("rs-fees");
-  function money(n) { return "$" + n.toFixed(0); }
   function drawResale() {
-    rsBody.innerHTML = "";
-    var n = 0;
+    var b = document.getElementById("rs-body");
+    b.innerHTML = ""; var n = 0;
     PRICES.forEach(function (p) {
-      var res = fees ? p.res * 1.18 : p.res, sg = fees ? p.sg * 1.18 : p.sg;
-      var low = Math.min(res, sg), hit = low < p.std;
+      var res = fees ? p[2] * 1.18 : p[2], sg = fees ? p[3] * 1.18 : p[3];
+      var low = Math.min(res, sg), hit = low < p[1];
       if (hit) n++;
       var tr = document.createElement("tr");
-      if (hit) tr.className = "keep";
-      tr.innerHTML = "<td class='wrap'>" + p.show + "</td>" +
-        "<td class='num'>" + money(p.std) + "</td>" +
-        "<td class='num'>" + money(res) + "</td>" +
-        "<td class='num'>" + money(sg) + "</td>" +
-        "<td class='num'>" + (hit ? "<span class='green'>" + money(low) + "</span>" :
-          "<span class='off'>" + money(low) + "</span>") + "</td>";
-      rsBody.appendChild(tr);
+      if (hit) tr.className = "open";
+      tr.innerHTML = "<td>" + p[0] + "</td><td class='num'>$" + p[1].toFixed(0) +
+        "</td><td class='num'>$" + res.toFixed(0) + "</td><td class='num'>$" + sg.toFixed(0) +
+        "</td><td class='num'>" + (hit ? "<span class='up'>$" + low.toFixed(0) + "</span>" :
+          "<span class='dash'>$" + low.toFixed(0) + "</span>") + "</td>";
+      b.appendChild(tr);
     });
-    rsTally.innerHTML = "<span>" + (fees ? "After fees" : "Before fees") +
+    document.getElementById("rs-foot").innerHTML = "<span>" + (fees ? "After fees" : "Before fees") +
       "</span><span><b>" + n + " cheaper on resale</b></span>";
   }
   rsBtn.addEventListener("click", function () {
-    fees = !fees;
-    rsBtn.setAttribute("aria-pressed", String(fees));
+    fees = !fees; rsBtn.setAttribute("aria-pressed", String(fees));
     rsBtn.textContent = fees ? "Fees on (+18%)" : "Add fees (+18%)";
     drawResale();
   });
