@@ -47,6 +47,9 @@
     gap: 8px 24px; padding-block: 26px 0;
   }
   .mast .mark { margin: 0; font-family: var(--sans); font-weight: 700; font-size: 18px; line-height: 1.25; letter-spacing: -0.01em; }
+  .mast-id { display: flex; flex-direction: column; gap: 6px; }
+  .mast .resume { align-self: flex-start; font-size: 14px; color: var(--green); text-decoration: none; border-bottom: 1px solid var(--green); }
+  .mast .resume:hover { color: var(--ink); border-bottom-color: var(--ink); }
   .mast p { margin: 0; font-size: 14px; color: var(--muted); max-width: 52ch; }
   .mast nav { display: flex; flex-wrap: wrap; gap: 4px 14px; }
   .mast nav a { font-family: var(--sans); font-size: 13px; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--grey4); }
@@ -54,21 +57,11 @@
 
   .tools { padding-block: 28px 10px; }
   .tools h2 { margin: 0 0 14px; font-family: var(--display); font-weight: 400; font-size: 24px; letter-spacing: 0.01em; color: var(--ink); }
-  .tabstrip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; margin-bottom: 18px; }
-  @media (max-width: 700px) { .tabstrip { grid-template-columns: 1fr; } }
-  .tabstrip button {
-    font-family: var(--sans); font-size: 11px; letter-spacing: 0.04em;
-    background: none; border: 1px solid var(--grey4); border-radius: 0;
-    padding: 14px 16px; cursor: pointer; color: var(--muted); text-align: left; line-height: 1.3;
-  }
-  .tabstrip button .tn { display: block; font-family: var(--display); font-size: 22px; letter-spacing: 0.01em; color: var(--ink); line-height: 1.1; }
-  .tabstrip button[aria-selected="true"] .tn { color: var(--bg); }
-  .tabstrip button .tv { display: block; font-size: 13px; letter-spacing: 0; line-height: 1.4; margin-top: 6px; }
-  .tabstrip button[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
-  .tabstrip button[aria-selected="true"] .tv { color: var(--bg); opacity: .8; }
-  .tabstrip button:hover { color: var(--ink); }
-  .tabstrip button[aria-selected="true"]:hover { color: var(--bg); }
 
+  .tool + .tool { margin-top: 40px; }
+  .tool-head { margin-bottom: 12px; }
+  .tool-head h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 22px; letter-spacing: 0.01em; line-height: 1.15; }
+  .tool-head p { margin: 4px 0 0; font-size: 14px; color: var(--muted); max-width: 62ch; }
   .panel-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 20px; margin-bottom: 12px; }
   .panel-head h3 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .panel-head p { margin: 0; font-size: 14px; color: var(--muted); max-width: 56ch; }
@@ -245,14 +238,13 @@
   ::selection { background: var(--tint); color: var(--ink); }
   a, button { -webkit-tap-highlight-color: transparent; }
   .mast nav a, .also a, .panel-head a { text-underline-offset: 3px; }
-  .mast nav a, .tabstrip button, .screen button, .also a {
+  .mast nav a, .screen button, .also a {
     transition: color 150ms cubic-bezier(.23,1,.32,1), background-color 150ms cubic-bezier(.23,1,.32,1),
                 border-color 150ms cubic-bezier(.23,1,.32,1), transform 120ms cubic-bezier(.23,1,.32,1);
   }
-  .tabstrip button:active, .screen button:active { transform: scale(0.97); }
   @media (prefers-reduced-motion: reduce) {
-    .mast nav a, .tabstrip button, .screen button, .also a { transition: none; }
-    .tabstrip button:active, .screen button:active { transform: none; }
+    .mast nav a, .screen button, .also a { transition: none; }
+    .screen button:active { transform: none; }
   }
 </style>
 </head>
@@ -261,7 +253,10 @@
 <div class="wrap">
 
   <header class="mast">
-    <h1 class="mark">Jonah Bierman Fall Intern Project: A&amp;R + AI Admin Systems</h1>
+    <div class="mast-id">
+      <h1 class="mark">Jonah Bierman Fall Intern Project: A&amp;R + AI Admin Systems</h1>
+      <a class="resume" href="jonah-bierman-resume.pdf" target="_blank" rel="noopener">Resume (PDF) &#8599;</a>
+    </div>
     <nav>
       <a href="https://ilovemyphone30000.github.io/instinct/">A&amp;R Instinct &#8599;</a>
       <a href="https://ilovemyphone30000.github.io/nyc-shows/">Shows &#8599;</a>
@@ -287,9 +282,8 @@
 
   <section class="tools" aria-labelledby="ai-h">
     <h2 id="ai-h">AI Systems</h2>
-    <div class="tabstrip" role="tablist" id="tabstrip"></div>
 
-    <div id="p-ar" role="tabpanel">
+    <div id="p-ar" class="tool">
       <div class="panel-head">
         <h3>A&amp;R Instinct</h3>
       </div>
@@ -314,7 +308,7 @@
       </div>
     </div>
 
-    <div id="p-sh" role="tabpanel" hidden>
+    <div id="p-sh" class="tool">
       <div class="panel-head">
         <h3>Show calendar</h3>
       </div>
@@ -335,10 +329,9 @@
       </div>
     </div>
 
-    <div id="p-it" role="tabpanel" hidden>
+    <div id="p-it" class="tool">
       <div class="panel-head">
         <h3>Itinerary routing engine</h3>
-        <p>An intake form in, a routed multi-year itinerary out.</p>
       </div>
       <div class="screen">
         <div class="bar tight">
@@ -414,20 +407,13 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
   }
 
   var TABS = [["ar","A&R Instinct","Finds artists with no agent yet, from playlists, press and listener jumps."],["sh","Show calendar","Every show in NYC, LA and Chicago, and which new announcements don't have support."],["it","Routing engine","Turns a short intake form into a multi-year tour plan."]];
-  var strip = document.getElementById("tabstrip");
-  TABS.forEach(function (t, i) {
-    var b = document.createElement("button");
-    b.type="button"; b.dataset.p=t[0];
-    b.innerHTML = "<span class='tn'>"+esc(t[1])+"</span><span class='tv'>"+esc(t[2])+"</span>";
-    b.setAttribute("role","tab"); b.setAttribute("aria-selected", String(i===0));
-    b.setAttribute("aria-controls","p-"+t[0]);
-    b.addEventListener("click", function () {
-      TABS.forEach(function (x) { document.getElementById("p-"+x[0]).hidden = (x[0] !== t[0]); });
-      Array.prototype.forEach.call(strip.children, function (c) {
-        c.setAttribute("aria-selected", String(c.dataset.p === t[0]));
-      });
-    });
-    strip.appendChild(b);
+  TABS.forEach(function (t) {
+    var panel = document.getElementById("p-"+t[0]);
+    panel.hidden = false;
+    var head = document.createElement("div");
+    head.className = "tool-head";
+    head.innerHTML = "<h3>"+esc(t[1])+"</h3><p>"+esc(t[2])+"</p>";
+    panel.insertBefore(head, panel.firstChild);
   });
 
   var ROWS = 4, arFilter = "all", arQ = "", starred = {};
@@ -503,7 +489,7 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
   var CITY={ "New York":556, "Chicago":280, "Los Angeles":480 };
   var DAYS=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   var MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-  [["up","Tomorrow"],["ann","Just announced"]].forEach(function (t) {
+  [["up","Today"],["ann","Just announced"]].forEach(function (t) {
     var b=document.createElement("button");
     b.type="button"; b.textContent=t[1]; b.dataset.v=t[0];
     b.setAttribute("aria-pressed", String(t[0]===shView));
