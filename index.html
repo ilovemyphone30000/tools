@@ -45,7 +45,7 @@
   .toplinks { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; margin-bottom: 16px; }
   .toplinks a { font-family: var(--sans); font-size: 16px; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--grey4); }
   .toplinks a:hover { color: var(--green); border-bottom-color: var(--green); }
-  .hero .wordmark {
+  .hero .wordmark { margin: 0;
     max-width: none; font-family: var(--display); font-size: clamp(56px, 12vw, 128px);
     line-height: 0.82; letter-spacing: -0.015em; text-transform: uppercase;
   }
@@ -102,7 +102,7 @@
   .scroll { overflow-x: auto; }
   .screen table { border-collapse: collapse; width: 100%; font-size: 11.5px; }
   .screen th {
-    text-align: left; font-weight: 400; font-size: 9px; letter-spacing: 0.1em;
+    text-align: left; font-weight: 400; font-size: 10px; letter-spacing: 0.08em;
     text-transform: uppercase; color: var(--muted);
     padding: 7px 14px 6px 0; border-bottom: 1px solid var(--grey1); white-space: nowrap;
   }
@@ -132,7 +132,7 @@
   .chip .dt { opacity: .55; margin-left: 4px; }
   .rostr .ag { font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; }
   .rostr .agt { font-size: 9.5px; color: var(--muted); margin-top: 2px; }
-  .dash { color: var(--grey4); }
+  .dash { color: var(--muted); }
   .screen-foot {
     display: flex; flex-wrap: wrap; gap: 4px 20px; padding: 8px 12px;
     border-top: 1px solid var(--grey1); font-size: 10px; color: var(--muted);
@@ -166,7 +166,7 @@
   .daygroup span { font-family: var(--sans); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
   .sh-date { font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
   .sh-act { font-size: 12.5px; }
-  .acts { font-size: 11px; color: var(--grey7); }
+  .acts { font-size: 11px; color: var(--muted); }
   .venue { color: var(--green) !important; font-size: 11.5px; }
   .nosup {
     font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
@@ -191,8 +191,8 @@
 
   <header class="hero">
     <div>
-      <p>Five tools I built and run for music work. They read what a person would read, write what
-        they find into a sheet or a page, and <em>do the boring part</em> on a schedule.</p>
+      <p>Five tools I built and run for music work. Each one reads what a person would read and
+        <em>does the boring part</em> on a schedule.</p>
     </div>
     <div class="right">
       <nav class="toplinks">
@@ -201,7 +201,7 @@
         <a href="https://ilovemyphone30000.github.io/labelmap/">Label map &#8599;</a>
         <a href="https://github.com/ilovemyphone30000/tools">Source &#8599;</a>
       </nav>
-      <p class="wordmark">AI<br>Tools</p>
+      <h1 class="wordmark">AI<br>Tools</h1>
     </div>
   </header>
 
@@ -213,15 +213,13 @@
       <h2>A&amp;R Instinct</h2>
       <span class="meta">Daily &middot; Aggregate A&amp;R tool</span>
     </div>
-    <p class="one">An aggregate A&amp;R tool. It surfaces artists early and keeps the case for each one
-      in a single row: where the listener and follower curves are going, who has written about them,
-      who represents them, and what they sit on.
+    <p class="one">An aggregate A&amp;R tool. The whole case for an artist in one row.
       <a href="https://ilovemyphone30000.github.io/instinct/">Open the live site &#8599;</a></p>
 
     <div class="stats">
       <div class="stat"><b>22</b><span>median days ahead of Spotify's Fresh Finds</span></div>
       <div class="stat"><b>33%</b><span>of early finds later made Fresh Finds (15 of 46)</span></div>
-      <div class="stat"><b>945</b><span>artists tracked and kept current</span></div>
+      <div class="stat"><b>945</b><span>artists tracked</span></div>
     </div>
     <p class="one" style="margin-top:18px">Billboard Style came out of this one and was
       <span class="said">signed by Greg Horbal</span> after.</p>
@@ -229,7 +227,7 @@
     <div class="screen" id="ar">
       <div class="screen-label">
         <span class="meta">Real rows from the live site</span>
-        <span class="tiny">Every link goes to the real page</span>
+        
       </div>
       <div class="bar tight">
         <span class="brand">A&amp;R INSTINCT</span>
@@ -243,8 +241,8 @@
       <div class="scroll">
         <table>
           <thead><tr>
-            <th>Artist</th><th>Monthly listeners</th><th>Instagram</th>
-            <th>Press</th><th>Rostr</th><th>Playlists</th>
+            <th scope="col">Artist</th><th scope="col">Monthly listeners</th><th scope="col">Instagram</th>
+            <th scope="col">Press</th><th scope="col">Rostr</th><th scope="col">Playlists</th>
           </tr></thead>
           <tbody id="ar-body"></tbody>
         </table>
@@ -259,9 +257,8 @@
       <h2>Show calendar</h2>
       <span class="meta">Daily &middot; NYC / CHI / LA</span>
     </div>
-    <p class="one">Every show in three cities for the next month, and separately every show announced
-      since the last check. A headliner with nothing underneath is an open support slot, so those are
-      marked. <a href="https://ilovemyphone30000.github.io/nyc-shows/">Open the live site &#8599;</a></p>
+    <p class="one">Every show in three cities, and everything announced since the last check.
+      <a href="https://ilovemyphone30000.github.io/nyc-shows/">Open the live site &#8599;</a></p>
 
     <div class="stats">
       <div class="stat"><b>1,283</b><span>shows in the next two weeks</span></div>
@@ -294,8 +291,7 @@
       <span class="meta">On demand &middot; Exports to Sheets</span>
     </div>
     <p class="one">An intake form in, a routed multi-year itinerary out. Venues come from what
-      comparable artists actually played, and anything that breaks a rule is flagged rather than
-      quietly fixed.</p>
+      comparable artists actually played, and rule breaks are flagged, not fixed quietly.</p>
 
     <div class="stats">
       <div class="stat"><b>310</b><span>shows planned across 47 markets, 2027 to 2030</span></div>
@@ -311,7 +307,7 @@
       <div class="bar" id="it-form"></div>
       <div class="scroll">
         <table>
-          <thead><tr><th>Leg</th><th>When</th><th>Markets</th><th>Room</th><th>Cap</th></tr></thead>
+          <thead><tr><th scope="col">Leg</th><th scope="col">When</th><th scope="col">Markets</th><th scope="col">Room</th><th scope="col">Cap</th></tr></thead>
           <tbody id="it-body"></tbody>
         </table>
       </div>
@@ -325,9 +321,8 @@
       <h2>Resale tracker</h2>
       <span class="meta">Every 3 days &middot; Writes back to the sheet</span>
     </div>
-    <p class="one">Reads the standard and official resale price on AXS, Ticketmaster, DICE and Etix,
-      adds SeatGeek, and colors the rows where getting in costs less than face value. It reads prices
-      only: it never signs in, holds or buys.</p>
+    <p class="one">Standard and resale prices from AXS, Ticketmaster, DICE, Etix and SeatGeek, every
+      three days. Rows where resale beats face value get colored. It reads prices only.</p>
 
     <div class="screen" id="rs">
       <div class="screen-label">
@@ -339,7 +334,7 @@
       </div>
       <div class="scroll">
         <table>
-          <thead><tr><th>Show</th><th>Standard</th><th>Official resale</th><th>SeatGeek</th><th>Cheapest</th></tr></thead>
+          <thead><tr><th scope="col">Show</th><th scope="col">Standard</th><th scope="col">Official resale</th><th scope="col">SeatGeek</th><th scope="col">Cheapest</th></tr></thead>
           <tbody id="rs-body"></tbody>
         </table>
       </div>
@@ -353,15 +348,13 @@
       <h2>Label map</h2>
       <span class="meta">Reference &middot; One file</span>
     </div>
-    <p class="one">Who owns whom across the majors, on one page, with the logos inlined so it works
-      offline. The PDF poster is generated by parsing the HTML, so the two can't drift.
+    <p class="one">Who owns whom across the majors, on one page.
       <a href="https://ilovemyphone30000.github.io/labelmap/">Open it &#8599;</a></p>
   </section>
 
   <footer>
-    <p>Rows shown here are real and come from the live tools, as of November 2026. Client rows are left
-      out of the listings. Resale prices are examples.</p>
-    <p>The A&amp;R and show pages are password-protected.
+    <p>Real rows from the live tools, November 2026, client rows left out. Resale prices are examples.
+      The A&amp;R and show pages are password-protected.
       Source: <a href="https://github.com/ilovemyphone30000/tools">github.com/ilovemyphone30000/tools</a></p>
   </footer>
 </div>
@@ -531,8 +524,8 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
     document.getElementById("sh-view").textContent =
       shView === "up" ? "Next month" : "Just announced";
     document.getElementById("sh-note").textContent = shView === "up"
-      ? "Everything on sale in the next month, support included where a bill is set."
-      : "Support is almost never listed the day a show is announced, which is the point: these are the open slots, caught before anyone fills them.";
+      ? ""
+      : "Support is rarely listed the day a show is announced. These are the open slots.";
 
     shList.innerHTML = "";
     if (!rows.length) {
