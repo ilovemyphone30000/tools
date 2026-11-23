@@ -119,6 +119,8 @@
   .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--grey4); display: inline-block; }
   .num { white-space: nowrap; font-variant-numeric: tabular-nums; }
   .num .v { display: inline-block; min-width: 2.6rem; }
+  .num .v.now { font-weight: 600; min-width: 2.4rem; }
+  .to-now { color: var(--grey7); margin: 0 4px 0 -6px; }
   .spark { vertical-align: middle; margin: 0 5px; }
   .up { color: var(--green); } .down { color: var(--red); } .flat { color: var(--muted); }
   .chip { display: inline-block; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 5px; margin: 0 3px 3px 0; white-space: nowrap; }
@@ -248,7 +250,6 @@
     <nav>
       <a href="https://ilovemyphone30000.github.io/instinct/">A&amp;R Instinct &#8599;</a>
       <a href="https://ilovemyphone30000.github.io/nyc-shows/">Shows &#8599;</a>
-      <a href="https://github.com/ilovemyphone30000/tools">Source &#8599;</a>
     </nav>
   </header>
 
@@ -286,7 +287,7 @@
         <div class="scroll">
           <table>
             <thead><tr>
-              <th scope="col">Artist</th><th scope="col">Monthly listeners</th><th scope="col">Instagram</th>
+              <th scope="col">Artist</th><th scope="col">Listeners: found &rarr; now</th><th scope="col">Instagram</th>
               <th scope="col">Press</th><th scope="col">Playlists</th>
             </tr></thead>
             <tbody id="ar-body"></tbody>
@@ -473,7 +474,7 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
           "<a class='nm' href='"+esc(r.u||"#")+"' target='_blank' rel='noopener'>"+esc(r.a)+"</a>"+
           "</td>"+
         "<td class='num' data-label='Listeners'>"+(r.l==null?"<span class='dash'>&ndash;</span>":
-          "<span class='v'>"+K(r.l)+"</span>"+spark(r.ls)+growth(r.ls)+
+          "<span class='v' title='When found'>"+K(r.l)+"</span><span class='to-now' aria-label='now'>&rarr;</span><span class='v now' title='Now'>"+K(r.ls&&r.ls.length?r.ls[r.ls.length-1]:r.l)+"</span>"+spark(r.ls)+growth([r.l, r.ls&&r.ls.length?r.ls[r.ls.length-1]:r.l])+
           (r.jp?"<span class='jump'>&#9650; Jump</span>":""))+"</td>"+
         "<td class='num' data-label='Instagram'>"+(r.ig==null?"<span class='dash'>&ndash;</span>":
           "<a href='"+esc(r.igu||"#")+"' target='_blank' rel='noopener'><span class='v'>"+K(r.ig)+"</span></a>"+
