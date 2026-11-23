@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Jonah Bierman Fall Intern Project: A&amp;R + AI Admin Systems</title>
-<meta name="description" content="AI tools built at a booking agency: A&amp;R scouting, a show calendar, tour routing and a label ownership map.">
+<meta name="description" content="AI tools built at a booking agency: A&amp;R scouting, a show calendar and tour routing.">
 <meta name="theme-color" content="#fffdf8">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Jonah Bierman Fall Intern Project: A&amp;R + AI Admin Systems">
-<meta property="og:description" content="AI tools built at a booking agency: A&amp;R scouting, a show calendar, tour routing and a label ownership map.">
+<meta property="og:description" content="AI tools built at a booking agency: A&amp;R scouting, a show calendar and tour routing.">
 <meta property="og:url" content="https://ilovemyphone30000.github.io/tools/">
 <meta property="og:image" content="https://ilovemyphone30000.github.io/tools/share.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -184,36 +184,43 @@
   .pitch-list .note { display: block; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--grey4); font-size: 13px; color: var(--muted); }
   .pitch-list .how { display: block; margin-top: 4px; font-size: 14px; color: var(--muted); }
 
-  /* label map */
-  .lmap { border-top: 1px solid var(--grey1); margin-top: 48px; padding-block: 28px 0; }
-  .lmap h2, .resale h2 { margin: 0 0 6px; font-family: var(--display); font-weight: 400; font-size: 30px; letter-spacing: 0.01em; }
-  .lmap > p, .resale p { margin: 0 0 16px; font-size: 15px; color: var(--muted); }
-  .lmap > p a { color: var(--green); }
-  .lm-box { display: grid; grid-template-columns: minmax(0, 20rem) minmax(0, 1fr); }
-  @media (max-width: 860px) { .lm-box { grid-template-columns: 1fr; } }
-  .lm-left { padding: 16px; border-right: 1px solid var(--grey1); display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-  @media (max-width: 860px) { .lm-left { border-right: 0; border-bottom: 1px solid var(--grey1); } }
-  .lm-left input { font: inherit; font-size: 15px; padding: 9px 12px; border: 1px solid var(--grey4); border-radius: 0; background: #fff; color: var(--ink); width: 100%; min-width: 0; }
-  .screen .lm-left input[type="search"] { flex: none; font-size: 15px; padding: 9px 12px; }
-  .screen .lm-col li button { font-size: 13px; letter-spacing: 0; text-transform: none; border: 0; background: none; padding: 3px 0; color: var(--ink); }
-  .screen .lm-col li button:hover, .screen .lm-col li button[aria-pressed="true"] { color: var(--green); background: none; }
-  .lm-own { margin-top: 10px; }
-  .lm-path { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: flex-start; }
-  .lm-path li { display: flex; flex-direction: column; align-items: flex-start; }
-  .lm-path .node { border: 1px solid var(--grey4); background: #fff; padding: 7px 11px; font-size: 15px; }
-  .lm-path .node.top { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-  .lm-path .node.hit { border-color: var(--green); color: var(--green); font-weight: 600; }
-  .lm-path .by { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding: 6px 0 6px 12px; border-left: 1px solid var(--grey4); margin-left: 14px; }
-  .lm-path .none { color: var(--muted); font-size: 14px; }
-  .lm-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 4px 0; }
-  @media (max-width: 1100px) { .lm-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 500px) { .lm-grid { grid-template-columns: 1fr; } }
-  .lm-col { padding: 12px 16px; min-width: 0; }
-  .lm-col h3 { margin: 0 0 8px; font-size: 13px; font-weight: 700; }
-  .lm-col h3 span { font-weight: 400; color: var(--muted); }
-  .lm-col ul { margin: 0; padding: 0; list-style: none; }
-  .lm-col li button { font: inherit; font-size: 13px; background: none; border: 0; padding: 3px 0; cursor: pointer; color: var(--ink); text-align: left; }
-  .lm-col li button:hover, .lm-col li button[aria-pressed="true"] { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
+  /* routing engine */
+  .it-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 24px; align-items: start; margin-bottom: 16px; }
+  @media (max-width: 760px) { .it-grid { grid-template-columns: 1fr; } }
+  .it-form { margin: 0; padding: 14px 16px 4px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; }
+  @media (max-width: 500px) { .it-form { grid-template-columns: 1fr; } }
+  .it-form .wide { grid-column: 1 / -1; }
+  .it-form dt { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .it-form dt span { text-transform: none; letter-spacing: 0; color: var(--grey7); margin-left: 4px; }
+  .it-form dd { margin: 0; border: 1px solid var(--grey4); padding: 8px 10px; font-size: 14px; background: #fff; }
+  .it-form dd.empty { color: var(--grey7); }
+  .it-go { padding: 12px 16px 16px; }
+  .it-go span { display: inline-block; background: var(--ink); color: var(--bg); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; padding: 9px 14px; }
+  .it-out { padding-top: 4px; }
+  .it-out ul { list-style: none; margin: 8px 0 0; padding: 0; }
+  .it-out li { font-size: 15px; padding: 10px 0; border-top: 1px solid var(--grey1); }
+  .it-out li:last-child { border-bottom: 1px solid var(--grey1); }
+  .it-flow { list-style: none; margin: 0; padding: 22px 16px; display: flex; align-items: center; gap: 0; }
+  .it-flow > li { display: flex; align-items: center; flex: 1 1 0; min-width: 0; }
+  .it-flow > li + li::before { content: "→"; color: var(--grey7); padding: 0 10px; flex: none; }
+  .it-flow .step { display: block; border: 1px solid var(--grey4); background: #fff; padding: 10px 12px; font-size: 14px; text-align: center; width: 100%; }
+  .it-flow .end { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .it-flow .lanes { flex: 1.5 1 0; display: flex; flex-direction: column; align-items: stretch; gap: 6px; }
+  .it-flow li.lanes { position: relative; }
+  .it-flow li.lanes::before { position: absolute; left: 0; top: 50%; transform: translateY(-50%); }
+  .it-flow .lanes .tiny { text-align: center; }
+  .it-flow .lane { border-color: var(--green); color: var(--green); }
+  .it-flow .lanes { padding-left: 30px; }
+  @media (max-width: 760px) {
+    .it-flow { flex-direction: column; align-items: stretch; }
+    .it-flow > li { flex-direction: column; }
+    .it-flow > li + li::before { content: "↓"; padding: 6px 0; }
+    .it-flow .lanes { padding-left: 0; }
+    .it-flow li.lanes::before { position: static; transform: none; text-align: center; }
+  }
+
+  .resale h2 { margin: 0 0 6px; font-family: var(--display); font-weight: 400; font-size: 30px; letter-spacing: 0.01em; }
+  .resale p { margin: 0; font-size: 15px; color: var(--muted); }
   .resale { border-top: 1px solid var(--grey1); margin-top: 48px; padding-block: 28px 8px; }
   .resale p { margin-bottom: 0; }
 
@@ -336,45 +343,50 @@
     </div>
 
     <div id="p-it" class="tool">
-      <div class="panel-head">
-        <h3>Itinerary routing engine</h3>
+      <div class="it-grid">
+        <div class="screen it-intake">
+          <div class="bar tight"><span class="scaleline">New tour plan</span><span class="spacer"></span><span class="tiny">Illustrative intake form</span></div>
+          <dl class="it-form">
+            <div><dt>Artist</dt><dd>Dillom</dd></div>
+            <div><dt>Or a comparable artist <span>Optional</span></dt><dd class="empty">&ndash;</dd></div>
+            <div><dt>Starting capacity</dt><dd>250</dd></div>
+            <div><dt>Target venue</dt><dd>Brooklyn Paramount (2,700)</dd></div>
+            <div><dt>Planning window</dt><dd>Jan 2027 to Jan 2030</dd></div>
+            <div><dt>Festival targets</dt><dd>Lollapalooza, ACL</dd></div>
+            <div class="wide"><dt>Constraints</dt><dd>17 locked dates, Thu to Sat preferred, no Mondays</dd></div>
+          </dl>
+          <div class="it-go"><span>Build itinerary</span></div>
+        </div>
+        <div class="it-out">
+          <div class="tiny">Output</div>
+          <ul>
+            <li>Venues picked from similar artists' past tours</li>
+            <li>Writing, recording and press weeks built in</li>
+            <li>Rule breaks flagged</li>
+            <li>Exports to a live Google Sheet</li>
+          </ul>
+        </div>
       </div>
-      <div class="screen">
-        <div class="bar tight">
-          <span class="scaleline">Example plan, 2027 to 2030</span>
-          <span class="spacer"></span>
-          <span class="tiny">Illustrative</span>
-        </div>
-        <div class="bar" id="it-form"></div>
-        <div class="scroll">
-          <table>
-            <thead><tr>
-              <th scope="col">Leg</th><th scope="col">When</th><th scope="col">Markets</th>
-              <th scope="col">Room</th><th scope="col">Cap</th>
-            </tr></thead>
-            <tbody id="it-body"></tbody>
-          </table>
-        </div>
-        <div class="screen-foot" id="it-foot"></div>
+
+      <div class="screen it-flow-box">
+        <div class="bar tight"><span class="scaleline">How it works</span></div>
+        <ol class="it-flow" aria-label="How the routing engine works">
+          <li><span class="step">Intake form</span></li>
+          <li><span class="step">Similar artists</span></li>
+          <li class="lanes">
+            <span class="tiny">Regional agents</span>
+            <span class="step lane">West Coast venues</span>
+            <span class="step lane">Southern venues</span>
+            <span class="step lane">North / East Coast venues</span>
+          </li>
+          <li><span class="step">Rule check</span></li>
+          <li><span class="step end">Itinerary</span></li>
+        </ol>
+        <div class="screen-foot"><span>Example: Dillom, 2027 to 2030. 310 shows in 47 markets, plus press and writing weeks.</span></div>
       </div>
     </div>
   </section>
 
-  <section class="lmap" aria-labelledby="lm-h">
-    <h2 id="lm-h">Major-label ownership map</h2>
-    <p>Type a label and see who really owns it. Covers the three majors and the big indie groups.
-      <a href="https://ilovemyphone30000.github.io/labelmap/">Open the full map &#8599;</a></p>
-    <div class="screen lm-box">
-      <div class="lm-left">
-        <label class="tiny" for="lm-q">Search a label</label>
-        <input id="lm-q" type="search" list="lm-list" placeholder="Try Sub Pop" autocomplete="off">
-        <datalist id="lm-list"></datalist>
-        <div class="tiny lm-own">Ownership</div>
-        <ol class="lm-path" id="lm-path" aria-live="polite"></ol>
-      </div>
-      <div class="lm-grid" id="lm-grid"></div>
-    </div>
-  </section>
 
   <section class="resale" aria-labelledby="rs-h">
     <h2 id="rs-h">Resale tracker</h2>
@@ -414,7 +426,7 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
     return "<span class='flat'>&#9679; 0%</span>";
   }
 
-  var TABS = [["ar","A&R Instinct","Finds artists with no agent yet, from playlists, press and listener jumps."],["sh","Show calendar","Every show in NYC, LA and Chicago, and which new announcements don't have support."],["it","Routing engine","Turns a short intake form into a multi-year tour plan."]];
+  var TABS = [["ar","A&R Instinct","Finds unsigned artists from editorial playlists, user playlists, press and listener jumps."],["sh","Show calendar","Every show in NYC, LA and Chicago, and which new announcements don't have support."],["it","Routing engine","Turns a short intake form into a multi-year tour plan."]];
   TABS.forEach(function (t) {
     var panel = document.getElementById("p-"+t[0]);
     panel.hidden = false;
@@ -529,87 +541,10 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
     shFoot.innerHTML="<span>"+all.length+(all.length===1?" show":" shows")+(all.length>5?", scroll for more":"")+"</span>";
   }
 
-  var INTAKE=[["Artist","Dillom",12],["Starting capacity","250",5],["Target venue","Brooklyn Paramount (2,700)",20],
-              ["Planning window","Jan 2027 to Jan 2030",16],["Constraints","17 locked dates, Thu to Sat, no Mondays",28]];
-  var itForm=document.getElementById("it-form");
-  INTAKE.forEach(function (f,i) {
-    var d=document.createElement("div");
-    d.style.cssText="display:flex;flex-direction:column;gap:3px;min-width:0";
-    d.innerHTML="<label class='tiny' for='it"+i+"'>"+esc(f[0])+"</label><input id='it"+i+
-      "' type='text' value='"+esc(f[1])+"' size='"+f[2]+
-      "' style=\"font-family:var(--sans);font-size:11px;border:1px solid var(--grey4);padding:5px 7px;min-width:0\">";
-    itForm.appendChild(d);
-  });
-  var itGo=document.createElement("button");
-  itGo.type="button"; itGo.textContent="Build itinerary";
-  itGo.style.cssText="background:var(--ink);color:#fff;border-color:var(--ink);align-self:flex-end";
-  itForm.appendChild(itGo);
-  var LEGS=[["01","Mar 2027","Northeast, 6 markets","Club",250],["02","Jun 2027","Midwest and South, 9 markets","Club",400],
-            ["03","Oct 2027","West Coast, 7 markets","Ballroom",600],["04","Mar 2028","National, 12 markets","Ballroom",900],
-            ["05","Aug 2028","Festivals plus 5 markets","Festival",0],["06","Feb 2029","National, 14 markets","Theatre",1400],
-            ["07","Sep 2029","National, 11 markets","Theatre",2000],["08","Jan 2030","Brooklyn finale","Target venue",2700]];
-  function drawItin() {
-    var target=document.getElementById("it2").value || "Target venue";
-    var b=document.getElementById("it-body"); b.innerHTML="";
-    LEGS.forEach(function (l,i) {
-      var tr=document.createElement("tr");
-      if (i===LEGS.length-1) tr.className="open";
-      tr.innerHTML="<td class='sh-date'>"+l[0]+"</td><td>"+l[1]+"</td><td>"+esc(l[2])+"</td><td>"+
-        (i===LEGS.length-1?esc(target):l[3])+"</td><td class='num'>"+
-        (l[4]?l[4].toLocaleString("en-US"):"<span class='dash'>&ndash;</span>")+"</td>";
-      b.appendChild(tr);
-    });
-    document.getElementById("it-foot").innerHTML=
-      "<span>"+esc(document.getElementById("it0").value)+"</span>"+
-      "<span>"+esc(document.getElementById("it3").value)+"</span>"+
-      "";
-  }
-  itGo.addEventListener("click", drawItin);
 
 
-  var LM = [["Interscope Records",["Universal Music Group"],"umg",null,0],["Aftermath Entertainment",["Universal Music Group","Interscope Records"],"umg",null,0],["Dreamville Records",["Universal Music Group","Interscope Records"],"umg","DIST",0],["Friends Keep Secrets",["Universal Music Group","Interscope Records"],"umg",null,0],["LVRN",["Universal Music Group","Interscope Records"],"umg","DIST",0],["Mad Love Records",["Universal Music Group","Interscope Records"],"umg",null,0],["Shady Records",["Universal Music Group","Interscope Records"],"umg",null,0],["The Darkroom",["Universal Music Group","Interscope Records"],"umg",null,0],["Music Soup",["Universal Music Group","Interscope Records","The Darkroom"],"umg","JV",0],["Geffen Records",["Universal Music Group","Interscope Records"],"umg",null,0],["Disorder Records",["Universal Music Group","Interscope Records","Geffen Records"],"umg",null,0],["Proximity",["Universal Music Group","Interscope Records","Geffen Records"],"umg",null,0],["Republic Corps",["Universal Music Group"],"umg",null,0],["Island Records",["Universal Music Group","Republic Corps"],"umg",null,0],["Mercury Records",["Universal Music Group","Republic Corps"],"umg",null,0],["Def Jam Recordings",["Universal Music Group","Republic Corps"],"umg",null,0],["4th & Broadway",["Universal Music Group","Republic Corps","Def Jam Recordings"],"umg",null,0],["Disturbing Tha Peace Records",["Universal Music Group","Republic Corps","Def Jam Recordings"],"umg",null,0],["Native Records",["Universal Music Group","Republic Corps","Def Jam Recordings"],"umg",null,0],["Stack or Starve Records",["Universal Music Group","Republic Corps","Def Jam Recordings"],"umg",null,0],["We The Best Music Group",["Universal Music Group","Republic Corps","Def Jam Recordings"],"umg",null,0],["Republic Records",["Universal Music Group","Republic Corps"],"umg",null,0],["ALT:VISION",["Universal Music Group","Republic Corps","Republic Records"],"umg",null,0],["American Recordings",["Universal Music Group","Republic Corps","Republic Records"],"umg",null,0],["Amigo Records",["Universal Music Group","Republic Corps","Republic Records"],"umg",null,0],["Brushfire Records",["Universal Music Group","Republic Corps","Republic Records"],"umg",null,0],["Casablanca Records",["Universal Music Group","Republic Corps","Republic Records"],"umg",null,0],["Hikari-ULTRA",["Universal Music Group","Republic Corps","Republic Records"],"umg",null,0],["IMPERIAL",["Universal Music Group","Republic Corps","Republic Records"],"umg",null,0],["Lava Records",["Universal Music Group","Republic Corps","Republic Records"],"umg",null,0],["The Trenches",["Universal Music Group","Republic Corps","Republic Records"],"umg","JV",0],["Young Money Entertainment",["Universal Music Group","Republic Corps","Republic Records"],"umg",null,0],["Cash Money Records",["Universal Music Group","Republic Corps","Republic Records"],"umg",null,0],["Cash Money West",["Universal Music Group","Republic Corps","Republic Records","Cash Money Records"],"umg",null,0],["Capitol Music Group",["Universal Music Group"],"umg",null,0],["Astralwerks Records",["Universal Music Group","Capitol Music Group"],"umg",null,0],["Blue Note Records",["Universal Music Group","Capitol Music Group"],"umg",null,0],["Capitol CMG",["Universal Music Group","Capitol Music Group"],"umg",null,0],["Capitol Records",["Universal Music Group","Capitol Music Group"],"umg",null,0],["Harvest Records",["Universal Music Group","Capitol Music Group"],"umg",null,0],["Motown Records",["Universal Music Group","Capitol Music Group"],"umg",null,0],["Blacksmith Recordings",["Universal Music Group","Capitol Music Group","Motown Records"],"umg",null,0],["Verve Label Group",["Universal Music Group"],"umg",null,0],["Decca Records",["Universal Music Group","Verve Label Group"],"umg",null,0],["ECM Records",["Universal Music Group","Verve Label Group"],"umg",null,0],["Impulse Records",["Universal Music Group","Verve Label Group"],"umg",null,0],["Mercury KX",["Universal Music Group","Verve Label Group"],"umg",null,0],["Verve Forecast",["Universal Music Group","Verve Label Group"],"umg",null,0],["Verve Records",["Universal Music Group","Verve Label Group"],"umg",null,0],["Universal Music Group Nashville",["Universal Music Group"],"umg",null,0],["Capitol Records Nashville",["Universal Music Group","Universal Music Group Nashville"],"umg",null,0],["EMI Records Nashville",["Universal Music Group","Universal Music Group Nashville"],"umg",null,0],["MCA Nashville",["Universal Music Group","Universal Music Group Nashville"],"umg",null,0],["Mercury Nashville",["Universal Music Group","Universal Music Group Nashville"],"umg",null,0],["Universal Music UK",["Universal Music Group"],"umg",null,0],["0207 Def Jam",["Universal Music Group","Universal Music UK"],"umg",null,0],["Capitol Records UK",["Universal Music Group","Universal Music UK"],"umg",null,0],["Island Records UK",["Universal Music Group","Universal Music UK"],"umg",null,0],["EMI Records",["Universal Music Group"],"umg",null,0],["Minos EMI",["Universal Music Group","EMI Records"],"umg",null,0],["Universal Music Latin Entertainment",["Universal Music Group"],"umg",null,0],["AfterCluv",["Universal Music Group","Universal Music Latin Entertainment"],"umg",null,0],["Universal Music Chile",["Universal Music Group","Universal Music Latin Entertainment"],"umg",null,0],["Universal Music Latino",["Universal Music Group","Universal Music Latin Entertainment"],"umg",null,0],["Virgin Music Group",["Universal Music Group"],"umg",null,0],["Neon Gold",["Universal Music Group","Virgin Music Group"],"umg",null,0],["Virgin Music",["Universal Music Group","Virgin Music Group"],"umg",null,0],["Virgin Music Latin",["Universal Music Group","Virgin Music Group"],"umg",null,0],["10:22 pm",["Universal Music Group"],"umg",null,0],["A&M Records",["Universal Music Group"],"umg",null,0],["Calderstone Productions",["Universal Music Group"],"umg",null,0],["Doggy Style Records",["Universal Music Group"],"umg",null,0],["Fiction Records",["Universal Music Group"],"umg",null,0],["ForeFront Records",["Universal Music Group"],"umg",null,0],["G-Unit Records",["Universal Music Group"],"umg",null,0],["Lench Mob Records",["Universal Music Group"],"umg",null,0],["Mass Appeal Records",["Universal Music Group"],"umg",null,0],["Polar Music",["Universal Music Group"],"umg",null,0],["Polydor Records",["Universal Music Group"],"umg",null,0],["Romance Musique",["Universal Music Group"],"umg",null,0],["Spinefarm Records",["Universal Music Group"],"umg",null,0],["T-Boy Records",["Universal Music Group"],"umg",null,0],["Universal Arabic Music",["Universal Music Group"],"umg",null,0],["XO Records",["Universal Music Group"],"umg",null,0],["HYBE Labels",["Universal Music Group"],"umg","DIST",0],["ADOR",["Universal Music Group","HYBE Labels"],"umg",null,0],["BELIFT LAB",["Universal Music Group","HYBE Labels"],"umg",null,0],["BigHit Music",["Universal Music Group","HYBE Labels"],"umg",null,0],["KOZ Entertainment",["Universal Music Group","HYBE Labels"],"umg",null,0],["PLEDIS Entertainment",["Universal Music Group","HYBE Labels"],"umg",null,0],["Quality Control Music",["Universal Music Group","HYBE Labels"],"umg",null,0],["SB Projects",["Universal Music Group","HYBE Labels"],"umg",null,0],["Source Music",["Universal Music Group","HYBE Labels"],"umg",null,0],["Big Loud",["Universal Music Group"],"umg","DIST",0],["Big Loud Records",["Universal Music Group","Big Loud"],"umg",null,0],["Big Loud Rock",["Universal Music Group","Big Loud"],"umg",null,0],["Big Loud Texas",["Universal Music Group","Big Loud"],"umg",null,0],["Partisan Records",["Universal Music Group"],"umg","DIST",0],["section1",["Universal Music Group","Partisan Records"],"umg",null,0],["Select Discs",["Universal Music Group","Partisan Records"],"umg",null,0],["Universal Music France",["Universal Music Group"],"umg",null,1],["Capitol Music France",["Universal Music Group"],"umg",null,1],["Decca Records France",["Universal Music Group"],"umg",null,1],["Island Def Jam",["Universal Music Group"],"umg",null,1],["Polydor France",["Universal Music Group"],"umg",null,1],["Virgin Records France",["Universal Music Group"],"umg",null,1],["Universal Music Germany",["Universal Music Group"],"umg",null,1],["Airforce1 Records",["Universal Music Group"],"umg",null,1],["Vertigo Berlin",["Universal Music Group"],"umg",null,1],["Virgin Records Germany",["Universal Music Group"],"umg",null,1],["Universal Music Australia",["Universal Music Group"],"umg",null,1],["Island Records Australia",["Universal Music Group"],"umg",null,1],["Modular Recordings",["Universal Music Group"],"umg",null,1],["Universal Music Denmark",["Universal Music Group"],"umg",null,1],["Copenhagen Records",["Universal Music Group"],"umg",null,1],["Def Jam Recordings Denmark",["Universal Music Group"],"umg",null,1],["Universal Music Belgium",["Universal Music Group"],"umg",null,1],["Top Notch Music",["Universal Music Group"],"umg",null,1],["Universal Music México",["Universal Music Group"],"umg",null,1],["Sony Music Entertainment",["Sony Music Group"],"sony",null,0],["(dis)harmony",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["5020 Records",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Babygrande Records",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Beach Street Records",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Century Media",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Disruptor Records",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Freebandz",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Human Re Sources",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["InsideOut Music",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Kemosabe Records",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Legacy Recordings",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Louder Than Life Records",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Ministry of Sound",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Mr. 305 Inc.",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Okeh Records",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Palm Tree Crew",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Polo Grounds Music",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Quartz Hill Records",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["RCA Inspiration",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["RECORDS Co",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Robots and Humans",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Signal Records",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Som Livre",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["STMPD RCRDS",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Triple Tigers",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Ultra Records",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Columbia Records",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["30th Century Records",["Sony Music Group","Sony Music Entertainment","Columbia Records"],"sony",null,0],["Zelig Records",["Sony Music Group","Sony Music Entertainment","Columbia Records"],"sony",null,0],["Epic Records",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Bad Boy Worldwide Entertainment",["Sony Music Group","Sony Music Entertainment","Epic Records"],"sony",null,0],["RCA Records",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Keep Cool",["Sony Music Group","Sony Music Entertainment","RCA Records"],"sony",null,0],["Since '93",["Sony Music Group","Sony Music Entertainment","RCA Records"],"sony",null,0],["Bourne Creatives",["Sony Music Group","Sony Music Entertainment","RCA Records"],"sony",null,0],["Provident Label Group",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Essential Records",["Sony Music Group","Sony Music Entertainment","Provident Label Group"],"sony",null,0],["Reunion Records",["Sony Music Group","Sony Music Entertainment","Provident Label Group"],"sony",null,0],["Alamo Records",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["Santa Anna",["Sony Music Group","Sony Music Entertainment","Alamo Records"],"sony",null,0],["Sony Music Masterworks",["Sony Music Group","Sony Music Entertainment"],"sony",null,0],["XXIM Records",["Sony Music Group","Sony Music Entertainment","Sony Music Masterworks"],"sony",null,0],["Sony Music Entertainment UK",["Sony Music Group"],"sony",null,0],["5K Records",["Sony Music Group","Sony Music Entertainment UK"],"sony",null,0],["B1 Recordings",["Sony Music Group","Sony Music Entertainment UK"],"sony",null,0],["Columbia Records UK",["Sony Music Group","Sony Music Entertainment UK"],"sony",null,0],["Insanity Records",["Sony Music Group","Sony Music Entertainment UK"],"sony",null,0],["Relentless Records",["Sony Music Group","Sony Music Entertainment UK"],"sony",null,0],["AWAL",["Sony Music Group"],"sony",null,0],["Rimas Entertainment",["Sony Music Group"],"sony","DIST",0],["Nabru Records",["Sony Music Group","Rimas Entertainment"],"sony",null,0],["Nain Music",["Sony Music Group","Rimas Entertainment"],"sony",null,0],["Dale Play Records",["Sony Music Group","Rimas Entertainment"],"sony",null,0],["Sony Music Entertainment Germany",["Sony Music Group"],"sony",null,1],["Columbia Germany",["Sony Music Group"],"sony",null,1],["Famouz Records",["Sony Music Group"],"sony",null,1],["Four Music",["Sony Music Group"],"sony",null,1],["Sony Music Entertainment Italy",["Sony Music Group"],"sony",null,1],["Arista Italia",["Sony Music Group"],"sony",null,1],["Columbia Records Italy",["Sony Music Group"],"sony",null,1],["Sony Music Entertainment Nashville",["Sony Music Group"],"sony",null,1],["1021 Entertainment",["Sony Music Group"],"sony",null,1],["Sony Music Entertainment Brasil",["Sony Music Group"],"sony",null,1],["HUB Records",["Sony Music Group"],"sony",null,1],["Sony Music Entertainment Latin",["Sony Music Group"],"sony",null,1],["Pina Records",["Sony Music Group"],"sony",null,1],["Sony Music Entertainment Netherlands",["Sony Music Group"],"sony",null,1],["Epic Amsterdam",["Sony Music Group"],"sony",null,1],["Arista Records",["Sony Music Group"],"sony",null,1],["Atlantic Music Group",["Warner Music Group"],"wmg",null,0],["300 Entertainment",["Warner Music Group","Atlantic Music Group"],"wmg",null,0],["Elektra Records",["Warner Music Group","Atlantic Music Group"],"wmg",null,0],["Fueled By Ramen",["Warner Music Group","Atlantic Music Group"],"wmg",null,0],["Low Country Sound",["Warner Music Group","Atlantic Music Group"],"wmg",null,0],["Roadrunner Records",["Warner Music Group","Atlantic Music Group"],"wmg",null,0],["10K Projects",["Warner Music Group","Atlantic Music Group"],"wmg","JV",0],["'94 Sounds",["Warner Music Group","Atlantic Music Group","10K Projects"],"wmg",null,0],["Homemade Projects",["Warner Music Group","Atlantic Music Group","10K Projects"],"wmg",null,0],["Asylum Records",["Warner Music Group","Atlantic Music Group"],"wmg",null,0],["Big Beat Records",["Warner Music Group","Atlantic Music Group"],"wmg",null,0],["Atlantic Records",["Warner Music Group","Atlantic Music Group"],"wmg",null,0],["1017 Records",["Warner Music Group","Atlantic Music Group","Atlantic Records"],"wmg",null,0],["Gingerbread Man Records",["Warner Music Group","Atlantic Music Group","Atlantic Records"],"wmg",null,0],["Anemoia",["Warner Music Group","Atlantic Music Group","Atlantic Records"],"wmg",null,0],["Canvasback Music",["Warner Music Group","Atlantic Music Group","Atlantic Records"],"wmg",null,0],["Gold Tooth Records",["Warner Music Group","Atlantic Music Group","Atlantic Records"],"wmg",null,0],["Parametric",["Warner Music Group","Atlantic Music Group","Atlantic Records"],"wmg",null,0],["The Machine Works",["Warner Music Group","Atlantic Music Group","Atlantic Records"],"wmg",null,0],["Spinnin' Records",["Warner Music Group"],"wmg",null,0],["Dharma",["Warner Music Group","Spinnin' Records"],"wmg",null,0],["Heartfeldt Records",["Warner Music Group","Spinnin' Records"],"wmg",null,0],["Heldeep Records",["Warner Music Group","Spinnin' Records"],"wmg",null,0],["Spinnin' Deep",["Warner Music Group","Spinnin' Records"],"wmg",null,0],["Spinnin' Records Asia",["Warner Music Group","Spinnin' Records"],"wmg",null,0],["Warner Records",["Warner Music Group"],"wmg",null,0],["Altadena",["Warner Music Group","Warner Records"],"wmg",null,0],["Major Recordings",["Warner Music Group","Warner Records"],"wmg",null,0],["No Love Entertainment",["Warner Music Group","Warner Records"],"wmg",null,0],["Warner Music Norway",["Warner Music Group","Warner Records"],"wmg",null,0],["ADA",["Warner Music Group"],"wmg",null,0],["East West Records",["Warner Music Group"],"wmg",null,0],["Latium Entertainment",["Warner Music Group"],"wmg",null,0],["Nonesuch Records",["Warner Music Group"],"wmg",null,0],["Parlophone Records",["Warner Music Group"],"wmg",null,0],["Reprise Records",["Warner Music Group"],"wmg",null,0],["Rhino Entertainment",["Warner Music Group"],"wmg",null,0],["Sire Records",["Warner Music Group"],"wmg",null,0],["Warner Music Nashville",["Warner Music Group"],"wmg",null,0],["WCB Wasafi",["Warner Music Group"],"wmg",null,0],["Sub Pop",["Warner Music Group"],"wmg","49%",0],["Hardly Art",["Warner Music Group","Sub Pop"],"wmg",null,0],["Nice Life",["Warner Music Group"],"wmg","JV",0],["BBR Music Group",["Warner Music Group"],"wmg","DIST",0],["Broken Bow Records",["Warner Music Group","BBR Music Group"],"wmg",null,0],["Stoney Creek Records",["Warner Music Group","BBR Music Group"],"wmg",null,0],["Wheelhouse Records",["Warner Music Group","BBR Music Group"],"wmg",null,0],["Atlantic Records UK",["Warner Music Group"],"wmg",null,1],["Asylum Records UK",["Warner Music Group"],"wmg",null,1],["Warner Music UK",["Warner Music Group"],"wmg",null,1],["Warner Music France",["Warner Music Group"],"wmg",null,1],["Elektra France",["Warner Music Group"],"wmg",null,1],["Warner Music South Africa",["Warner Music Group"],"wmg",null,1],["Coleske Artists",["Warner Music Group"],"wmg",null,1],["BMG",[],"ind",null,null],["Big Dada",["BMG"],"ind",null,null],["BMG Australia",["BMG"],"ind",null,null],["BMG UK",["BMG"],"ind",null,null],["Concord Jazz",["BMG"],"ind",null,null],["Concord Records",["BMG"],"ind",null,null],["Counter Records",["BMG"],"ind",null,null],["Fearless Records",["BMG"],"ind",null,null],["Infectious Music",["BMG"],"ind",null,null],["Loma Vista Recordings",["BMG"],"ind",null,null],["Modern Recordings",["BMG"],"ind",null,null],["Mute Records",["BMG"],"ind",null,null],["Ninja Tune",["BMG"],"ind",null,null],["RAM Records",["BMG"],"ind",null,null],["Razor & Tie",["BMG"],"ind",null,null],["RBC Records",["BMG"],"ind",null,null],["Rounder Records",["BMG"],"ind",null,null],["Stax Records",["BMG"],"ind",null,null],["Technicolour",["BMG"],"ind",null,null],["The End Records",["BMG"],"ind",null,null],["Vagrant Records",["BMG"],"ind",null,null],["Vanguard Records",["BMG"],"ind",null,null],["Victor Victor Worldwide",["BMG"],"ind",null,null],["Create Music Group",[],"ind",null,null],["Monstercat",["Create Music Group"],"ind",null,null],["Monstercat Silk",["Create Music Group"],"ind",null,null],["Star Trak",["Create Music Group"],"ind",null,null],["Insomniac Music Group",[],"ind",null,null],["Basscon Records",["Insomniac Music Group"],"ind",null,null],["Bassrush Records",["Insomniac Music Group"],"ind",null,null],["Catch & Release",["Insomniac Music Group"],"ind",null,null],["Gud Vibrations",["Insomniac Music Group"],"ind",null,null],["HARD Recs",["Insomniac Music Group"],"ind",null,null],["Insomniac Records",["Insomniac Music Group"],"ind",null,null],["Beggars Group",[],"ind",null,null],["4AD",["Beggars Group"],"ind",null,null],["Matador Records",["Beggars Group"],"ind",null,null],["Rough Trade Records",["Beggars Group"],"ind",null,null],["XL Recordings",["Beggars Group"],"ind",null,null],["Young",["Beggars Group"],"ind",null,null],["Secretly Group",[],"ind",null,null],["Dead Oceans",["Secretly Group"],"ind",null,null],["Jagjaguwar",["Secretly Group"],"ind",null,null],["Merge Records",["Secretly Group"],"ind",null,null],["Secretly Canadian",["Secretly Group"],"ind",null,null],["Epitaph Records",[],"ind",null,null],["ANTI-",["Epitaph Records"],"ind",null,null],["Hellcat Records",["Epitaph Records"],"ind",null,null],["Reservoir Media",[],"ind",null,null],["Blue Raincoat Music",["Reservoir Media"],"ind",null,null],["Chrysalis Records",["Reservoir Media"],"ind",null,null]];
-  var MAJ = {umg:"Universal Music Group", sony:"Sony Music Group", wmg:"Warner Music Group", ind:"Independent groups"};
-  var REL = {DIST:"distributed", JV:"joint venture", "49%":"49% owned"};
-  var lmRel = {}, lmByName = {};
-  LM.forEach(function(x){ lmRel[x[0]] = x[3]; lmByName[x[0].toLowerCase()] = x; });
-  var lmQ=document.getElementById("lm-q"), lmPath=document.getElementById("lm-path"), lmGrid=document.getElementById("lm-grid");
-  var dl=document.getElementById("lm-list");
-  LM.forEach(function(x){ var o=document.createElement("option"); o.value=x[0]; dl.appendChild(o); });
-  function lmNode(name, cls){ var r=lmRel[name]; return "<span class='node "+cls+"'>"+esc(name)+(r?"<span class='rel'>"+esc(REL[r]||r)+"</span>":"")+"</span>"; }
-  function lmShow(name){
-    var q=(name||"").trim().toLowerCase();
-    var x=lmByName[q];
-    if (!x && q.length>2) { for (var i=0;i<LM.length;i++){ if (LM[i][0].toLowerCase().indexOf(q)===0){ x=LM[i]; break; } } }
-    if (!x && q.length>2) { for (var j=0;j<LM.length;j++){ if (LM[j][0].toLowerCase().indexOf(q)>=0){ x=LM[j]; break; } } }
-    Array.prototype.forEach.call(lmGrid.querySelectorAll("li button"), function(b){ b.setAttribute("aria-pressed", String(!!x && b.textContent===x[0])); });
-    if (!q) { lmPath.innerHTML="<li class='none'>Pick a label on the right, or type one.</li>"; return; }
-    if (!x) { lmPath.innerHTML="<li class='none'>Not on the map yet.</li>"; return; }
-    var names=[x[0]];
-    x[1].slice().reverse().forEach(function(n){ if (x[2]==="ind" || n!==MAJ[x[2]]) names.push(n); });
-    var topName = x[2]==="ind" ? (x[1].length ? null : null) : MAJ[x[2]];
-    var html="";
-    names.forEach(function(n,i){
-      var r=lmRel[n], last=(i===names.length-1)&&!topName;
-      html+="<li><span class='node"+(i===0?" hit":"")+"'>"+esc(n)+"</span>";
-      if (!last) html+="<span class='by'>"+(r==="49%"?"49% owned by":r==="DIST"?"distributed by":r==="JV"?"joint venture with":"owned by")+"</span>";
-      html+="</li>";
-    });
-    if (topName) html+="<li><span class='node top'>"+esc(topName)+"</span></li>";
-    else html+="<li><span class='by' style='border:0;margin:0;padding:6px 0 0'>Independent</span></li>";
-    lmPath.innerHTML=html;
-  }
-  ["umg","sony","wmg","ind"].forEach(function(k){
-    var top=LM.filter(function(x){ return x[2]===k && !x[4] && x[1].length===(k==="ind"?0:1); });
-    var col=document.createElement("div"); col.className="lm-col";
-    var cnt=LM.filter(function(x){return x[2]===k;}).length;
-    col.innerHTML="<h3>"+esc(MAJ[k])+"</h3><ul>"+top.slice(0,8).map(function(x){ return "<li><button type='button'>"+esc(x[0])+"</button></li>"; }).join("")+"</ul>";
-    lmGrid.appendChild(col);
-  });
-  lmGrid.addEventListener("click", function(e){ var b=e.target.closest("button"); if(!b) return; lmQ.value=b.textContent; lmShow(b.textContent); });
-  lmQ.addEventListener("input", function(){ lmShow(lmQ.value); });
-  lmShow("Sub Pop"); lmQ.value="Sub Pop";
 
-  drawAR(); drawShows(); drawItin();
+  drawAR(); drawShows();
 })();
 </script>
 </body>
