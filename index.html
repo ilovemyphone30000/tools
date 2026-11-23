@@ -165,6 +165,7 @@
   @media (max-width: 760px) { .pitch-list img { aspect-ratio: 4 / 3; } }
   .pitch-list .who { display: block; font-family: var(--display); font-size: 24px; line-height: 1.1; white-space: normal; }
   .pitch-list .st { display: inline-block; margin-top: 10px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border: 1px solid var(--green); color: var(--green); background: var(--tint); }
+  .pitch-list li.chasing { background: #efede6; border-color: var(--grey4); }
   .pitch-list .st.prog { border-color: var(--grey4); color: var(--muted); background: none; }
   .pitch-list .to { display: block; margin-top: 10px; font-size: 15px; }
   .pitch-list .how { display: block; margin-top: 4px; font-size: 14px; color: var(--muted); }
@@ -262,7 +263,7 @@
       <li><img src="img/billboard-style.webp" alt="Billboard Style" width="720" height="720" loading="lazy">
         <span class="who">Billboard Style</span><span class="st">Signed</span>
         <span class="to">Agent: Greg Horbal</span><span class="how">Found by the A&amp;R Instinct scan, Aug 10</span></li>
-      <li><img src="img/ruby-rose-turner.webp" alt="Ruby Rose Turner" width="614" height="614" loading="lazy">
+      <li class="chasing"><img src="img/ruby-rose-turner.webp" alt="Ruby Rose Turner" width="614" height="614" loading="lazy">
         <span class="who">Ruby Rose Turner</span><span class="st prog">Actively chased</span>
         <span class="to">Agent: Zac Bluestone</span><span class="how">Personal connection</span></li>
     </ul>
@@ -358,10 +359,6 @@
       <label class="tiny" for="lm-q">Label</label>
       <input id="lm-q" type="search" list="lm-list" placeholder="Try Sub Pop" autocomplete="off">
       <datalist id="lm-list"></datalist>
-      <button type="button" data-try="Sub Pop">Sub Pop</button>
-      <button type="button" data-try="Dreamville Records">Dreamville</button>
-      <button type="button" data-try="Matador Records">Matador</button>
-      <button type="button" data-try="Fueled By Ramen">Fueled By Ramen</button>
     </div>
     <div class="lm-path" id="lm-path" aria-live="polite"></div>
     <div class="lm-grid" id="lm-grid"></div>
@@ -630,7 +627,6 @@ var ANN = [{"c": "New York", "d": "2027-05-14", "t": "19:00", "h": "76th Street"
     lmGrid.appendChild(col);
   });
   lmGrid.addEventListener("click", function(e){ var b=e.target.closest("button"); if(!b) return; lmQ.value=b.textContent; lmShow(b.textContent); });
-  document.querySelectorAll(".lm-ask button[data-try]").forEach(function(b){ b.addEventListener("click", function(){ lmQ.value=b.dataset.try; lmShow(b.dataset.try); }); });
   lmQ.addEventListener("input", function(){ lmShow(lmQ.value); });
   lmShow("Sub Pop"); lmQ.value="Sub Pop";
 
