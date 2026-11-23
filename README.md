@@ -15,5 +15,8 @@ the itinerary builder, the AXS resale scan and the label map.
 
 ## Publishing
 
-Not published yet. To serve it from GitHub Pages, push to a repo and point Pages at `main` / root;
-Pages serves `index.html` from the root. Ask Jonah before creating the remote or pushing.
+Repo: github.com/ilovemyphone30000/tools (the local folder keeps the longer name).
+GitHub Pages serves `index.html` from `main` / root, so a push to `main` deploys within about a minute:
+https://ilovemyphone30000.github.io/tools/
+
+Ask Jonah before pushing.
